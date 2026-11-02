@@ -64,6 +64,7 @@
             display: flex;
             align-items: center;
             gap: 0.6rem;
+            cursor: pointer;
         }
 
         .logo span {
@@ -83,6 +84,10 @@
             color: var(--text-muted);
             font-weight: 600;
             transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1rem;
         }
 
         .nav-btn.active, .nav-btn:hover {
@@ -151,6 +156,14 @@
             color: var(--text-main);
         }
 
+        /* Sayfa Görünürlük Yönetimi */
+        .page-view {
+            display: none;
+        }
+        .page-view.active-view {
+            display: block;
+        }
+
         /* Konu Kartları */
         .grid-topics {
             display: grid;
@@ -193,6 +206,114 @@
         .topic-card p {
             color: var(--text-muted);
             font-size: 0.95rem;
+        }
+
+        /* Konu Anlatımı Sekmesi Tasarımı */
+        .units-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .unit-sidebar {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid #f1f5f9;
+        }
+
+        .unit-sidebar h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .unit-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .unit-btn {
+            width: 100%;
+            text-align: left;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-main);
+            transition: 0.2s;
+        }
+
+        .unit-btn:hover, .unit-btn.active {
+            background: #e0e7ff;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .topic-sublist {
+            list-style: none;
+            padding-left: 1rem;
+            margin-top: 0.4rem;
+            display: none;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .unit-item.open .topic-sublist {
+            display: flex;
+        }
+
+        .topic-subitem {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: 0.2s;
+        }
+
+        .topic-subitem:hover, .topic-subitem.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .content-viewer {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid #f1f5f9;
+            min-height: 450px;
+            position: relative;
+        }
+
+        .content-viewer h2 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .content-viewer p {
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .source-tag {
+            position: absolute;
+            bottom: 1rem;
+            right: 1.5rem;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-style: italic;
         }
 
         /* Test Section */
@@ -319,10 +440,12 @@
             color: var(--text-muted);
             border-top: 1px solid #e2e8f0;
             background: white;
+            margin-top: 4rem;
         }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
+            .units-layout { grid-template-columns: 1fr; }
             .quiz-actions { flex-direction: column; gap: 1rem; }
             .btn { width: 100%; }
         }
@@ -333,13 +456,13 @@
     <!-- Header -->
     <header>
         <div class="navbar">
-            <div class="logo">
+            <div class="logo" onclick="switchPage('home')">
                 <i class="fa-solid fa-compass"></i> Türkçe<span> Diyarı</span>
             </div>
             <ul class="nav-links">
-                <li><a href="#" class="nav-btn active">Ana Sayfa</a></li>
-                <li><a href="#konular" class="nav-btn">Konu Özetleri</a></li>
-                <li><a href="#test" class="nav-btn">Test Çöz</a></li>
+                <li><button class="nav-btn active" id="navHome" onclick="switchPage('home')">Ana Sayfa</button></li>
+                <li><button class="nav-btn" id="navLessons" onclick="switchPage('lessons')">Konu Anlatımları</button></li>
+                <li><button class="nav-btn" id="navTest" onclick="switchPage('test')">Test Çöz</button></li>
             </ul>
         </div>
     </header>
@@ -356,78 +479,104 @@
         </div>
     </section>
 
-    <!-- Main Content -->
+    <!-- Main Container -->
     <div class="container">
 
-        <!-- Konu Kartları -->
-        <h2 class="section-title" id="konular">
-            <i class="fa-solid fa-book-open"></i> 6. Sınıf Konu Özetleri
-        </h2>
-        <div class="grid-topics">
-            <div class="topic-card">
-                <div class="topic-icon"><i class="fa-solid fa-font"></i></div>
-                <h3>Sözcükte Anlam</h3>
-                <p>Gerçek, mecaz, terim anlam, eş ve zıt anlamlı kelimeler ile söz sanatı özetleri.</p>
+        <!-- 1. ANA SAYFA GÖRÜNÜMÜ -->
+        <div id="pageHome" class="page-view active-view">
+            <h2 class="section-title">
+                <i class="fa-solid fa-book-open"></i> 6. Sınıf Öne Çıkan Başlıklar
+            </h2>
+            <div class="grid-topics">
+                <div class="topic-card">
+                    <div class="topic-icon"><i class="fa-solid fa-font"></i></div>
+                    <h3>Sözcükte Anlam</h3>
+                    <p>Gerçek, mecaz, terim anlam, eş ve zıt anlamlı kelimeler.</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon"><i class="fa-solid fa-align-left"></i></div>
+                    <h3>Cümlede Anlam</h3>
+                    <p>Öznel-nesnel anlatım, neden-sonuç, amaç-sonuç ve koşul cümleleri.</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon"><i class="fa-solid fa-cubes"></i></div>
+                    <h3>İsimler & Sıfatlar</h3>
+                    <p>Cins isim, özel isim, topluluk isimleri ve sıfat tamlamaları.</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon"><i class="fa-solid fa-link"></i></div>
+                    <h3>Edat, Bağlaç, Ünlem</h3>
+                    <p>Cümleye kattıkları anlamlar ve ayırt etme yolları.</p>
+                </div>
             </div>
-            <div class="topic-card">
-                <div class="topic-icon"><i class="fa-solid fa-align-left"></i></div>
-                <h3>Cümlede Anlam</h3>
-                <p>Öznel-nesnel anlatım, neden-sonuç, amaç-sonuç ve koşul cümleleri detaylı anlatımı.</p>
-            </div>
-            <div class="topic-card">
-                <div class="topic-icon"><i class="fa-solid fa-cubes"></i></div>
-                <h3>İsimler & Sıfatlar</h3>
-                <p>Cins isim, özel isim, topluluk isimleri ve niteleme-belirtme sıfatlarının püf noktaları.</p>
-            </div>
-            <div class="topic-card">
-                <div class="topic-icon"><i class="fa-solid fa-link"></i></div>
-                <h3>Edat, Bağlaç, Ünlem</h3>
-                <p>Cümleye kattıkları anlamlar, ayırt etme yolları ve örnek cümle incelemeleri.</p>
-            </div>
-        </div>
 
-        <!-- İnteraktif Test Modülü -->
-        <h2 class="section-title" id="test">
-            <i class="fa-solid fa-circle-check"></i> Günün Mini Testi
-        </h2>
-        <div class="quiz-section">
-            <div class="quiz-header">
+            <!-- Günün İpucu -->
+            <div class="tip-card">
+                <div class="tip-icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
                 <div>
-                    <span style="color: var(--primary); font-weight: 600;">Test #1</span>
-                    <h3>Sözcükte Anlam & Cümlede Anlam</h3>
+                    <h4 style="margin-bottom: 0.3rem;">Günün Türkçe İpucu</h4>
+                    <p><strong>"İle"</strong> kelimesi yerine <strong>"ve"</strong> koyabiliyorsan <u>bağlaçtır</u>, koyamıyorsan <u>edattır</u>! Örnek: "Ali ile (ve) Veli geldi" &rarr; Bağlaç.</p>
                 </div>
-                <div id="score" style="font-weight: 700; color: var(--secondary);">Puan: 0</div>
-            </div>
-
-            <div class="question-box">
-                <div class="question-text" id="questionText">
-                    1. "Ağır" sözcüğü aşağıdaki cümlelerin hangisinde "mecaz anlamda" kullanılmıştır?
-                </div>
-                <div class="options-grid" id="optionsContainer">
-                    <button class="option-btn" onclick="checkAnswer(0)">A) Bu torba çok ağır, taşımama yardım et.</button>
-                    <button class="option-btn" onclick="checkAnswer(1)">B) Söylediği ağır sözler kalbimi çok kırdı.</button>
-                    <button class="option-btn" onclick="checkAnswer(2)">C) Kamyona ağır yükler yüklendi.</button>
-                    <button class="option-btn" onclick="checkAnswer(3)">D) Masanın üzerindeki ağır kutu yere düştü.</button>
-                </div>
-                <div class="explanation" id="explanationBox">
-                    <strong>Açıklama:</strong> B seçeneğinde "ağır" sözcüğü fiziksel bir ağırlığı değil, "kırıcı, üzücü" anlamında kullanıldığı için mecaz anlamlıdır.
-                </div>
-            </div>
-
-            <div class="quiz-actions">
-                <span id="quizStatus" style="color: var(--text-muted);">Soru 1 / 3</span>
-                <button class="btn" id="nextBtn" onclick="nextQuestion()" style="display: none;">Sonraki Soru <i class="fa-solid fa-arrow-right"></i></button>
             </div>
         </div>
 
-        <!-- Günün İpucu -->
-        <div class="tip-card">
-            <div class="tip-icon">
-                <i class="fa-solid fa-lightbulb"></i>
+        <!-- 2. KONU ANLATIMLARI GÖRÜNÜMÜ (YENİ ÜNİTE SİSTEMİ) -->
+        <div id="pageLessons" class="page-view">
+            <h2 class="section-title">
+                <i class="fa-solid fa-graduation-cap"></i> 6. Sınıf Türkçe Üniteleri ve Konu Anlatımları
+            </h2>
+            <div class="units-layout">
+                <!-- Sol Menü / Üniteler -->
+                <div class="unit-sidebar">
+                    <h3><i class="fa-solid fa-list"></i> Temalar & Üniteler</h3>
+                    <ul class="unit-list" id="unitSidebarList">
+                        <!-- JS ile doldurulacak -->
+                    </ul>
+                </div>
+                <!-- Sağ İçerik / Detaylı Anlatım -->
+                <div class="content-viewer" id="contentViewer">
+                    <h2>Sol taraftan bir ünite ve konu seçin.</h2>
+                    <p>Seçtiğiniz konunun ayrıntılı açıklamaları ve kuralları burada görünecektir.</p>
+                    <div class="source-tag" id="sourceTag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
+                </div>
             </div>
-            <div>
-                <h4 style="margin-bottom: 0.3rem;">Günün Türkçe İpucu</h4>
-                <p><strong>"İle"</strong> kelimesi yerine <strong>"ve"</strong> koyabiliyorsan <u>bağlaçtır</u>, koyamıyorsan <u>edattır</u>! Örnek: "Ali ile (ve) Veli geldi" &rarr; Bağlaç.</p>
+        </div>
+
+        <!-- 3. TEST ÇÖZ GÖRÜNÜMÜ -->
+        <div id="pageTest" class="page-view">
+            <h2 class="section-title">
+                <i class="fa-solid fa-circle-check"></i> Günün Mini Testi
+            </h2>
+            <div class="quiz-section">
+                <div class="quiz-header">
+                    <div>
+                        <span style="color: var(--primary); font-weight: 600;">Test #1</span>
+                        <h3>Sözcükte Anlam & Cümlede Anlam</h3>
+                    </div>
+                    <div id="score" style="font-weight: 700; color: var(--secondary);">Puan: 0</div>
+                </div>
+
+                <div class="question-box">
+                    <div class="question-text" id="questionText">
+                        1. "Ağır" sözcüğü aşağıdaki cümlelerin hangisinde "mecaz anlamda" kullanılmıştır?
+                    </div>
+                    <div class="options-grid" id="optionsContainer">
+                        <button class="option-btn" onclick="checkAnswer(0)">A) Bu torba çok ağır, taşımama yardım et.</button>
+                        <button class="option-btn" onclick="checkAnswer(1)">B) Söylediği ağır sözler kalbimi çok kırdı.</button>
+                        <button class="option-btn" onclick="checkAnswer(2)">C) Kamyona ağır yükler yüklendi.</button>
+                        <button class="option-btn" onclick="checkAnswer(3)">D) Masanın üzerindeki ağır kutu yere düştü.</button>
+                    </div>
+                    <div class="explanation" id="explanationBox">
+                        <strong>Açıklama:</strong> B seçeneğinde "ağır" sözcüğü fiziksel bir ağırlığı değil, "kırıcı, üzücü" anlamında kullanıldığı için mecaz anlamlıdır.
+                    </div>
+                </div>
+
+                <div class="quiz-actions">
+                    <span id="quizStatus" style="color: var(--text-muted);">Soru 1 / 3</span>
+                    <button class="btn" id="nextBtn" onclick="nextQuestion()" style="display: none;">Sonraki Soru <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
             </div>
         </div>
 
@@ -440,6 +589,128 @@
 
     <!-- JavaScript Mantığı -->
     <script>
+        // Sayfa Değiştirme Fonksiyonu
+        function switchPage(pageId) {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active-view'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+            if(pageId === 'home') {
+                document.getElementById('pageHome').classList.add('active-view');
+                document.getElementById('navHome').classList.add('active');
+            } else if(pageId === 'lessons') {
+                document.getElementById('pageLessons').classList.add('active-view');
+                document.getElementById('navLessons').classList.add('active');
+            } else if(pageId === 'test') {
+                document.getElementById('pageTest').classList.add('active-view');
+                document.getElementById('navTest').classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // 6. Sınıf MEB Temaları ve Konu Anlatım Veritabanı
+        const curriculumData = [
+            {
+                unit: "1. Tema: Dilimizin Zenginliği",
+                topics: [
+                    { name: "Gerçek, Mecaz ve Terim Anlam", content: "Gerçek anlam, bir sözcüğün akla gelen ilk temel anlamıdır. Mecaz anlam, sözcüğün gerçek anlamından tamamen uzaklaşarak kazandığı yeni anlamdır. Terim anlam ise bilim, sanat, spor veya meslek dalıyla ilgili özel kavramları karşılayan sözcüklerdir." },
+                    { name: "Eş ve Zıt Anlamlı Kelimeler", content: "Yazılışları farklı ama anlamları aynı olan sözcükler eş anlamlıdır (örneğin: siyah-kara). Anlamca birbirinin karşıtı olan sözcükler ise zıt anlamlıdır (örneğin: büyük-küçük)." },
+                    { name: "Deyimler ve Atasözleri", content: "Deyimler, genellikle gerçek anlamından ayrı kendine özgü anlam taşıyan kalıplaşmış söz öbekleridir. Atasözleri ise atalarımızın uzun gözlem ve deneyimleri sonucunda söylemiş oldukları özlü, öğüt verici kalıplaşmış cümlelerdir." }
+                ]
+            },
+            {
+                unit: "2. Tema: Bağımsızlık Yolu",
+                topics: [
+                    { name: "Cümlede Anlam İlişkileri", content: "Cümleler arasında Neden-Sonuç (gerekçe), Amaç-Sonuç (hedef) ve Koşul-Sonuç (şart) ilişkileri bulunur. Örneğin 'Yağmur yağdığı için piknik iptal oldu' cümlesi neden-sonuç bildirirken, 'Sınavı kazanmak için çok çalıştı' cümlesi amaç-sonuç bildirir." },
+                    { name: "Kök ve Ekler (Yapım & Çekim)", content: "Kök, sözcüğün anlamlı en küçük parçasıdır. Yapım ekleri eklendiği sözcüğün anlamını veya türünü değiştirirken; çekim ekleri sözcüğün anlamını değiştirmez, cümlede görev almasını sağlar." },
+                    { name: "Hikâye Unsurları", content: "Hikâyede olay, kişi/varlık kadrosu, yer (mekân) ve zaman olmak üzere 4 temel unsur bulunur. Olayı aktaran kişi ise anlatıcıdır." }
+                ]
+            },
+            {
+                unit: "3. Tema: Farklı Dünyalar",
+                topics: [
+                    { name: "Ses Olayları (Ünlü ve Ünsüz)", content: "Türkçede kelimelere ek eklenirken ünlü düşmesi, ünlü daralması, ünsüz yumuşaması, ünsüz benzeşmesi ve ünsüz türemesi gibi ses olayları meydana gelir." },
+                    { name: "Öznel ve Nesnel Anlatım", content: "Kişiden kişiye değişen, kanıtlanamayan yargılar öznel; herkesçe aynı olan, belgelenebilir ve kanıtlanabilir yargılar ise nesnel anlatımlı cümlelerdir." },
+                    { name: "Söz Sanatları", content: "Benzetme (teşbih), kişileştirme (teşhis), konuşturma (intak) ve abartma (mübalağa) edebî metinlerde duygu ve düşünceyi güçlendirmek için kullanılan sanatlı söyleyişlerdir." }
+                ]
+            },
+            {
+                unit: "4. Tema: İletişim ve Sosyal İlişkiler",
+                topics: [
+                    { name: "İsimler ve İsim Tamlamaları", content: "Varlıklara verilişlerine (özel-cins) ve varlıkların oluşumuna (somut-soyut) göre isimler ayrılır. İsimlerin birbirini tamlamasıyla oluşan gruplar ise belirtili, belirtisiz ve takısız isim tamlamalarıdır." },
+                    { name: "Yazım Kuralları ve Noktalama", content: "Büyük harflerin yeri, sayıların yazımı, de/da ve ki bağlaçlarının yazılış kuralları; nokta, virgül, iki nokta, kesme işareti gibi noktalama işaretlerinin doğru kullanım yerleri metin akışı için çok önemlidir." }
+                ]
+            },
+            {
+                unit: "5. Tema: Bilim ve Teknoloji",
+                topics: [
+                    { name: "Sıfatlar (Ön Adlar)", content: "İsimlerin önüne gelerek onları niteleyen ya da belirten sözcüklerdir. Niteleme sıfatları 'nasıl' sorusuna yanıt verirken; belirtme sıfatları işaret, sayı, belgisiz ve soru sıfatları olarak ayrılır." },
+                    { name: "Grafik, Tablo ve Görsel Okuma", content: "Metin içindeki bilgileri somutlaştıran grafik, şema, harita, kroki ve infografik gibi görsel verileri yorumlama ve analiz etme becerisidir." }
+                ]
+            },
+            {
+                unit: "6. Tema: Lider Ruhlar",
+                topics: [
+                    { name: "Metin Yapıları ve Düşünceyi Geliştirme", content: "Paragraflarda tanımlama, karşılaştırma, örnekleme, benzetme gibi düşünceyi geliştirme yolları kullanılır. Metinler karşılaştırma veya problem-çözüm yapısına sahip olabilir." },
+                    { name: "Edat, Bağlaç ve Ünlem", content: "Tek başına anlamı olmayıp cümle içinde anlam kazanan sözcüklerdir. 'İle, gibi, kadar, için' edat; 've, ama, fakat, çünkü' bağlacı; duygu bildiren sesler ise ünlemi oluşturur." }
+                ]
+            }
+        ];
+
+        // Üniteleri sol menüye dinamik olarak yerleştirme
+        function renderUnits() {
+            const sidebarList = document.getElementById('unitSidebarList');
+            sidebarList.innerHTML = "";
+
+            curriculumData.forEach((unitObj, uIndex) => {
+                const li = document.createElement('li');
+                li.className = "unit-item";
+
+                const btn = document.createElement('button');
+                btn.className = "unit-btn";
+                btn.innerHTML = `<i class="fa-solid fa-folder-open"></i> ${unitObj.unit}`;
+                btn.onclick = () => {
+                    // Akordiyon aç/kapat
+                    li.classList.toggle('open');
+                };
+
+                const sublist = document.createElement('ul');
+                sublist.className = "topic-sublist";
+
+                unitObj.topics.forEach((topicObj, tIndex) => {
+                    const subItem = document.createElement('li');
+                    subItem.className = "topic-subitem";
+                    subItem.innerText = topicObj.name;
+                    subItem.onclick = (e) => {
+                        e.stopPropagation();
+                        // Aktif sınıfını güncelle
+                        document.querySelectorAll('.topic-subitem').forEach(s => s.classList.remove('active'));
+                        subItem.classList.add('active');
+                        // İçeriği göster
+                        showContent(topicObj.name, topicObj.content);
+                    };
+                    sublist.appendChild(subItem);
+                });
+
+                li.appendChild(btn);
+                li.appendChild(sublist);
+                sidebarList.appendChild(li);
+            });
+        }
+
+        function showContent(title, text) {
+            const viewer = document.getElementById('contentViewer');
+            viewer.innerHTML = `
+                <h2>${title}</h2>
+                <p>${text}</p>
+                <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
+            `;
+        }
+
+        // Sayfa açıldığında menüyü yükle
+        renderUnits();
+
+
+        // Test Mantığı (Önceki kod ile aynı)
         const questions = [
             {
                 question: "1. \"Ağır\" sözcüğü aşağıdaki cümlelerin hangisinde \"mecaz anlamda\" kullanılmıştır?",
