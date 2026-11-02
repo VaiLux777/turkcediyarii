@@ -238,7 +238,6 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-            margin-bottom: 1rem;
         }
 
         .unit-btn {
@@ -293,25 +292,59 @@
             padding: 2.5rem;
             box-shadow: var(--shadow);
             border: 1px solid #f1f5f9;
-            min-height: 450px;
+            min-height: 550px;
             position: relative;
         }
 
         .content-viewer h2 {
             margin-bottom: 1rem;
             color: var(--primary);
+            font-size: 1.6rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 0.5rem;
         }
 
-        .content-viewer p {
+        .content-viewer h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+            font-size: 1.2rem;
+        }
+
+        .content-viewer p, .content-viewer ul {
             margin-bottom: 1rem;
             color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        .content-viewer ul {
+            padding-left: 1.5rem;
+        }
+
+        .content-viewer li {
+            margin-bottom: 0.5rem;
+        }
+
+        .example-box {
+            background: #f0fdf4;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .note-box {
+            background: #eff6ff;
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
         }
 
         .source-tag {
-            position: absolute;
-            bottom: 1rem;
-            right: 1.5rem;
-            font-size: 0.75rem;
+            margin-top: 3rem;
+            text-align: right;
+            font-size: 0.8rem;
             color: #94a3b8;
             font-style: italic;
         }
@@ -470,7 +503,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <h1>Türkçe Diyarı'na Hoş Geldin!</h1>
-        <p>6. Sınıf Türkçe konularını eğlenceli özetler ve interaktif sorularla kolayca öğren.</p>
+        <p>6. Sınıf Türkçe konularını zengin örnekler, detaylı anlatımlar ve interaktif testlerle kusursuzca öğren.</p>
         <div class="grade-badges">
             <div class="grade-badge">5. Sınıf</div>
             <div class="grade-badge active">6. Sınıf</div>
@@ -491,22 +524,22 @@
                 <div class="topic-card">
                     <div class="topic-icon"><i class="fa-solid fa-font"></i></div>
                     <h3>Sözcükte Anlam</h3>
-                    <p>Gerçek, mecaz, terim anlam, eş ve zıt anlamlı kelimeler.</p>
+                    <p>Gerçek, mecaz, terim anlam, eş ve zıt anlamlı kelimeler, deyimler.</p>
                 </div>
                 <div class="topic-card">
                     <div class="topic-icon"><i class="fa-solid fa-align-left"></i></div>
                     <h3>Cümlede Anlam</h3>
-                    <p>Öznel-nesnel anlatım, neden-sonuç, amaç-sonuç ve koşul cümleleri.</p>
+                    <p>Öznel-nesnel, neden-sonuç, amaç-sonuç ve koşul cümleleri detayları.</p>
                 </div>
                 <div class="topic-card">
                     <div class="topic-icon"><i class="fa-solid fa-cubes"></i></div>
                     <h3>İsimler & Sıfatlar</h3>
-                    <p>Cins isim, özel isim, topluluk isimleri ve sıfat tamlamaları.</p>
+                    <p>Varlıkların türleri, isim tamlamaları ve niteleme-belirtme sıfatları.</p>
                 </div>
                 <div class="topic-card">
                     <div class="topic-icon"><i class="fa-solid fa-link"></i></div>
                     <h3>Edat, Bağlaç, Ünlem</h3>
-                    <p>Cümleye kattıkları anlamlar ve ayırt etme yolları.</p>
+                    <p>Cümleye kattıkları anlamlar, ayırt etme pratik yolları.</p>
                 </div>
             </div>
 
@@ -522,10 +555,10 @@
             </div>
         </div>
 
-        <!-- 2. KONU ANLATIMLARI GÖRÜNÜMÜ (YENİ ÜNİTE SİSTEMİ) -->
+        <!-- 2. KONU ANLATIMLARI GÖRÜNÜMÜ (DETAYLI & ÖRNEKLİ) -->
         <div id="pageLessons" class="page-view">
             <h2 class="section-title">
-                <i class="fa-solid fa-graduation-cap"></i> 6. Sınıf Türkçe Üniteleri ve Konu Anlatımları
+                <i class="fa-solid fa-graduation-cap"></i> 6. Sınıf Türkçe Kapsamlı Konu Anlatım Kılavuzu
             </h2>
             <div class="units-layout">
                 <!-- Sol Menü / Üniteler -->
@@ -538,8 +571,8 @@
                 <!-- Sağ İçerik / Detaylı Anlatım -->
                 <div class="content-viewer" id="contentViewer">
                     <h2>Sol taraftan bir ünite ve konu seçin.</h2>
-                    <p>Seçtiğiniz konunun ayrıntılı açıklamaları ve kuralları burada görünecektir.</p>
-                    <div class="source-tag" id="sourceTag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
+                    <p>Seçtiğiniz konunun ayrıntılı açıklamaları, püf noktaları ve zengin örnekleri burada görünecektir.</p>
+                    <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
                 </div>
             </div>
         </div>
@@ -607,51 +640,272 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 6. Sınıf MEB Temaları ve Konu Anlatım Veritabanı
+        // 6. Sınıf Zenginleştirilmiş, Detaylı ve Örnekli Konu Veritabanı
         const curriculumData = [
             {
                 unit: "1. Tema: Dilimizin Zenginliği",
                 topics: [
-                    { name: "Gerçek, Mecaz ve Terim Anlam", content: "Gerçek anlam, bir sözcüğün akla gelen ilk temel anlamıdır. Mecaz anlam, sözcüğün gerçek anlamından tamamen uzaklaşarak kazandığı yeni anlamdır. Terim anlam ise bilim, sanat, spor veya meslek dalıyla ilgili özel kavramları karşılayan sözcüklerdir." },
-                    { name: "Eş ve Zıt Anlamlı Kelimeler", content: "Yazılışları farklı ama anlamları aynı olan sözcükler eş anlamlıdır (örneğin: siyah-kara). Anlamca birbirinin karşıtı olan sözcükler ise zıt anlamlıdır (örneğin: büyük-küçük)." },
-                    { name: "Deyimler ve Atasözleri", content: "Deyimler, genellikle gerçek anlamından ayrı kendine özgü anlam taşıyan kalıplaşmış söz öbekleridir. Atasözleri ise atalarımızın uzun gözlem ve deneyimleri sonucunda söylemiş oldukları özlü, öğüt verici kalıplaşmış cümlelerdir." }
+                    {
+                        name: "Gerçek, Mecaz ve Terim Anlam",
+                        htmlContent: `
+                            <h2>Gerçek, Mecaz ve Terim Anlam</h2>
+                            <p>Sözcüklerin cümle içerisinde üstlendiği anlamlar anlatımı zenginleştirir. Kelimelerin temel ve yan anlamları bu başlık altında incelenir.</p>
+                            
+                            <h3>1. Gerçek (Temel) Anlam</h3>
+                            <p>Bir sözcüğün akla gelen ilk anlamıdır. Sözcük söylendiğinde herkesin zihninde oluşan ilk imge o kelimenin gerçek anlamını verir.</p>
+                            <div class="example-box">
+                                <strong>Örnekler:</strong>
+                                <ul>
+                                    <li>"Bardağın kırılmasına çok üzüldü." (Fiziksel olarak bütünlüğünün bozulması)</li>
+                                    <li>"Sıcak çorbayı içince içi ısındı." (Isı derecesi yüksek olan)</li>
+                                </ul>
+                            </div>
+
+                            <h3>2. Mecaz Anlam</h3>
+                            <p>Bir sözcüğün gerçek anlamından tamamen uzaklaşarak başka bir kavram ya da olay yerine kullanılmasından doğan soyut anlamdır.</p>
+                            <div class="example-box">
+                                <strong>Örnekler:</strong>
+                                <ul>
+                                    <li>"Bana karşı çok soğuk davranıyordu." (İlgisiz, sevgisiz anlamında)</li>
+                                    <li>"Adamın sert bakışları herkesi korkuttu." (Kırıcı, korkutucu tutum)</li>
+                                </ul>
+                            </div>
+
+                            <h3>3. Terim Anlam</h3>
+                            <p>Bir bilim, sanat, spor, meslek dalı veya akademik alana özgü kavramları karşılayan özel sözcüklerdir.</p>
+                            <div class="example-box">
+                                <strong>Örnekler:</strong>
+                                <ul>
+                                    <li>Matematik: Üçgenin iç açılarının toplamı 180 derecedir.</li>
+                                    <li>Tiyatro: Oyuncular sahneye çıkarak oyuna başladılar.</li>
+                                    <li>Müzik: Şarkıda sol anahtarı doğru okunmalı.</li>
+                                </ul>
+                            </div>
+                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
+                        `
+                    },
+                    {
+                        name: "Eş ve Zıt Anlamlı Kelimeler",
+                        htmlContent: `
+                            <h2>Eş Anlamlı (Anlamdaş) ve Zıt Anlamlı Kelimeler</h2>
+                            <p>Dilimizin kelime hazinesini zenginleştiren en önemli unsurlardan biridir.</p>
+
+                            <h3>1. Eş Anlamlı Kelimeler</h3>
+                            <p>Yazılışları ve okunuşları farklı olmasına rağmen aynı anlamı taşıyan sözcüklerdir. Genellikle biri Türkçe kökenli, diğeri ise yabancı dillerden dilimize girmiş kelimelerdir.</p>
+                            <div class="example-box">
+                                <strong>Örnekler:</strong>
+                                <ul>
+                                    <li>Siyah &ndash; Kara</li>
+                                    <li>Öğrenci &ndash; Talebe</li>
+                                    <li>Kırmızı &ndash; Al</li>
+                                    <li>Kelime &ndash; Sözcük</li>
+                                </ul>
+                            </div>
+
+                            <h3>2. Zıt Anlamlı Kelimeler</h3>
+                            <p>Anlamca birbirinin tamamen karşıtı, tersi olan sözcüklerdir. (Dikkat: Bir kelimenin olumsuzu o kelimenin zıttı değildir! Örneğin "geldi" kelimesinin zıttı "gelmedi" değil, "gitti"dir.)</p>
+                            <div class="example-box">
+                                <strong>Örnekler:</strong>
+                                <ul>
+                                    <li>Büyük &ndash; Küçük</li>
+                                    <li>Açık &ndash; Kapalı</li>
+                                    <li>İyi &ndash; Kötü</li>
+                                </ul>
+                            </div>
+                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
+                        `
+                    },
+                    {
+                        name: "Deyimler ve Atasözleri",
+                        htmlContent: `
+                            <h2>Deyimler ve Atasözleri</h2>
+                            <p>Anlatımı canlandırmak, az sözle çok şey ifade etmek için kullanılan kalıplaşmış dil miraslarımızdır.</p>
+
+                            <h3>1. Deyimler</h3>
+                            <p>Genellikle gerçek anlamından ayrı, kendine özgü bir anlam taşıyan kalıplaşmış söz öbekleridir. Çoğu zaman mastar haliyle (-mek, -mak) biterler ve cümle içinde duruma göre çekimlenirler.</p>
+                            <div class="example-box">
+                                <strong>Örnekler:</strong>
+                                <ul>
+                                    <li><strong>Etekleri zil çalmak:</strong> Çok sevinmek, havalara uçmak.</li>
+                                    <li><strong>Burnundan kıl aldırmamak:</strong> Çok gururlu ve kibirli olmak.</li>
+                                </ul>
+                            </div>
+
+                            <h3>2. Atasözleri</h3>
+                            <p>Atalarımızın uzun gözlem ve deneyimleri sonucunda ulaştıkları ortak akıl ve öğütleri içeren, kalıplaşmış cümlelerdir. Öğüt verici niteliktedirler ve sözcüklerinin yeri değiştirilemez.</p>
+                            <div class="example-box">
+                                <strong>Örnekler:</strong>
+                                <ul>
+                                    <li>"Damızlık taş yorulmaz" ya da "Damlaya damlaya göl olur." (Küçük birikimlerin zamanla büyük değerler oluşturacağı anlamı)</li>
+                                    <li>"Sakla samanı, gelir zamanı."</li>
+                                </ul>
+                            </div>
+                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
+                        `
+                    }
                 ]
             },
             {
                 unit: "2. Tema: Bağımsızlık Yolu",
                 topics: [
-                    { name: "Cümlede Anlam İlişkileri", content: "Cümleler arasında Neden-Sonuç (gerekçe), Amaç-Sonuç (hedef) ve Koşul-Sonuç (şart) ilişkileri bulunur. Örneğin 'Yağmur yağdığı için piknik iptal oldu' cümlesi neden-sonuç bildirirken, 'Sınavı kazanmak için çok çalıştı' cümlesi amaç-sonuç bildirir." },
-                    { name: "Kök ve Ekler (Yapım & Çekim)", content: "Kök, sözcüğün anlamlı en küçük parçasıdır. Yapım ekleri eklendiği sözcüğün anlamını veya türünü değiştirirken; çekim ekleri sözcüğün anlamını değiştirmez, cümlede görev almasını sağlar." },
-                    { name: "Hikâye Unsurları", content: "Hikâyede olay, kişi/varlık kadrosu, yer (mekân) ve zaman olmak üzere 4 temel unsur bulunur. Olayı aktaran kişi ise anlatıcıdır." }
+                    {
+                        name: "Cümlede Anlam İlişkileri",
+                        htmlContent: `
+                            <h2>Cümlede Anlam İlişkileri</h2>
+                            <p>Cümleler arasında sebep, amaç ve koşul gibi mantıksal bağlar kurulur. Bu ilişkiler metnin akışını ve anlam derinliğini belirler.</p>
+
+                            <h3>1. Neden (Sebep) &ndash; Sonuç Cümleleri</h3>
+                            <p>Bir eylemin hangi gerekçeyle, hangi sebeple gerçekleştiğini bildiren cümlelerdir. Yükleme "Neden?" veya "Niçin?" soruları sorulduğunda yanıt alınır.</p>
+                            <div class="example-box">
+                                <strong>Örnek:</strong> "Kar yağdığı için okullar tatil edildi." <br>
+                                <em>Neden:</em> Karın yağması | <em>Sonuç:</em> Okulların tatil edilmesi. (Eylem gerçekleşmiştir.)
+                            </div>
+
+                            <h3>2. Amaç &ndash; Sonuç Cümleleri</h3>
+                            <p>Bir eylemin hangi hedef veya niyetle yapıldığını gösteren cümlelerdir. Genellikle "amacıyla" veya "üzere" sözcükleri ile anlam bütünlüğü sağlanır.</p>
+                            <div class="example-box">
+                                <strong>Örnek:</strong> "LGS'yi kazanmak için gece gündüz çalışıyor." <br>
+                                <em>Hedef/Amaç:</em> Sınavı kazanmak.
+                            </div>
+
+                            <h3>3. Koşul (Şart) Cümleleri</h3>
+                            <p>Bir eylemin gerçekleşmesinin başka bir duruma veya şarta bağlı olduğu cümlelerdir. Genellikle "-se / -sa" ekiyle kurulur.</p>
+                            <div class="example-box">
+                                <strong>Örnek:</strong> "Ödevini bitirirsen dışarı çıkabilirsin."
+                            </div>
+                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
+                        `
+                    },
+                    {
+                        name: "Kök ve Ekler (Yapım & Çekim)",
+                        htmlContent: `
+                            <h2>Kök ve Ekler</h2>
+                            <p>Türkçe eklemeli bir dil olduğu için sözcükler kök ve eklere ayrılarak incelenir.</p>
+
+                            <h3>1. Kök</h3>
+                            <p>Bir sözcüğün anlamlı en küçük parçasıdır. Kökler isim kökü ve fiil kökü olmak üzere ikiye ayrılır (Kökün sonuna "-mek/-mak" getirebiliyorsak fiil, getiremiyorsak isim köküdür).</p>
+
+                            <h3>2. Yapım Ekleri</h3>
+                            <p>Eklendikleri sözcüğün anlamını veya türünü değiştiren, yeni sözcükler türeten eklerdir.</p>
+                            <div class="example-box">
+                                <strong>Örnek:</strong> "Göz" (isim) &rarr; "Gözlük" (isimden isim türeten yapım eki) &rarr; "Gözlükçü"
+                            </div>
+
+                            <h3>3. Çekim Ekleri</h3>
+                            <p>Sözcüğün anlamını değiştirmeyen; kelimelerin cümle içindeki görevlerini belirleyen veya diğer kelimelerle bağ kurmasını sağlayan eklerdir (Hal ekleri, çoğul ekleri, iyelik ekleri vb.).</p>
+                            <div class="example-box">
+                                <strong>Örnek:</strong> "Ev" &rarr; "Evler" (Çoğul çekim eki) &rarr; "Evde" (Bulunma hâl eki)
+                            </div>
+                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
+                        `
+                    }
                 ]
             },
             {
                 unit: "3. Tema: Farklı Dünyalar",
                 topics: [
-                    { name: "Ses Olayları (Ünlü ve Ünsüz)", content: "Türkçede kelimelere ek eklenirken ünlü düşmesi, ünlü daralması, ünsüz yumuşaması, ünsüz benzeşmesi ve ünsüz türemesi gibi ses olayları meydana gelir." },
-                    { name: "Öznel ve Nesnel Anlatım", content: "Kişiden kişiye değişen, kanıtlanamayan yargılar öznel; herkesçe aynı olan, belgelenebilir ve kanıtlanabilir yargılar ise nesnel anlatımlı cümlelerdir." },
-                    { name: "Söz Sanatları", content: "Benzetme (teşbih), kişileştirme (teşhis), konuşturma (intak) ve abartma (mübalağa) edebî metinlerde duygu ve düşünceyi güçlendirmek için kullanılan sanatlı söyleyişlerdir." }
+                    {
+                        name: "Öznel ve Nesnel Anlatım",
+                        htmlContent: `
+                            <h2>Öznel ve Nesnel Anlatım</h2>
+                            <p>Cümlelerin doğruluk değeri ve kanıtlanabilirlik özellikleri anlatımı şekillendirir.</p>
+
+                            <h3>1. Öznel Anlatım</h3>
+                            <p>Kişiden kişiye değişen, söyleyenin kendi kişisel düşüncelerini, beğenilerini veya duygularını içeren, kanıtlanamayan yargılardır.</p>
+                            <div class="example-box">
+                                <strong>Örnek:</strong> "Bu roman, yazarın bugüne kadar yazdığı en harika eserdir." (Bana göre harika olabilir ama başkasına göre olmayabilir.)
+                            </div>
+
+                            <h3>2. Nesnel Anlatım</h3>
+                            <p>Söyleyenin kişisel görüşünü barındırmayan, herkesçe aynı kabul edilen, belgelere dayanılarak kanıtlanabilen yargılardır.</p>
+                            <div class="example-box">
+                                <strong>Örnek:</strong> "Türkiye'nin başkenti Ankara'dır." (Herkes için geçerli ve kanıtlanabilir bir gerçektir.)
+                            </div>
+                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
+                        `
+                    },
+                    {
+                        name: "Söz Sanatları",
+                        htmlContent: `
+                            <h2>Söz Sanatları (Edebi Sanatlar)</h2>
+                            <p>Anlatımı renklendirmek ve daha etkileyici kılmak için başvurulan sanatlı söyleyişlerdir.</p>
+                            <ul>
+                                <li><strong>Benzetme (Teşbih):</strong> Aralarında ortak özellik bulunan iki varlıktan zayıf olanın güçlü olanına benzetilmesidir. (Örnek: "İnci gibi dişleri vardı.")</li>
+                                <li><strong>Kişileştirme (Teşhis):</strong> İnsan dışındaki varlıklara (hayvan, bitki, doğa) insana ait özellikler (konuşma, düşünme, üzülme) yükleme sanatıdır. (Örnek: "Küçük papatya boynunu büküp ağlıyordu.")</li>
+                                <li><strong>Konuşturma (İntak):</strong> İnsan dışındaki varlıkların konuşturulması sanatıdır. (Tüm konuşturma sanatlarında kişileştirme de vardır.)</li>
+                                <li><strong>Abartma (Mübalağa):</strong> Bir durumu olduğundan çok büyük veya çok küçük gösterme sanatıdır. (Örnek: "Ağlamaktan gözlerimde yaş sel oldu.")</li>
+                            </ul>
+                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
+                        `
+                    }
                 ]
             },
             {
                 unit: "4. Tema: İletişim ve Sosyal İlişkiler",
                 topics: [
-                    { name: "İsimler ve İsim Tamlamaları", content: "Varlıklara verilişlerine (özel-cins) ve varlıkların oluşumuna (somut-soyut) göre isimler ayrılır. İsimlerin birbirini tamlamasıyla oluşan gruplar ise belirtili, belirtisiz ve takısız isim tamlamalarıdır." },
-                    { name: "Yazım Kuralları ve Noktalama", content: "Büyük harflerin yeri, sayıların yazımı, de/da ve ki bağlaçlarının yazılış kuralları; nokta, virgül, iki nokta, kesme işareti gibi noktalama işaretlerinin doğru kullanım yerleri metin akışı için çok önemlidir." }
+                    {
+                        name: "İsimler ve İsim Tamlamaları",
+                        htmlContent: `
+                            <h2>İsimler ve İsim Tamlamaları</h2>
+                            <p>Varlıkları karşılayan sözcükler ile bu sözcüklerin oluşturduğu öbeklerdir.</p>
+                            <h3>İsim Tamlamaları</h3>
+                            <p>En az iki ismin aralarında anlam bağlantısı kurarak oluşturduğu söz öbeğidir. Tamlayan ve tamlanan eklerinden oluşur.</p>
+                            <ul>
+                                <li><strong>Belirtili İsim Tamlaması:</strong> Hem tamlayan hem tamlanan ek alır. (Örnek: <em>Okul<strong>un</strong> bahçesi</em>)</li>
+                                <li><strong>Belirtisiz İsim Tamlaması:</strong> Yalnız tamlanan ek alır. (Örnek: <em>Türkçe dersi</em>)</li>
+                                <li><strong>Takısız İsim Tamlaması:</strong> Hiç ek almaz, neyden yapıldığı veya neye benzediğini belirtir. (Örnek: <em>Demir kapı</em>)</li>
+                            </ul>
+                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
+                        `
+                    }
                 ]
             },
             {
                 unit: "5. Tema: Bilim ve Teknoloji",
                 topics: [
-                    { name: "Sıfatlar (Ön Adlar)", content: "İsimlerin önüne gelerek onları niteleyen ya da belirten sözcüklerdir. Niteleme sıfatları 'nasıl' sorusuna yanıt verirken; belirtme sıfatları işaret, sayı, belgisiz ve soru sıfatları olarak ayrılır." },
-                    { name: "Grafik, Tablo ve Görsel Okuma", content: "Metin içindeki bilgileri somutlaştıran grafik, şema, harita, kroki ve infografik gibi görsel verileri yorumlama ve analiz etme becerisidir." }
+                    {
+                        name: "Sıfatlar (Ön Adlar)",
+                        htmlContent: `
+                            <h2>Sıfatlar (Ön Adlar)</h2>
+                            <p>İsimlerin önüne gelerek onları niteleyen veya belirten sözcük gruplarıdır. Asla tek başına kullanılmazlar, bir ismin (adın) önünde yer alırlar.</p>
+                            <h3>1. Niteleme Sıfatları</h3>
+                            <p>İsimlerin durumunu, rengini, biçimini bildirir. İsme sorulan <strong>"Nasıl?"</strong> sorusunun yanıtıdır.</p>
+                            <div class="example-box"><strong>Örnek:</strong> "Kırmızı araba", "Zor soru"</div>
+
+                            <h3>2. Belirtme Sıfatları</h3>
+                            <p>İsimleri işaret, sayı, belgisizlik ve soru yönünden belirten sözcüklerdir.</p>
+                            <ul>
+                                <li><strong>İşaret Sıfatı:</strong> Bu, o, şu, buniyar (Örnek: <em>Bu</em> kitap)</li>
+                                <li><strong>Sayı Sıfatı:</strong> Kesin sayı bildirir (Örnek: <em>Üç</em> elma)</li>
+                                <li><strong>Belgisiz Sıfat:</strong> Kesinlik bildirmez (Örnek: <em>Bazı</em> öğrenciler)</li>
+                            </ul>
+                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
+                        `
+                    }
                 ]
             },
             {
                 unit: "6. Tema: Lider Ruhlar",
                 topics: [
-                    { name: "Metin Yapıları ve Düşünceyi Geliştirme", content: "Paragraflarda tanımlama, karşılaştırma, örnekleme, benzetme gibi düşünceyi geliştirme yolları kullanılır. Metinler karşılaştırma veya problem-çözüm yapısına sahip olabilir." },
-                    { name: "Edat, Bağlaç ve Ünlem", content: "Tek başına anlamı olmayıp cümle içinde anlam kazanan sözcüklerdir. 'İle, gibi, kadar, için' edat; 've, ama, fakat, çünkü' bağlacı; duygu bildiren sesler ise ünlemi oluşturur." }
+                    {
+                        name: "Edat, Bağlaç ve Ünlem",
+                        htmlContent: `
+                            <h2>Edat, Bağlaç ve Ünlem</h2>
+                            <p>Tek başına bir anlamı olmayan ancak cümle içindeki sözcükler arasında köprü kuran görevli sözcük türleridir.</p>
+                            
+                            <h3>1. Edatlar (İlgeçler)</h3>
+                            <p>Tek başına anlamı olmayan, kendinden önceki kelimeyle anlam ilişkisi kuran sözcüklerdir. En yaygın edatlar: <em>gibi, kadar, için, ile, karşı, doğru</em>.</p>
+                            <div class="example-box"><strong>Örnek:</strong> "Akşama doğru hava soğudu."</div>
+
+                            <h3>2. Bağlaçlar</h3>
+                            <p>Aynı görevdeki sözcükleri veya cümleleri birbirine bağlayan sözcüklerdir. Çıkarıldığında cümlenin anlamı bozulmaz ama daralabilir. Yaygın bağlaçlar: <em>ve, ama, fakat, çünkü, de/da, ki</em>.</p>
+                            
+                            <h3>3. Ünlemler</h3>
+                            <p>Sevinç, korku, acı, şaşkınlık gibi güçlü duyguları bildiren ya da seslenme bildiren sözcüklerdir.</p>
+                            <div class="example-box"><strong>Örnek:</strong> "Eyvah, sınavı unuttum!" &bull; "Hey, buraya bak!"</div>
+                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
+                        `
+                    }
                 ]
             }
         ];
@@ -669,7 +923,6 @@
                 btn.className = "unit-btn";
                 btn.innerHTML = `<i class="fa-solid fa-folder-open"></i> ${unitObj.unit}`;
                 btn.onclick = () => {
-                    // Akordiyon aç/kapat
                     li.classList.toggle('open');
                 };
 
@@ -682,11 +935,9 @@
                     subItem.innerText = topicObj.name;
                     subItem.onclick = (e) => {
                         e.stopPropagation();
-                        // Aktif sınıfını güncelle
                         document.querySelectorAll('.topic-subitem').forEach(s => s.classList.remove('active'));
                         subItem.classList.add('active');
-                        // İçeriği göster
-                        showContent(topicObj.name, topicObj.content);
+                        document.getElementById('contentViewer').innerHTML = topicObj.htmlContent;
                     };
                     sublist.appendChild(subItem);
                 });
@@ -697,20 +948,9 @@
             });
         }
 
-        function showContent(title, text) {
-            const viewer = document.getElementById('contentViewer');
-            viewer.innerHTML = `
-                <h2>${title}</h2>
-                <p>${text}</p>
-                <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
-            `;
-        }
-
-        // Sayfa açıldığında menüyü yükle
         renderUnits();
 
-
-        // Test Mantığı (Önceki kod ile aynı)
+        // Test Mantığı
         const questions = [
             {
                 question: "1. \"Ağır\" sözcüğü aşağıdaki cümlelerin hangisinde \"mecaz anlamda\" kullanılmıştır?",
