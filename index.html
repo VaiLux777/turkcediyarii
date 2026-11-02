@@ -103,7 +103,8 @@
             font-weight: 600;
             transition: all 0.3s ease;
             cursor: pointer;
-            display: inline-block;
+            border: none;
+            background: transparent;
             font-size: 0.95rem;
         }
 
@@ -173,11 +174,9 @@
             color: var(--text-main);
         }
 
+        /* Sayfa Görünümleri Kontrolü */
         .page-view {
-            display: none !important;
-        }
-        .page-view.active-view {
-            display: block !important;
+            display: none;
         }
 
         /* Konu Kartları */
@@ -536,16 +535,16 @@
     <!-- Header -->
     <header>
         <div class="navbar">
-            <a href="javascript:void(0);" class="logo-area" onclick="switchPage('home')">
+            <div class="logo-area" onclick="switchPage('home')">
                 <div class="logo-icon-box">
                     <i class="fa-solid fa-graduation-cap"></i>
                 </div>
                 <div class="logo-text">Türkçe<span> Diyarı</span></div>
-            </a>
+            </div>
             <ul class="nav-links">
-                <li><a href="javascript:void(0);" class="nav-btn active" id="navHome" onclick="switchPage('home')">Ana Sayfa</a></li>
-                <li><a href="javascript:void(0);" class="nav-btn" id="navLessons" onclick="switchPage('lessons')">Konu Anlatımları</a></li>
-                <li><a href="javascript:void(0);" class="nav-btn" id="navTests" onclick="switchPage('tests')">Testler</a></li>
+                <li><button class="nav-btn active" id="navHome" onclick="switchPage('home')">Ana Sayfa</button></li>
+                <li><button class="nav-btn" id="navLessons" onclick="switchPage('lessons')">Konu Anlatımları</button></li>
+                <li><button class="nav-btn" id="navTests" onclick="switchPage('tests')">Testler</button></li>
             </ul>
         </div>
     </header>
@@ -566,7 +565,7 @@
     <div class="container">
 
         <!-- 1. ANA SAYFA GÖRÜNÜMÜ -->
-        <div id="pageHome" class="page-view active-view">
+        <div id="pageHome" class="page-view" style="display: block;">
             <h2 class="section-title">
                 <i class="fa-solid fa-book-open"></i> 6. Sınıf Öne Çıkan Başlıklar
             </h2>
@@ -683,17 +682,22 @@
     <!-- JavaScript Mantığı -->
     <script>
         function switchPage(pageId) {
-            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active-view'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('pageHome').style.display = 'none';
+            document.getElementById('pageLessons').style.display = 'none';
+            document.getElementById('pageTests').style.display = 'none';
+
+            document.getElementById('navHome').classList.remove('active');
+            document.getElementById('navLessons').classList.remove('active');
+            document.getElementById('navTests').classList.remove('active');
 
             if(pageId === 'home') {
-                document.getElementById('pageHome').classList.add('active-view');
+                document.getElementById('pageHome').style.display = 'block';
                 document.getElementById('navHome').classList.add('active');
             } else if(pageId === 'lessons') {
-                document.getElementById('pageLessons').classList.add('active-view');
+                document.getElementById('pageLessons').style.display = 'block';
                 document.getElementById('navLessons').classList.add('active');
             } else if(pageId === 'tests') {
-                document.getElementById('pageTests').classList.add('active-view');
+                document.getElementById('pageTests').style.display = 'block';
                 document.getElementById('navTests').classList.add('active');
                 initTestDropdowns();
             }
@@ -800,7 +804,7 @@
                         ]
                     },
                     {
-                        name: "Deyimler dan Atasözleri",
+                        name: "Deyimler ve Atasözleri",
                         htmlContent: `
                             <h2>Deyimler ve Atasözleri</h2>
                             <p>Kültürümüzün en değerli sözel mirasları olan kalıplaşmış anlatımlardır.</p>
@@ -825,4 +829,349 @@
                         questions: [
                             { q: "\"Etekleri zil çalmak\" deyiminin anlamı nedir?", options: ["A) Çok korkmak", "B) Çok sevinmek", "C) Üzülmek", "D) Telaşlanmak"], correct: 1, exp: "B seçeneğinde belirtildiği gibi 'etekleri zil çalmak' aşırı neşelenmek ve çok sevinmek anlamındadır." },
                             { q: "\"Ağzı kulaklarına varmak\" ne anlama gelir?", options: ["A) Gülmekten bayılmak", "B) Çok sevinmek", "C) Şaşırmak", "D) Korkmak"], correct: 1, exp: "B seçeneğinde olduğu gibi mutluluktan yüzü gülmek, çok sevinmek demektir." },
-                            { q: "\"Damdan düşer gibi\" deyiminin anlamı nedir?", options:
+                            { q: "\"Damdan düşer gibi\" deyiminin anlamı nedir?", options: ["A) Yavaşça gelmek", "B) Birdenbire, yersiz ve uygunsuz bir şekilde ortaya çıkmak", "C) Yüksekten atlamak", "D) Düşüp yaralanmak"], correct: 1, exp: "B seçeneğinde açıklandığı gibi aniden ve pat diye uygunsuz biçimde konuşmak veya gelmektir." },
+                            { q: "\"Göz boyamak\" deyimi hangi anlamda kullanılır?", options: ["A) Makyaj yapmak", "B) Birini kandırmak, aldatmak", "C) Resim yapmak", "D) Gözü iyileştirmek"], correct: 1, exp: "B seçeneğinde ifade edildiği gibi karşı tarafı aldatmak, kandırmak anlamındadır." },
+                            { q: "\"İğne atsan yere düşmez\" deyimi neyi anlatır?", options: ["A) Çok kalabalık bir yeri", "B) Çok temiz bir odayı", "C) Kaybolan iğneyi", "D) Karanlık bir ortamı"], correct: 0, exp: "A seçeneğinde belirtildiği gibi adım atılmayacak kadar çok kalabalık yerler için söylenir." },
+                            { q: "\"Damlaya damlaya göl olur\" atasözünün anlamı nedir?", options: ["A) Su içmek sağlığa yararlıdır", "B) Küçük birikimler zamanla büyük sonuçlar doğurur", "C) Göller doludur", "D) Tasarruf etmemek gerekir"], correct: 1, exp: "B seçeneğinde açıklandığı gibi küçük paralar veya adımlar zamanla büyük varlıklar oluşturur." },
+                            { q: "\"Sakla samanı, gelir zamanı\" atasözü neyi öğütler?", options: ["A) Saman saklamayı", "B) Eşyaları çöpe atmamayı", "C) Gereksiz görülen şeylerin ileride lazımat olabileceğini", "D) Ahır kurmayı"], correct: 2, exp: "C seçeneğinde belirtildiği gibi küçümsenen eşyaların bile bir gün mutlaka işe yarayacağını anlatır." },
+                            { q: "\"Ağaç yaşken eğilir\" atasözünün anlamı nedir?", options: ["A) Ağaçlar sulanmalıdır", "B) Çocuklar küçük yaşta kolay eğitilir", "C) Yaş ağaçlar kesilmez", "D) Odunlar kırılır"], correct: 1, exp: "B seçeneğinde açıklandığı üzere insanlara küçük yaşta eğitim verilmesi gerektiğini vurgular." },
+                            { q: "\"Acele işe şeytan karışır\" atasözü neyi tavsiye eder?", options: ["A) Hızlı olmayı", "B) Her işi sakin ve düşünerek yapmayı", "C) Şeytandan uzak durmayı", "D) İşleri ertelemeyi"], correct: 1, exp: "B seçeneğinde belirtildiği gibi telaşla yapılan işlerde hata olacağını, sakin olunması gerektiğini söyler." },
+                            { q: "\"Taşıma su ile değirmen dönmez\" atasözü neyi anlatır?", options: ["A) Başkasının gücüyle sürekli iş yürütülemez", "B) Değirmenler suyla çalışır", "C) Su taşımak zordur", "D) Taşlar ağırdır"], correct: 0, exp: "A seçeneğinde açıklandığı gibi geçici ve başkasının yardımıyla büyük işler sürekli sürdürülemez." },
+                            { q: "\"Çam sakızı çoban armağanı\" ne demektir?", options: ["A) Çam ağacı hediyesi", "B) Değersiz ama sevgiyle verilen küçük hediye", "C) Çobanlara verilen maaş", "D) Sakız çiğnemek"], correct: 1, exp: "B seçeneğinde belirtildiği gibi maddi değeri az fakat samimi olan hediyeleri tanımlar." },
+                            { q: "\"Ateş olmayan yerden duman çıkmaz\" neyi ifade eder?", options: ["A) Yangın çıktığını", "B) Her söylentinin gerçek bir payı bulunduğunu", "C) Dumanın zararlı olduğunu", "D) Bacaların tıkandığını"], correct: 1, exp: "B seçeneğinde açıklandığı gibi ortada bir dedikodu varsa mutlaka kısmen bir gerçeğe dayanır." },
+                            { q: "\"Bal tutan parmağını yalar\" ne anlama gelir?", options: ["A) Bal yemek yasaktır", "B) İmkân sağlayan bir işte çalışan kişi bundan faydalanır", "C) Parmaklar yapış yapış olur", "D) Tatlı sevenler"], correct: 1, exp: "B seçeneğinde belirtildiği gibi imkanlı işlerde görev yapanlar oradaki avantajlardan yararlanır." },
+                            { q: "\"Gülü seven dikenine katlanır\" neyi simgeler?", options: ["A) Bahçe işlerini", "B) Güzel bir şeyin sıkıntılarına da göğüs germek gerektiğini", "C) Gül dikmek zorludur", "D) Çiçekleri korumayı"], correct: 1, exp: "B seçeneğinde açıklandığı gibi sevdiğimiz şeylerin getirdiği zorluklara da sabretmeliyiz." },
+                            { q: "\"İt ürür kervan yürür\" atasözünün anlamı nedir?", options: ["A) Köpekler kervanı sever", "B) Kötü sözlere kulak asmadan işimize devam etmeliyiz", "C) Kervanlar gece yürür", "D) Köpekler havlar"], correct: 1, exp: "B seçeneğinde belirtildiği gibi asılsız eleştirilere ve engellere takılmadan hedefe yürünür." }
+                        ]
+                    }
+                ]
+            },
+            {
+                unit: "2. Tema: Bağımsızlık Yolu (Dolu)",
+                topics: [
+                    {
+                        name: "Cümlede Anlam İlişkileri",
+                        htmlContent: `
+                            <h2>Cümlede Anlam İlişkileri</h2>
+                            <p>Cümlelerin birbirleriyle olan mantıksal bağlantıları şu başlıklarla gruplanır:</p>
+                            
+                            <h3>1. Neden-Sonuç (Sebep-Sonuç) Cümleleri</h3>
+                            <p>Eylemin hangi gerekçe ya da sebeple gerçekleştiğini bildiren cümlelerdir. Hem neden hem de sonuç bölümü gerçekleşmiş durumdadır.</p>
+                            <div class="example-box">
+                                <strong>Örnek:</strong> "Kar yağdığı için <u>okullar tatil edildi</u>." (Kar yağması gerçekleşmiş bir nedendir.)
+                            </div>
+
+                            <h3>2. Amaç-Sonuç Cümleleri</h3>
+                            <p>Eylemin hangi hedef ve amaç doğrultusunda yapıldığını belirten cümlelerdir. Amaç bölümü henüz gerçekleşmemiş bir hedeftir.</p>
+                            <div class="example-box">
+                                <strong>Örnek:</strong> "Sınavı kazanmak amacıyla <u>gece gündüz çalışıyor</u>." ('Amacıyla' getirebiliyorsak amaç-sonuçtur.)
+                            </div>
+
+                            <h3>3. Koşul-Sonuç (Şart) Cümleleri</h3>
+                            <p>Bir olayın veya durumun gerçekleşmesinin başka bir olaya veya duruma bağlı olduğunu belirten cümlelerdir.</p>
+                            <div class="example-box">
+                                <strong>Örnek:</strong> "Ödevlerini bitirirsen <u>dışarı çıkıp oynayabilirsin</u>." (-se/-sa eki ile sağlanır.)
+                            </div>
+                            <div class="source-tag">Kaynak: MEB & Türkçe Ders Kitapları</div>
+                        `,
+                        questions: [
+                            { q: "Hangisinde neden-sonuç ilişkisi vardır?", options: ["A) Sınavı kazanmak için çalışıyor.", "B) Yağmur yağdığı için maç iptal oldu.", "C) Erken yatarsa uyanır.", "D) Kitap almak üzere çıktı."], correct: 1, exp: "B seçeneğinde maçın iptal olmasının somut nedeni yağmurun yağmasıdır (neden-sonuç)." },
+                            { q: "Hangisinde amaç-sonuç ilişkisi vardır?", options: ["A) Hastalandığı için okula gelmedi.", "B) Soruları çözmek için kütüphaneye gitti.", "C) Otobüs kaçınca geç kaldı.", "D) Yorgun olduğu için uyudu."], correct: 1, exp: "B seçeneğinde kütüphaneye gitme hedefi/amacı soruları çözmektir." },
+                            { q: "\"Hava soğuk olduğu için kalın giyindi\" cümlesinde anlam ilişkisi nedir?", options: ["A) Amaç-sonuç", "B) Neden-sonuç", "C) Koşul-sonuç", "D) Karşılaştırma"], correct: 1, exp: "B seçeneğinde kalın giyinmesinin gerekçesi soğuk havadır (neden-sonuç)." },
+                            { q: "Aşağıdakilerden hangisinde koşul (şart) anlamı vardır?", options: ["A) Çok çalıştığı için sınavı geçti.", "B) Ödevini bitirirse oyun oynayabilir.", "C) Kardeşini görmek üzere eve geldi.", "D) Sinemaya gitmek istiyordu."], correct: 1, exp: "B seçeneğinde oyun oynaması ödevini bitirmesine bağlanmıştır." },
+                            { q: "\"Akşam oldu mu içime bir hüzün çöker\" cümlesinin anlamı nedir?", options: ["A) Neden", "B) Zaman/Koşul", "C) Amaç", "D) Öznel"], correct: 1, exp: "B seçeneğinde akşam olması durumuna bağlı olarak her seferinde hüzün çöktüğü (zaman/koşul) belirtilir." },
+                            { q: "Hangisi amaç-sonuç cümlesidir?", options: ["A) Sütü taşırdığı için annesi kızdı.", "B) Doktor olmak amacıyla fen lisesini istiyor.", "C) Kar yağınca yollar kapandı.", "D) Uykusuz kalınca başı ağrımış."], correct: 1, exp: "B seçeneğinde hedeflenen amaç doktor olmaktır." },
+                            { q: "\"Toplantıya yetişmek üzere hızlıca evden çıktı\" cümlesindeki ilişki türü nedir?", options: ["A) Amaç-sonuç", "B) Neden-sonuç", "C) Koşul", "D) Karşılaştırma"], correct: 1, exp: "A seçeneğinde evden çıkış amacı toplantıya yetişmektir." },
+                            { q: "Hangisinde neden-sonuç ilişkisi *yoktur*?", options: ["A) Trafik sıkışınca işe geç kaldı.", "B) Erken kalkmak için alarmları kurdu.", "C) Yorgunluktan gözleri kapanıyordu.", "D) Sıcaktan buzlar eridi."], correct: 1, exp: "B seçeneğinde alarm kurma amacı erken kalkmaktır (amaç-sonuç ilişkisidir)." },
+                            { q: "\"Ağaçları suladı ki yeşerip meyve versin\" cümlesinin anlam özelliği nedir?", options: ["A) Neden-sonuç", "B) Amaç-sonuç", "C) Koşul", "D) Benzetme"], correct: 1, exp: "B seçeneğinde sulama amacı meyve vermesini sağlamaktır." },
+                            { q: "Hangisinde şart (koşul) anlamı vardır?", options: ["A) Düzenli beslenirse kısa sürede iyileşir.", "B) İlaçlarını içtiği için iyileşti.", "C) Sağlığına kavuşmak için ilaç içiyor.", "D) Hastalandığından okula gelemedi."], correct: 0, exp: "A seçeneğinde iyileşme durumu düzenli beslenme şartına bağlanmıştır." },
+                            { q: "\"Gözlük taktı ki yazıları rahat okusun\" cümlesi ne bildirir?", options: ["A) Neden", "B) Amaç", "C) Koşul", "D) Sonuç"], correct: 1, exp: "B seçeneğinde okumayı kolaylaştırma amacı güdülmüştür." },
+                            { q: "\"Erken yatarsan sabah dinç uyanırsın\" cümlesinin anlamı nedir?", options: ["A) Amaç", "B) Neden", "C) Koşul", "D) Tanım"], correct: 2, exp: "C seçeneğinde uyanmanın koşulu erken yatmaktır." }
+                        ]
+                    },
+                    {
+                        name: "Kök ve Ekler",
+                        htmlContent: `
+                            <h2>Kök ve Ekler</h2>
+                            <p>Sözcüklerin yapısal parçaları olan kökler ve ekler dil bilgisinin temel taşıdır.</p>
+                            
+                            <h3>1. Sözcük Kökü</h3>
+                            <p>Bir sözcüğün anlamı bozulmadan bölünebilen en küçük anlamlı parçasına kök denir. Tür yönünden ikiye ayrılır:</p>
+                            <div class="example-box">
+                                • <strong>İsim Kökü:</strong> -mek/-mak mastar ekini alamayan köklerdir. (Örn: Göz, Yol, Ev)<br>
+                                • <strong>Fiil Kökü:</strong> -mek/-mak mastar ekini alabilen eylem kökleridir. (Örn: Gel-, Oku-, Yaz-)
+                            </div>
+
+                            <h3>2. Ekler</h3>
+                            <p>Sözcük köklerine gelerek yeni kelimeler türeten ya da durumlarını belirleyen eklerdir:</p>
+                            <div class="example-box">
+                                • <strong>Yapım Ekleri:</strong> Geldiği sözcüğün anlamını değiştiren yeni kelime oluşturan eklerdir. (Örn: Göz &rarr; Göz-lük, Simit &rarr; Simit-çi)<br>
+                                • <strong>Çekim Ekleri:</strong> Sözcüğün anlamını değiştirmeyen, cümledeki görevini düzenleyen eklerdir (Çoğul ekleri, Hâl ekleri vb.). (Örn: Ev &rarr; Ev-ler, Masa &rarr; Masa-da)
+                            </div>
+                            <div class="source-tag">Kaynak: Dil Bilgisi Kuralları</div>
+                        `,
+                        questions: [
+                            { q: "\"Gözlükçü\" kelimesinin kökü türü yönünden nedir?", options: ["A) İsim kökü", "B) Fiil kökü", "C) Gövde", "D) Ek kök"], correct: 0, exp: "A seçeneğinde belirtildiği gibi 'göz' sözcüğü bir isim köküdür." },
+                            { q: "Aşağıdakilerden hangisi yapım eki almıştır?", options: ["A) Evler", "B) Kalemim", "C) Simitçi", "D) Okulda"], correct: 2, exp: "C seçeneğindeki '-çi' eki simit kelimesine gelerek yeni bir meslek/anlam türetmiştir (yapım eki)." },
+                            { q: "Hangisinde çekim eki kullanılmıştır?", options: ["A) Bilgi", "B) Sevgi", "C) Kitaplar", "D) Gözlük"], correct: 2, exp: "C seçeneğindeki '-lar' çokluk ekidir ve bir çekim ekidir." },
+                            { q: "\"Yazmaktan yazıcı\" kelimesinde ek hangi görevdedir?", options: ["A) İsimden fiil yapım", "B) Fiilden isim yapım", "C) Çekim eki", "D) Hal eki"], correct: 1, exp: "B seçeneğinde fiil kökünden isim türeten yapım eki görevindedir." },
+                            { q: "Hangisi fiil köküdür?", options: ["A) Yol", "B) Güneş", "C) Gel", "D) Taş"], correct: 2, exp: "C seçeneğindeki 'gel-' fiil köküdür çünkü mek/mak mastar eki alabilir." },
+                            { q: "Hangisi isim köküdür?", options: ["A) Oku", "B) Koş", "C) Balık", "D) Yaz (fiil olan)"], correct: 2, exp: "C seçeneğindeki 'balık' sözcüğü isim köküdür." }
+                        ]
+                    }
+                ]
+            },
+            {
+                unit: "3. Tema: Farklı Dünyalar (Dolu)",
+                topics: [
+                    {
+                        name: "Öznel ve Nesnel Anlatım",
+                        htmlContent: `
+                            <h2>Öznel ve Nesnel Anlatım</h2>
+                            <p>Cümlelerin kanıtlanabilirlik özelliğine göre ayrılan iki temel anlatım biçimidir:</p>
+                            
+                            <h3>1. Öznel Anlatım</h3>
+                            <p>Söyleyenin kendi kişisel duygu, düşünce ve beğenilerini içeren cümlelerdir. Öznel yargılar kişiden kişiye değişir ve kanıtlanamaz.</p>
+                            <div class="example-box">
+                                <strong>Örnekler:</strong><br>
+                                • "İstanbul dünyadaki en güzel şehirdir." (Kişisel beğeni)<br>
+                                • "Sarı renk insana mutluluk verir." (Kişisel yorum)
+                            </div>
+
+                            <h3>2. Nesnel Anlatım</h3>
+                            <p>Kişisel duygu ve yorumlardan uzak, herkesçe aynı kabul edilen ve tarafsızca kanıtlanabilen yargılardır.</p>
+                            <div class="example-box">
+                                <strong>Örnekler:</strong><br>
+                                • "Türkiye'nin başkenti Ankara'dır." (Doğrulanabilir gerçek)<br>
+                                • "Okuduğum bu kitap toplam 150 sayfadan oluşuyor." (Ölçülebilir veri)
+                            </div>
+                            <div class="source-tag">Kaynak: MEB & Türkçe Kaynakları</div>
+                        `,
+                        questions: [
+                            { q: "Hangisi öznel anlatımlı bir cümledir?", options: ["A) Yazarın bu kitabı üç bölümden oluşuyor.", "B) Filmde başrolde yerli oyuncular oynamış.", "C) Romanın dili oldukça akıcı ve etkileyiciydi.", "D) Kitap 2024 yılında basılmıştır."], correct: 2, exp: "C seçeneğinde akıcı ve etkileyici bulmak kişisel görüş bildirdiği için özneldir." },
+                            { q: "Hangisi nesnel anlatımlı bir cümledir?", options: ["A) Bu ressamın tabloları harika görünüyor.", "B) Şairin son şiiri yüz mısradan ibarettir.", "C) Mavi renk insanı her zaman huzur verir.", "D) İzmir Türkiye'nin en güzel şehridir."], correct: 1, exp: "B seçeneğindeki mısra sayısı sayılabilir ve kanıtlanabilir bir bilgidir (nesnel)." },
+                            { q: "Aşağıdakilerden hangisinde nesnel bir yargı vardır?", options: ["A) Dünyanın en lezzetli yemeği mantıdır.", "B) Okulumuzun bahçesinde dört tane çam ağacı var.", "C) Matematik dersi en eğlenceli derstir.", "D) Hava bugün insana neşe veriyor."], correct: 1, exp: "B seçeneğindeki ağaç sayısı gözlemlenip doğrulanabilir." },
+                            { q: "Hangisi öznel yargıdır?", options: ["A) Sınavda toplam yirmi soru soruldu.", "B) Sınıfımız otuz kişiliktir.", "C) Türkçe dersi ortaokulda okunur.", "D) Bu zor soruları kimse çözemez."], correct: 3, exp: "D seçeneğinde kimsenin çözememesi abartılı ve kişisel bir görüştür." },
+                            { q: "Hangisi nesnel bir cümledir?", options: ["A) En iyi müzik türü halk müziğidir.", "B) Yazar, eserinde sade bir dil kullanmıştır.", "C) Romanın kapak resmi turuncu renktedir.", "D) Oyuncu performansıyla göz kamaştırdı."], correct: 2, exp: "C seçeneğindeki kapak rengi herkes tarafından aynı şekilde doğrulanabilir." },
+                            { q: "\"Yazar bu romanı iki yılda tamamlamıştır\" cümlesi nedir?", options: ["A) Öznel", "B) Nesnel", "C) Varsayım", "D) Öneri"], correct: 1, exp: "B seçeneğinde verilen süre bilgisi belgelenebilir niteliktedir." }
+                        ]
+                    },
+                    {
+                        name: "Söz Sanatları",
+                        htmlContent: `
+                            <h2>Söz Sanatları</h2>
+                            <p>Anlatımı daha etkileyici, zengin ve çekici kılmak için kullanılan edebi sanatlardır:</p>
+                            
+                            <h3>1. Benzetme (Teşbih)</h3>
+                            <p>Anlatımı güçlendirmek amacıyla zayıf olan varlığın güçlü olana benzetilmesidir.</p>
+                            <div class="example-box">
+                                <strong>Örnek:</strong> "Çocuk <strong>aslan gibi</strong> cesurca öne atıldı." (Çocuk aslana benzetilmiştir.)
+                            </div>
+
+                            <h3>2. Kişileştirme (Teşhis)</h3>
+                            <p>İnsan dışındaki canlı veya cansız varlıklara insana özgü nitelikler (ağlama, sevinme, küsme vb.) yükleme sanatıdır.</p>
+                            <div class="example-box">
+                                <strong>Örnek:</strong> "Rüzgar bugün dağlara <strong>küsüp ağlıyordu</strong>."
+                            </div>
+
+                            <h3>3. Konuşturma (İntak)</h3>
+                            <p>İnsan dışındaki varlıkları konuşturma sanatıdır. Konuşturma sanatının olduğu her yerde kişileştirme de vardır.</p>
+                            <div class="example-box">
+                                <strong>Örnek:</strong> "Küçük papatya, 'Beni sulayın!' diye seslendi."
+                            </div>
+
+                            <h3>4. Abartma (Mübalağa)</h3>
+                            <p>Bir durum ya da olayı olduğundan çok daha büyük veya çok daha küçük gösterme sanatıdır.</p>
+                            <div class="example-box">
+                                <strong>Örnek:</strong> "Ağlamaktan gözümün yaşı <strong>sel oldu aktı</strong>."
+                            </div>
+                            <div class="source-tag">Kaynak: Edebi Sanatlar Kılavuzu</div>
+                        `,
+                        questions: [
+                            { q: "\"Kömür karası gözleriyle bana baktı\" cümlesinde hangi söz sanatı vardır?", options: ["A) Kişileştirme", "B) Benzetme", "C) Abartma", "D) Konuşturma"], correct: 1, exp: "B seçeneğinde gözlerin rengi kömür karasına benzetilmiştir." },
+                            { q: "\"Bulutlar, bugün bize küsmüş gibi ağlıyordu\" cümlesinde hangi sanat vardır?", options: ["A) Benzetme", "B) Kişileştirme (Teşhis)", "C) Abartma", "D) Zıtlık"], correct: 1, exp: "B seçeneğinde bulutlara küsme ve ağlama gibi insani özellikler verilmiştir." },
+                            { q: "\"Ağlamaktan gözümde yaş sel oldu\" cümlesinde hangi söz sanatına başvurulmuştur?", options: ["A) Benzetme", "B) Abartma (Mübalağa)", "C) Kişileştirme", "D) Konuşturma"], correct: 1, exp: "B seçeneğinde gözyaşının sel olması durumu abartılarak anlatılmıştır." },
+                            { q: "\"Papatya kulağıma fısıldadı\" cümlesinde hangi sanat vardır?", options: ["A) Benzetme", "B) Konuşturma ve Kişileştirme", "C) Abartma", "D) Tezat"], correct: 1, exp: "B seçeneğinde papatyanın fısıldaması kişileştirme ve konuşturma sanatıdır." },
+                            { q: "\"Aslanlar gibi çalışıp sınavı kazandı\" cümlesindeki sanat nedir?", options: ["A) Benzetme", "B) Kişileştirme", "C) Abartma", "D) Konuşturma"], correct: 0, exp: "A seçeneğinde çalışma tarzı aslana benzetilmiştir." },
+                            { q: "\"Gök gürültüsünden korkan dağlar titriyordu\" cümlesinde hangi sanat vardır?", options: ["A) Benzetme", "B) Kişileştirme", "C) Abartma", "D) Tezat"], correct: 1, exp: "B seçeneğinde dağların korkup titremesi kişileştirmedir." }
+                        ]
+                    }
+                ]
+            },
+            {
+                unit: "4. Tema: İletişim ve Sosyal İlişkiler (Yakında)",
+                topics: [
+                    { name: "İsimler ve İsim Tamlamaları", htmlContent: `<h2>İsimler ve İsim Tamlamaları</h2><p>Bu ünitenin kapsamlı konu anlatımları ve 15 soruluk testleri çok yakında eklenecektir!</p><div class="source-tag">Yakında Geliyor</div>` },
+                    { name: "Yazım Kuralları ve Noktalama", htmlContent: `<h2>Yazım Kuralları ve Noktalama</h2><p>Bu ünitenin konu anlatımı ve testleri çok yakında eklenecektir!</p><div class="source-tag">Yakında Geliyor</div>` }
+                ]
+            },
+            {
+                unit: "5. Tema: Bilim ve Teknoloji (Yakında)",
+                topics: [
+                    { name: "Sıfatlar (Ön Adlar)", htmlContent: `<h2>Sıfatlar</h2><p>Bu konunun içerikleri yakında yayında olacaktır.</p><div class="source-tag">Yakında Geliyor</div>` }
+                ]
+            },
+            {
+                unit: "6. Tema: Lider Ruhlar (Yakında)",
+                topics: [
+                    { name: "Edat, Bağlaç ve Ünlem", htmlContent: `<h2>Edat, Bağlaç ve Ünlem</h2><p>Bu konunun içerikleri yakında yayında olacaktır.</p><div class="source-tag">Yakında Geliyor</div>` }
+                ]
+            }
+        ];
+
+        function renderUnits() {
+            const sidebarList = document.getElementById('unitSidebarList');
+            sidebarList.innerHTML = "";
+
+            curriculumData.forEach((unitObj) => {
+                const li = document.createElement('li');
+                li.className = "unit-item";
+
+                const btn = document.createElement('button');
+                btn.className = "unit-btn";
+                btn.innerHTML = `<span><i class="fa-solid fa-folder-open"></i> ${unitObj.unit}</span> <i class="fa-solid fa-chevron-down" style="font-size: 0.8rem;"></i>`;
+                btn.onclick = function(e) {
+                    e.stopPropagation();
+                    li.classList.toggle('open');
+                };
+
+                const sublist = document.createElement('ul');
+                sublist.className = "topic-sublist";
+
+                unitObj.topics.forEach((topicObj) => {
+                    const subItem = document.createElement('li');
+                    subItem.className = "topic-subitem";
+                    subItem.innerText = topicObj.name;
+                    subItem.onclick = function(e) {
+                        e.stopPropagation();
+                        document.querySelectorAll('.topic-subitem').forEach(s => s.classList.remove('active'));
+                        subItem.classList.add('active');
+                        document.getElementById('contentViewer').innerHTML = topicObj.htmlContent;
+                    };
+                    sublist.appendChild(subItem);
+                });
+
+                li.appendChild(btn);
+                li.appendChild(sublist);
+                sidebarList.appendChild(li);
+            });
+        }
+        renderUnits();
+
+        function initTestDropdowns() {
+            const unitSelect = document.getElementById('selectUnit');
+            unitSelect.innerHTML = "";
+            curriculumData.forEach((unitObj, index) => {
+                const opt = document.createElement('option');
+                opt.value = index;
+                opt.innerText = unitObj.unit;
+                unitSelect.appendChild(opt);
+            });
+            updateTopicDropdown();
+        }
+
+        function updateTopicDropdown() {
+            const unitIndex = document.getElementById('selectUnit').value;
+            const topicSelect = document.getElementById('selectTopic');
+            topicSelect.innerHTML = "";
+
+            const topics = curriculumData[unitIndex].topics;
+            topics.forEach((topicObj, index) => {
+                const opt = document.createElement('option');
+                opt.value = index;
+                opt.innerText = topicObj.name;
+                topicSelect.appendChild(opt);
+            });
+        }
+
+        let activeQuestions = [];
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        function startCustomQuiz() {
+            const uIndex = document.getElementById('selectUnit').value;
+            const tIndex = document.getElementById('selectTopic').value;
+            const selectedTopic = curriculumData[uIndex].topics[tIndex];
+
+            activeQuestions = selectedTopic.questions || [];
+            if(activeQuestions.length === 0) {
+                alert("Bu ünitenin soruları pek yakında eklenecektir!");
+                return;
+            }
+
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('score').innerText = `Puan: 0`;
+            document.getElementById('activeTopicName').innerText = selectedTopic.name;
+            document.getElementById('testConfigCard').style.display = 'none';
+            document.getElementById('quizSection').style.display = 'block';
+
+            loadQuizQuestion();
+        }
+
+        function returnToConfig() {
+            document.getElementById('quizSection').style.display = 'none';
+            document.getElementById('testConfigCard').style.display = 'block';
+        }
+
+        function loadQuizQuestion() {
+            answered = false;
+            const q = activeQuestions[currentQuestion];
+            document.getElementById("questionText").innerText = `${currentQuestion + 1}. ${q.q}`;
+            document.getElementById("quizStatus").innerText = `Soru ${currentQuestion + 1} / ${activeQuestions.length}`;
+            document.getElementById("explanationBox").style.display = "none";
+            document.getElementById("nextBtn").style.display = "none";
+
+            const optionsContainer = document.getElementById("optionsContainer");
+            optionsContainer.innerHTML = "";
+
+            q.options.forEach((opt, index) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.innerText = opt;
+                btn.onclick = () => checkQuizAnswer(index);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function checkQuizAnswer(selectedIndex) {
+            if (answered) return;
+            answered = true;
+
+            const q = activeQuestions[currentQuestion];
+            const buttons = document.querySelectorAll(".option-btn");
+
+            if (selectedIndex === q.correct) {
+                buttons[selectedIndex].classList.add("correct");
+                score += Math.round(100 / activeQuestions.length);
+                document.getElementById("score").innerText = `Puan: ${score}`;
+            } else {
+                buttons[selectedIndex].classList.add("wrong");
+                buttons[q.correct].classList.add("correct");
+            }
+
+            const expBox = document.getElementById("explanationBox");
+            expBox.innerHTML = `<strong>Açıklama:</strong> ${q.exp}`;
+            expBox.style.display = "block";
+
+            if (currentQuestion < activeQuestions.length - 1) {
+                document.getElementById("nextBtn").style.display = "inline-block";
+            } else {
+                document.getElementById("nextBtn").innerText = "Testi Tamamla";
+                document.getElementById("nextBtn").style.display = "inline-block";
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < activeQuestions.length - 1) {
+                currentQuestion++;
+                loadQuizQuestion();
+            } else {
+                alert(`Tebrikler! Testi tamamladın. Toplam Puanın: ${score}`);
+                returnToConfig();
+            }
+        }
+    </script>
+</body>
+</html>
