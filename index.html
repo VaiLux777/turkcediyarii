@@ -73,8 +73,9 @@
 
         .nav-links {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             list-style: none;
+            flex-wrap: wrap;
         }
 
         .nav-btn {
@@ -87,7 +88,7 @@
             cursor: pointer;
             border: none;
             background: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
         }
 
         .nav-btn.active, .nav-btn:hover {
@@ -333,14 +334,6 @@
             margin: 1rem 0;
         }
 
-        .note-box {
-            background: #eff6ff;
-            border-left: 4px solid var(--secondary);
-            padding: 1rem;
-            border-radius: 8px;
-            margin: 1rem 0;
-        }
-
         .source-tag {
             margin-top: 3rem;
             text-align: right;
@@ -349,7 +342,47 @@
             font-style: italic;
         }
 
-        /* Test Section */
+        /* Test Bankası / Seçim Alanı */
+        .test-config-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid #f1f5f9;
+            margin-bottom: 2rem;
+        }
+
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            font-size: 1rem;
+            background: #f8fafc;
+            outline: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .form-group select:focus {
+            border-color: var(--primary);
+        }
+
+        /* Test Çözüm Ekranı */
         .quiz-section {
             background: var(--card-bg);
             border-radius: var(--radius);
@@ -357,6 +390,7 @@
             box-shadow: var(--shadow);
             border: 1px solid #f1f5f9;
             margin-bottom: 4rem;
+            display: none;
         }
 
         .quiz-header {
@@ -400,11 +434,6 @@
         .option-btn:hover {
             border-color: var(--primary);
             background: #f0fdf4;
-        }
-
-        .option-btn.selected {
-            border-color: var(--primary);
-            background: #e0e7ff;
         }
 
         .option-btn.correct {
@@ -495,7 +524,7 @@
             <ul class="nav-links">
                 <li><button class="nav-btn active" id="navHome" onclick="switchPage('home')">Ana Sayfa</button></li>
                 <li><button class="nav-btn" id="navLessons" onclick="switchPage('lessons')">Konu Anlatımları</button></li>
-                <li><button class="nav-btn" id="navTest" onclick="switchPage('test')">Test Çöz</button></li>
+                <li><button class="nav-btn" id="navTests" onclick="switchPage('tests')">Testler</button></li>
             </ul>
         </div>
     </header>
@@ -503,7 +532,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <h1>Türkçe Diyarı'na Hoş Geldin!</h1>
-        <p>6. Sınıf Türkçe konularını zengin örnekler, detaylı anlatımlar ve interaktif testlerle kusursuzca öğren.</p>
+        <p>6. Sınıf Türkçe konularını zengin örnekler, detaylı anlatımlar ve interaktif test havuzuyla kusursuzca öğren.</p>
         <div class="grade-badges">
             <div class="grade-badge">5. Sınıf</div>
             <div class="grade-badge active">6. Sınıf</div>
@@ -555,20 +584,16 @@
             </div>
         </div>
 
-        <!-- 2. KONU ANLATIMLARI GÖRÜNÜMÜ (DETAYLI & ÖRNEKLİ) -->
+        <!-- 2. KONU ANLATIMLARI GÖRÜNÜMÜ -->
         <div id="pageLessons" class="page-view">
             <h2 class="section-title">
                 <i class="fa-solid fa-graduation-cap"></i> 6. Sınıf Türkçe Kapsamlı Konu Anlatım Kılavuzu
             </h2>
             <div class="units-layout">
-                <!-- Sol Menü / Üniteler -->
                 <div class="unit-sidebar">
                     <h3><i class="fa-solid fa-list"></i> Temalar & Üniteler</h3>
-                    <ul class="unit-list" id="unitSidebarList">
-                        <!-- JS ile doldurulacak -->
-                    </ul>
+                    <ul class="unit-list" id="unitSidebarList"></ul>
                 </div>
-                <!-- Sağ İçerik / Detaylı Anlatım -->
                 <div class="content-viewer" id="contentViewer">
                     <h2>Sol taraftan bir ünite ve konu seçin.</h2>
                     <p>Seçtiğiniz konunun ayrıntılı açıklamaları, püf noktaları ve zengin örnekleri burada görünecektir.</p>
@@ -577,38 +602,60 @@
             </div>
         </div>
 
-        <!-- 3. TEST ÇÖZ GÖRÜNÜMÜ -->
-        <div id="pageTest" class="page-view">
+        <!-- 3. TESTLER SEKMESİ (ÜNİTE ve KONU SEÇMELİ TEST HAVUZU) -->
+        <div id="pageTests" class="page-view">
             <h2 class="section-title">
-                <i class="fa-solid fa-circle-check"></i> Günün Mini Testi
+                <i class="fa-solid fa-circle-check"></i> İnteraktif Test Bankası (50 Soruya Kadar)
             </h2>
-            <div class="quiz-section">
+            
+            <!-- Test Seçim Paneli -->
+            <div class="test-config-card" id="testConfigCard">
+                <p style="margin-bottom: 1.5rem; color: var(--text-muted);">Çözmek istediğin üniteyi ve konuyu seçerek test havuzundan dilediğin kadar soru çözebilirsin. (Her güncellemede soru sayısı artırılmaktadır!)</p>
+                <div class="config-grid">
+                    <div class="form-group">
+                        <label for="selectUnit">1. Ünite / Tema Seç:</label>
+                        <select id="selectUnit" onchange="updateTopicDropdown()">
+                            <!-- JS ile dolacak -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectTopic">2. Konu Seç:</label>
+                        <select id="selectTopic">
+                            <!-- Seçilen üniteye göre dolacak -->
+                        </select>
+                    </div>
+                </div>
+                <button class="btn" onclick="startCustomQuiz()"><i class="fa-solid fa-play"></i> Testi Başlat</button>
+            </div>
+
+            <!-- Aktif Test Çözüm Alanı -->
+            <div class="quiz-section" id="quizSection">
                 <div class="quiz-header">
                     <div>
-                        <span style="color: var(--primary); font-weight: 600;">Test #1</span>
-                        <h3>Sözcükte Anlam & Cümlede Anlam</h3>
+                        <span style="color: var(--primary); font-weight: 600;" id="quizTitleBadge">Seçmeli Test</span>
+                        <h3 id="activeTopicName">Konu Adı</h3>
                     </div>
                     <div id="score" style="font-weight: 700; color: var(--secondary);">Puan: 0</div>
                 </div>
 
                 <div class="question-box">
                     <div class="question-text" id="questionText">
-                        1. "Ağır" sözcüğü aşağıdaki cümlelerin hangisinde "mecaz anlamda" kullanılmıştır?
+                        Soru metni yükleniyor...
                     </div>
                     <div class="options-grid" id="optionsContainer">
-                        <button class="option-btn" onclick="checkAnswer(0)">A) Bu torba çok ağır, taşımama yardım et.</button>
-                        <button class="option-btn" onclick="checkAnswer(1)">B) Söylediği ağır sözler kalbimi çok kırdı.</button>
-                        <button class="option-btn" onclick="checkAnswer(2)">C) Kamyona ağır yükler yüklendi.</button>
-                        <button class="option-btn" onclick="checkAnswer(3)">D) Masanın üzerindeki ağır kutu yere düştü.</button>
+                        <!-- Seçenekler -->
                     </div>
                     <div class="explanation" id="explanationBox">
-                        <strong>Açıklama:</strong> B seçeneğinde "ağır" sözcüğü fiziksel bir ağırlığı değil, "kırıcı, üzücü" anlamında kullanıldığı için mecaz anlamlıdır.
+                        <strong>Açıklama:</strong> Açıklama metni.
                     </div>
                 </div>
 
                 <div class="quiz-actions">
-                    <span id="quizStatus" style="color: var(--text-muted);">Soru 1 / 3</span>
-                    <button class="btn" id="nextBtn" onclick="nextQuestion()" style="display: none;">Sonraki Soru <i class="fa-solid fa-arrow-right"></i></button>
+                    <span id="quizStatus" style="color: var(--text-muted);">Soru 1 / 50</span>
+                    <div>
+                        <button class="btn" style="background: var(--text-muted); margin-right: 0.5rem;" onclick="returnToConfig()"><i class="fa-solid fa-arrow-left"></i> Test Seçimine Dön</button>
+                        <button class="btn" id="nextBtn" onclick="nextQuestion()" style="display: none;">Sonraki Soru <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -633,14 +680,15 @@
             } else if(pageId === 'lessons') {
                 document.getElementById('pageLessons').classList.add('active-view');
                 document.getElementById('navLessons').classList.add('active');
-            } else if(pageId === 'test') {
-                document.getElementById('pageTest').classList.add('active-view');
-                document.getElementById('navTest').classList.add('active');
+            } else if(pageId === 'tests') {
+                document.getElementById('pageTests').classList.add('active-view');
+                document.getElementById('navTests').classList.add('active');
+                initTestDropdowns();
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // 6. Sınıf Zenginleştirilmiş, Detaylı ve Örnekli Konu Veritabanı
+        // 6. Sınıf Zenginleştirilmiş Konu & Test Veritabanı (50 Soruya Kadar Ölçeklenebilir)
         const curriculumData = [
             {
                 unit: "1. Tema: Dilimizin Zenginliği",
@@ -649,99 +697,46 @@
                         name: "Gerçek, Mecaz ve Terim Anlam",
                         htmlContent: `
                             <h2>Gerçek, Mecaz ve Terim Anlam</h2>
-                            <p>Sözcüklerin cümle içerisinde üstlendiği anlamlar anlatımı zenginleştirir. Kelimelerin temel ve yan anlamları bu başlık altında incelenir.</p>
-                            
+                            <p>Sözcüklerin cümle içerisinde üstlendiği anlamlar anlatımı zenginleştirir.</p>
                             <h3>1. Gerçek (Temel) Anlam</h3>
-                            <p>Bir sözcüğün akla gelen ilk anlamıdır. Sözcük söylendiğinde herkesin zihninde oluşan ilk imge o kelimenin gerçek anlamını verir.</p>
-                            <div class="example-box">
-                                <strong>Örnekler:</strong>
-                                <ul>
-                                    <li>"Bardağın kırılmasına çok üzüldü." (Fiziksel olarak bütünlüğünün bozulması)</li>
-                                    <li>"Sıcak çorbayı içince içi ısındı." (Isı derecesi yüksek olan)</li>
-                                </ul>
-                            </div>
-
+                            <p>Bir sözcüğün akla gelen ilk temel anlamıdır.</p>
+                            <div class="example-box"><strong>Örnek:</strong> "Bardağın kırılmasına çok üzüldü."</div>
                             <h3>2. Mecaz Anlam</h3>
-                            <p>Bir sözcüğün gerçek anlamından tamamen uzaklaşarak başka bir kavram ya da olay yerine kullanılmasından doğan soyut anlamdır.</p>
-                            <div class="example-box">
-                                <strong>Örnekler:</strong>
-                                <ul>
-                                    <li>"Bana karşı çok soğuk davranıyordu." (İlgisiz, sevgisiz anlamında)</li>
-                                    <li>"Adamın sert bakışları herkesi korkuttu." (Kırıcı, korkutucu tutum)</li>
-                                </ul>
-                            </div>
-
+                            <p>Gerçek anlamdan tamamen uzaklaşarak kazanılan soyut anlamdır.</p>
+                            <div class="example-box"><strong>Örnek:</strong> "Bana karşı çok soğuk davranıyordu."</div>
                             <h3>3. Terim Anlam</h3>
-                            <p>Bir bilim, sanat, spor, meslek dalı veya akademik alana özgü kavramları karşılayan özel sözcüklerdir.</p>
-                            <div class="example-box">
-                                <strong>Örnekler:</strong>
-                                <ul>
-                                    <li>Matematik: Üçgenin iç açılarının toplamı 180 derecedir.</li>
-                                    <li>Tiyatro: Oyuncular sahneye çıkarak oyuna başladılar.</li>
-                                    <li>Müzik: Şarkıda sol anahtarı doğru okunmalı.</li>
-                                </ul>
-                            </div>
+                            <p>Bilim, sanat veya meslek dalına özgü kavramlar.</p>
+                            <div class="example-box"><strong>Örnek:</strong> "Üçgenin iç açırları toplamı 180 derecedir."</div>
                             <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
-                        `
+                        `,
+                        questions: [
+                            { q: "\"Ağır\" sözcüğü hangisinde mecaz anlamdadır?", options: ["A) Bu torba çok ağır.", "B) Söylediği ağır sözler kalbimi kırdı.", "C) Kamyona ağır yükler yüklendi.", "D) Masadaki ağır kutu düştü."], correct: 1, exp: "Kırıcı, üzücü anlamında mecazdır." },
+                            { q: "\"Tatlı\" sözcüğü hangisinde gerçek anlamıyla kullanılmıştır?", options: ["A) Tatlı diliyle herkesi etkiledi.", "B) Tatlı bir yorgunluk hissediyordu.", "C) Fırından taze ve tatlı bir kurabiye aldı.", "D) Tatlı anılarımızı yad ettik."], correct: 2, exp: "Yiyecek olarak lezzet anlamındadır." },
+                            { q: "Aşağıdakilerin hangisinde terim anlamlı bir sözcük vardır?", options: ["A) Sahneye çıkan oyuncular alkışlandı.", "B) Bugün hava çok bulutlu.", "C) Kalemim masada unutulmuş.", "D) Çiçekleri sulamayı unuttum."], correct: 0, exp: "'Sahne ve oyuncu' tiyatro terimidir." }
+                        ]
                     },
                     {
                         name: "Eş ve Zıt Anlamlı Kelimeler",
                         htmlContent: `
-                            <h2>Eş Anlamlı (Anlamdaş) ve Zıt Anlamlı Kelimeler</h2>
-                            <p>Dilimizin kelime hazinesini zenginleştiren en önemli unsurlardan biridir.</p>
-
-                            <h3>1. Eş Anlamlı Kelimeler</h3>
-                            <p>Yazılışları ve okunuşları farklı olmasına rağmen aynı anlamı taşıyan sözcüklerdir. Genellikle biri Türkçe kökenli, diğeri ise yabancı dillerden dilimize girmiş kelimelerdir.</p>
-                            <div class="example-box">
-                                <strong>Örnekler:</strong>
-                                <ul>
-                                    <li>Siyah &ndash; Kara</li>
-                                    <li>Öğrenci &ndash; Talebe</li>
-                                    <li>Kırmızı &ndash; Al</li>
-                                    <li>Kelime &ndash; Sözcük</li>
-                                </ul>
-                            </div>
-
-                            <h3>2. Zıt Anlamlı Kelimeler</h3>
-                            <p>Anlamca birbirinin tamamen karşıtı, tersi olan sözcüklerdir. (Dikkat: Bir kelimenin olumsuzu o kelimenin zıttı değildir! Örneğin "geldi" kelimesinin zıttı "gelmedi" değil, "gitti"dir.)</p>
-                            <div class="example-box">
-                                <strong>Örnekler:</strong>
-                                <ul>
-                                    <li>Büyük &ndash; Küçük</li>
-                                    <li>Açık &ndash; Kapalı</li>
-                                    <li>İyi &ndash; Kötü</li>
-                                </ul>
-                            </div>
+                            <h2>Eş ve Zıt Anlamlı Kelimeler</h2>
+                            <p>Yazılışları farklı anlamları aynı ya da zıt olan kelimelerdir.</p>
                             <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
-                        `
+                        `,
+                        questions: [
+                            { q: "Aşağıdaki kelime çiftlerinden hangisi zıt anlamlıdır?", options: ["A) Siyah - Kara", "B) Yaşlı - İhtiyar", "C) İleri - Geri", "D) Konuk - Misafir"], correct: 2, exp: "İleri ve geri sözcükleri zıt anlamlıdır." },
+                            { q: "\"Fakir\" kelimesinin eş anlamlısı hangisidir?", options: ["A) Zengin", "B) Yoksul", "C) Cimri", "D) Cömert"], correct: 1, exp: "Fakir kelimesi yoksul ile eş anlamlıdır." }
+                        ]
                     },
                     {
                         name: "Deyimler ve Atasözleri",
                         htmlContent: `
                             <h2>Deyimler ve Atasözleri</h2>
-                            <p>Anlatımı canlandırmak, az sözle çok şey ifade etmek için kullanılan kalıplaşmış dil miraslarımızdır.</p>
-
-                            <h3>1. Deyimler</h3>
-                            <p>Genellikle gerçek anlamından ayrı, kendine özgü bir anlam taşıyan kalıplaşmış söz öbekleridir. Çoğu zaman mastar haliyle (-mek, -mak) biterler ve cümle içinde duruma göre çekimlenirler.</p>
-                            <div class="example-box">
-                                <strong>Örnekler:</strong>
-                                <ul>
-                                    <li><strong>Etekleri zil çalmak:</strong> Çok sevinmek, havalara uçmak.</li>
-                                    <li><strong>Burnundan kıl aldırmamak:</strong> Çok gururlu ve kibirli olmak.</li>
-                                </ul>
-                            </div>
-
-                            <h3>2. Atasözleri</h3>
-                            <p>Atalarımızın uzun gözlem ve deneyimleri sonucunda ulaştıkları ortak akıl ve öğütleri içeren, kalıplaşmış cümlelerdir. Öğüt verici niteliktedirler ve sözcüklerinin yeri değiştirilemez.</p>
-                            <div class="example-box">
-                                <strong>Örnekler:</strong>
-                                <ul>
-                                    <li>"Damızlık taş yorulmaz" ya da "Damlaya damlaya göl olur." (Küçük birikimlerin zamanla büyük değerler oluşturacağı anlamı)</li>
-                                    <li>"Sakla samanı, gelir zamanı."</li>
-                                </ul>
-                            </div>
+                            <p>Kalıplaşmış söz öbekleridir.</p>
                             <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
-                        `
+                        `,
+                        questions: [
+                            { q: "\"Etekleri zil çalmak\" deyiminin anlamı nedir?", options: ["A) Çok korkmak", "B) Çok sevinmek", "C) Üzülmek", "D) Telaşlanmak"], correct: 1, exp: "Çok sevinmek anlamına gelir." }
+                        ]
                     }
                 ]
             },
@@ -752,184 +747,36 @@
                         name: "Cümlede Anlam İlişkileri",
                         htmlContent: `
                             <h2>Cümlede Anlam İlişkileri</h2>
-                            <p>Cümleler arasında sebep, amaç ve koşul gibi mantıksal bağlar kurulur. Bu ilişkiler metnin akışını ve anlam derinliğini belirler.</p>
-
-                            <h3>1. Neden (Sebep) &ndash; Sonuç Cümleleri</h3>
-                            <p>Bir eylemin hangi gerekçeyle, hangi sebeple gerçekleştiğini bildiren cümlelerdir. Yükleme "Neden?" veya "Niçin?" soruları sorulduğunda yanıt alınır.</p>
-                            <div class="example-box">
-                                <strong>Örnek:</strong> "Kar yağdığı için okullar tatil edildi." <br>
-                                <em>Neden:</em> Karın yağması | <em>Sonuç:</em> Okulların tatil edilmesi. (Eylem gerçekleşmiştir.)
-                            </div>
-
-                            <h3>2. Amaç &ndash; Sonuç Cümleleri</h3>
-                            <p>Bir eylemin hangi hedef veya niyetle yapıldığını gösteren cümlelerdir. Genellikle "amacıyla" veya "üzere" sözcükleri ile anlam bütünlüğü sağlanır.</p>
-                            <div class="example-box">
-                                <strong>Örnek:</strong> "LGS'yi kazanmak için gece gündüz çalışıyor." <br>
-                                <em>Hedef/Amaç:</em> Sınavı kazanmak.
-                            </div>
-
-                            <h3>3. Koşul (Şart) Cümleleri</h3>
-                            <p>Bir eylemin gerçekleşmesinin başka bir duruma veya şarta bağlı olduğu cümlelerdir. Genellikle "-se / -sa" ekiyle kurulur.</p>
-                            <div class="example-box">
-                                <strong>Örnek:</strong> "Ödevini bitirirsen dışarı çıkabilirsin."
-                            </div>
+                            <p>Neden-sonuç, amaç-sonuç ilişkileri.</p>
                             <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
-                        `
-                    },
-                    {
-                        name: "Kök ve Ekler (Yapım & Çekim)",
-                        htmlContent: `
-                            <h2>Kök ve Ekler</h2>
-                            <p>Türkçe eklemeli bir dil olduğu için sözcükler kök ve eklere ayrılarak incelenir.</p>
-
-                            <h3>1. Kök</h3>
-                            <p>Bir sözcüğün anlamlı en küçük parçasıdır. Kökler isim kökü ve fiil kökü olmak üzere ikiye ayrılır (Kökün sonuna "-mek/-mak" getirebiliyorsak fiil, getiremiyorsak isim köküdür).</p>
-
-                            <h3>2. Yapım Ekleri</h3>
-                            <p>Eklendikleri sözcüğün anlamını veya türünü değiştiren, yeni sözcükler türeten eklerdir.</p>
-                            <div class="example-box">
-                                <strong>Örnek:</strong> "Göz" (isim) &rarr; "Gözlük" (isimden isim türeten yapım eki) &rarr; "Gözlükçü"
-                            </div>
-
-                            <h3>3. Çekim Ekleri</h3>
-                            <p>Sözcüğün anlamını değiştirmeyen; kelimelerin cümle içindeki görevlerini belirleyen veya diğer kelimelerle bağ kurmasını sağlayan eklerdir (Hal ekleri, çoğul ekleri, iyelik ekleri vb.).</p>
-                            <div class="example-box">
-                                <strong>Örnek:</strong> "Ev" &rarr; "Evler" (Çoğul çekim eki) &rarr; "Evde" (Bulunma hâl eki)
-                            </div>
-                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
-                        `
-                    }
-                ]
-            },
-            {
-                unit: "3. Tema: Farklı Dünyalar",
-                topics: [
-                    {
-                        name: "Öznel ve Nesnel Anlatım",
-                        htmlContent: `
-                            <h2>Öznel ve Nesnel Anlatım</h2>
-                            <p>Cümlelerin doğruluk değeri ve kanıtlanabilirlik özellikleri anlatımı şekillendirir.</p>
-
-                            <h3>1. Öznel Anlatım</h3>
-                            <p>Kişiden kişiye değişen, söyleyenin kendi kişisel düşüncelerini, beğenilerini veya duygularını içeren, kanıtlanamayan yargılardır.</p>
-                            <div class="example-box">
-                                <strong>Örnek:</strong> "Bu roman, yazarın bugüne kadar yazdığı en harika eserdir." (Bana göre harika olabilir ama başkasına göre olmayabilir.)
-                            </div>
-
-                            <h3>2. Nesnel Anlatım</h3>
-                            <p>Söyleyenin kişisel görüşünü barındırmayan, herkesçe aynı kabul edilen, belgelere dayanılarak kanıtlanabilen yargılardır.</p>
-                            <div class="example-box">
-                                <strong>Örnek:</strong> "Türkiye'nin başkenti Ankara'dır." (Herkes için geçerli ve kanıtlanabilir bir gerçektir.)
-                            </div>
-                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
-                        `
-                    },
-                    {
-                        name: "Söz Sanatları",
-                        htmlContent: `
-                            <h2>Söz Sanatları (Edebi Sanatlar)</h2>
-                            <p>Anlatımı renklendirmek ve daha etkileyici kılmak için başvurulan sanatlı söyleyişlerdir.</p>
-                            <ul>
-                                <li><strong>Benzetme (Teşbih):</strong> Aralarında ortak özellik bulunan iki varlıktan zayıf olanın güçlü olanına benzetilmesidir. (Örnek: "İnci gibi dişleri vardı.")</li>
-                                <li><strong>Kişileştirme (Teşhis):</strong> İnsan dışındaki varlıklara (hayvan, bitki, doğa) insana ait özellikler (konuşma, düşünme, üzülme) yükleme sanatıdır. (Örnek: "Küçük papatya boynunu büküp ağlıyordu.")</li>
-                                <li><strong>Konuşturma (İntak):</strong> İnsan dışındaki varlıkların konuşturulması sanatıdır. (Tüm konuşturma sanatlarında kişileştirme de vardır.)</li>
-                                <li><strong>Abartma (Mübalağa):</strong> Bir durumu olduğundan çok büyük veya çok küçük gösterme sanatıdır. (Örnek: "Ağlamaktan gözlerimde yaş sel oldu.")</li>
-                            </ul>
-                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
-                        `
-                    }
-                ]
-            },
-            {
-                unit: "4. Tema: İletişim ve Sosyal İlişkiler",
-                topics: [
-                    {
-                        name: "İsimler ve İsim Tamlamaları",
-                        htmlContent: `
-                            <h2>İsimler ve İsim Tamlamaları</h2>
-                            <p>Varlıkları karşılayan sözcükler ile bu sözcüklerin oluşturduğu öbeklerdir.</p>
-                            <h3>İsim Tamlamaları</h3>
-                            <p>En az iki ismin aralarında anlam bağlantısı kurarak oluşturduğu söz öbeğidir. Tamlayan ve tamlanan eklerinden oluşur.</p>
-                            <ul>
-                                <li><strong>Belirtili İsim Tamlaması:</strong> Hem tamlayan hem tamlanan ek alır. (Örnek: <em>Okul<strong>un</strong> bahçesi</em>)</li>
-                                <li><strong>Belirtisiz İsim Tamlaması:</strong> Yalnız tamlanan ek alır. (Örnek: <em>Türkçe dersi</em>)</li>
-                                <li><strong>Takısız İsim Tamlaması:</strong> Hiç ek almaz, neyden yapıldığı veya neye benzediğini belirtir. (Örnek: <em>Demir kapı</em>)</li>
-                            </ul>
-                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
-                        `
-                    }
-                ]
-            },
-            {
-                unit: "5. Tema: Bilim ve Teknoloji",
-                topics: [
-                    {
-                        name: "Sıfatlar (Ön Adlar)",
-                        htmlContent: `
-                            <h2>Sıfatlar (Ön Adlar)</h2>
-                            <p>İsimlerin önüne gelerek onları niteleyen veya belirten sözcük gruplarıdır. Asla tek başına kullanılmazlar, bir ismin (adın) önünde yer alırlar.</p>
-                            <h3>1. Niteleme Sıfatları</h3>
-                            <p>İsimlerin durumunu, rengini, biçimini bildirir. İsme sorulan <strong>"Nasıl?"</strong> sorusunun yanıtıdır.</p>
-                            <div class="example-box"><strong>Örnek:</strong> "Kırmızı araba", "Zor soru"</div>
-
-                            <h3>2. Belirtme Sıfatları</h3>
-                            <p>İsimleri işaret, sayı, belgisizlik ve soru yönünden belirten sözcüklerdir.</p>
-                            <ul>
-                                <li><strong>İşaret Sıfatı:</strong> Bu, o, şu, buniyar (Örnek: <em>Bu</em> kitap)</li>
-                                <li><strong>Sayı Sıfatı:</strong> Kesin sayı bildirir (Örnek: <em>Üç</em> elma)</li>
-                                <li><strong>Belgisiz Sıfat:</strong> Kesinlik bildirmez (Örnek: <em>Bazı</em> öğrenciler)</li>
-                            </ul>
-                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
-                        `
-                    }
-                ]
-            },
-            {
-                unit: "6. Tema: Lider Ruhlar",
-                topics: [
-                    {
-                        name: "Edat, Bağlaç ve Ünlem",
-                        htmlContent: `
-                            <h2>Edat, Bağlaç ve Ünlem</h2>
-                            <p>Tek başına bir anlamı olmayan ancak cümle içindeki sözcükler arasında köprü kuran görevli sözcük türleridir.</p>
-                            
-                            <h3>1. Edatlar (İlgeçler)</h3>
-                            <p>Tek başına anlamı olmayan, kendinden önceki kelimeyle anlam ilişkisi kuran sözcüklerdir. En yaygın edatlar: <em>gibi, kadar, için, ile, karşı, doğru</em>.</p>
-                            <div class="example-box"><strong>Örnek:</strong> "Akşama doğru hava soğudu."</div>
-
-                            <h3>2. Bağlaçlar</h3>
-                            <p>Aynı görevdeki sözcükleri veya cümleleri birbirine bağlayan sözcüklerdir. Çıkarıldığında cümlenin anlamı bozulmaz ama daralabilir. Yaygın bağlaçlar: <em>ve, ama, fakat, çünkü, de/da, ki</em>.</p>
-                            
-                            <h3>3. Ünlemler</h3>
-                            <p>Sevinç, korku, acı, şaşkınlık gibi güçlü duyguları bildiren ya da seslenme bildiren sözcüklerdir.</p>
-                            <div class="example-box"><strong>Örnek:</strong> "Eyvah, sınavı unuttum!" &bull; "Hey, buraya bak!"</div>
-                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & DilBilgisi.net</div>
-                        `
+                        `,
+                        questions: [
+                            { q: "Hangisinde neden-sonuç ilişkisi vardır?", options: ["A) Sınavı kazanmak için çalışıyor.", "B) Yağmur yağdığı için maç iptal oldu.", "C) Erken yatarsa uyanır.", "D) Kitap almak üzere çıktı."], correct: 1, exp: "Yağmurun yağması maçın iptal olma nedenidir." },
+                            { q: "Hangisinde amaç-sonuç ilişkisi vardır?", options: ["A) Hastalandığı için okula gelmedi.", "B) Soruları çözmek için kütüphaneye gitti.", "C) Otobüs kaçınca geç kaldı.", "D) Yorgun olduğu için uyudu."], correct: 1, exp: "Kütüphaneye gitme amacı soruları çözmektir." }
+                        ]
                     }
                 ]
             }
         ];
 
-        // Üniteleri sol menüye dinamik olarak yerleştirme
+        // Konu Anlatım Menüsünü Oluştur
         function renderUnits() {
             const sidebarList = document.getElementById('unitSidebarList');
             sidebarList.innerHTML = "";
 
-            curriculumData.forEach((unitObj, uIndex) => {
+            curriculumData.forEach((unitObj) => {
                 const li = document.createElement('li');
                 li.className = "unit-item";
 
                 const btn = document.createElement('button');
                 btn.className = "unit-btn";
                 btn.innerHTML = `<i class="fa-solid fa-folder-open"></i> ${unitObj.unit}`;
-                btn.onclick = () => {
-                    li.classList.toggle('open');
-                };
+                btn.onclick = () => { li.classList.toggle('open'); };
 
                 const sublist = document.createElement('ul');
                 sublist.className = "topic-sublist";
 
-                unitObj.topics.forEach((topicObj, tIndex) => {
+                unitObj.topics.forEach((topicObj) => {
                     const subItem = document.createElement('li');
                     subItem.className = "topic-subitem";
                     subItem.innerText = topicObj.name;
@@ -947,55 +794,72 @@
                 sidebarList.appendChild(li);
             });
         }
-
         renderUnits();
 
-        // Test Mantığı
-        const questions = [
-            {
-                question: "1. \"Ağır\" sözcüğü aşağıdaki cümlelerin hangisinde \"mecaz anlamda\" kullanılmıştır?",
-                options: [
-                    "A) Bu torba çok ağır, taşımama yardım et.",
-                    "B) Söylediği ağır sözler kalbimi çok kırdı.",
-                    "C) Kamyona ağır yükler yüklendi.",
-                    "D) Masanın üzerindeki ağır kutu yere düştü."
-                ],
-                correct: 1,
-                explanation: "B seçeneğinde 'ağır' sözcüğü gerçek fiziksel ağırlığı dışında, 'kırıcı, gönül inciten' anlamında kullanıldığı için mecaz anlamlıdır."
-            },
-            {
-                question: "2. Aşağıdaki cümlelerin hangisinde bir \"neden-sonuç\" ilişkisi vardır?",
-                options: [
-                    "A) Sınavı geçmek için gece gündüz çalıştı.",
-                    "B) Yağmur yağdığı için piknik iptal oldu.",
-                    "C) Erken yatarsa sabah rahat uyanır.",
-                    "D) Kitap okumak üzere kütüphaneye gitti."
-                ],
-                correct: 1,
-                explanation: "B seçeneğinde pikniğin iptal olmasının somut nedeni yağmurun yağmasıdır (eylem gerçekleşmiştir)."
-            },
-            {
-                question: "3. \"Soğuk\" kelimesi hangisinde \"terim anlamlı\" bir kelime DEĞİLDİR?",
-                options: [
-                    "A) Hakem oyuncuya soğuk bir duş etkisi yarattı.",
-                    "B) Coğrafya dersinde soğuk iklim tiplerini işledik.",
-                    "C) Tıpta soğuk kompres uygulaması anlatıldı.",
-                    "D) Fen dersinde soğuk havanın alçalıcı hareketi incelendi."
-                ],
-                correct: 0,
-                explanation: "A seçeneğinde 'soğuk' bir bilim, sanat veya meslek dalına özgü kavram olarak değil, günlük yaşamda mecazi/soyut bir anlamda kullanılmıştır."
-            }
-        ];
+        // Test Seçim Ekranı Dropdown Yönetimi
+        function initTestDropdowns() {
+            const unitSelect = document.getElementById('selectUnit');
+            unitSelect.innerHTML = "";
+            curriculumData.forEach((unitObj, index) => {
+                const opt = document.createElement('option');
+                opt.value = index;
+                opt.innerText = unitObj.unit;
+                unitSelect.appendChild(opt);
+            });
+            updateTopicDropdown();
+        }
 
+        function updateTopicDropdown() {
+            const unitIndex = document.getElementById('selectUnit').value;
+            const topicSelect = document.getElementById('selectTopic');
+            topicSelect.innerHTML = "";
+
+            const topics = curriculumData[unitIndex].topics;
+            topics.forEach((topicObj, index) => {
+                const opt = document.createElement('option');
+                opt.value = index;
+                opt.innerText = topicObj.name;
+                topicSelect.appendChild(opt);
+            });
+        }
+
+        // Test Çözme Mantığı
+        let activeQuestions = [];
         let currentQuestion = 0;
         let score = 0;
         let answered = false;
 
-        function loadQuestion() {
+        function startCustomQuiz() {
+            const uIndex = document.getElementById('selectUnit').value;
+            const tIndex = document.getElementById('selectTopic').value;
+            const selectedTopic = curriculumData[uIndex].topics[tIndex];
+
+            activeQuestions = selectedTopic.questions || [];
+            if(activeQuestions.length === 0) {
+                alert("Bu konu için henüz soru eklenmedi, yakında 50 soruya tamamlanacaktır!");
+                return;
+            }
+
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('score').innerText = `Puan: 0`;
+            document.getElementById('activeTopicName').innerText = selectedTopic.name;
+            document.getElementById('testConfigCard').style.display = 'none';
+            document.getElementById('quizSection').style.display = 'block';
+
+            loadQuizQuestion();
+        }
+
+        function returnToConfig() {
+            document.getElementById('quizSection').style.display = 'none';
+            document.getElementById('testConfigCard').style.display = 'block';
+        }
+
+        function loadQuizQuestion() {
             answered = false;
-            const q = questions[currentQuestion];
-            document.getElementById("questionText").innerText = q.question;
-            document.getElementById("quizStatus").innerText = `Soru ${currentQuestion + 1} / ${questions.length}`;
+            const q = activeQuestions[currentQuestion];
+            document.getElementById("questionText").innerText = `${currentQuestion + 1}. ${q.q}`;
+            document.getElementById("quizStatus").innerText = `Soru ${currentQuestion + 1} / ${activeQuestions.length}`;
             document.getElementById("explanationBox").style.display = "none";
             document.getElementById("nextBtn").style.display = "none";
 
@@ -1006,21 +870,21 @@
                 const btn = document.createElement("button");
                 btn.className = "option-btn";
                 btn.innerText = opt;
-                btn.onclick = () => checkAnswer(index);
+                btn.onclick = () => checkQuizAnswer(index);
                 optionsContainer.appendChild(btn);
             });
         }
 
-        function checkAnswer(selectedIndex) {
+        function checkQuizAnswer(selectedIndex) {
             if (answered) return;
             answered = true;
 
-            const q = questions[currentQuestion];
+            const q = activeQuestions[currentQuestion];
             const buttons = document.querySelectorAll(".option-btn");
 
             if (selectedIndex === q.correct) {
                 buttons[selectedIndex].classList.add("correct");
-                score += 10;
+                score += Math.round(100 / activeQuestions.length);
                 document.getElementById("score").innerText = `Puan: ${score}`;
             } else {
                 buttons[selectedIndex].classList.add("wrong");
@@ -1028,10 +892,10 @@
             }
 
             const expBox = document.getElementById("explanationBox");
-            expBox.innerHTML = `<strong>Açıklama:</strong> ${q.explanation}`;
+            expBox.innerHTML = `<strong>Açıklama:</strong> ${q.exp}`;
             expBox.style.display = "block";
 
-            if (currentQuestion < questions.length - 1) {
+            if (currentQuestion < activeQuestions.length - 1) {
                 document.getElementById("nextBtn").style.display = "inline-block";
             } else {
                 document.getElementById("nextBtn").innerText = "Testi Tamamla";
@@ -1040,20 +904,14 @@
         }
 
         function nextQuestion() {
-            if (currentQuestion < questions.length - 1) {
+            if (currentQuestion < activeQuestions.length - 1) {
                 currentQuestion++;
-                loadQuestion();
+                loadQuizQuestion();
             } else {
                 alert(`Tebrikler! Testi tamamladın. Toplam Puanın: ${score}`);
-                currentQuestion = 0;
-                score = 0;
-                document.getElementById("score").innerText = `Puan: 0`;
-                document.getElementById("nextBtn").innerText = "Sonraki Soru";
-                loadQuestion();
+                returnToConfig();
             }
         }
-
-        loadQuestion();
     </script>
 </body>
 </html>
