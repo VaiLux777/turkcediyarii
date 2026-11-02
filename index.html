@@ -267,6 +267,9 @@
             font-weight: 600;
             color: var(--text-main);
             transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .unit-btn:hover, .unit-btn.active {
@@ -797,7 +800,7 @@
                         ]
                     },
                     {
-                        name: "Deyimler ve Atasözleri",
+                        name: "Deyimler dan Atasözleri",
                         htmlContent: `
                             <h2>Deyimler ve Atasözleri</h2>
                             <p>Kültürümüzün en değerli sözel mirasları olan kalıplaşmış anlatımlardır.</p>
@@ -807,4 +810,19 @@
                             <div class="example-box">
                                 <strong>Özellikleri:</strong><br>
                                 • Kalıplaşmıştır, kelimelerin yeri değiştirilemez.<br>
-                                • Genellikle fiil so
+                                • Genellikle fiil soyludur (örn: etekleri zil çalmak).
+                            </div>
+
+                            <h3>2. Atasözleri</h3>
+                            <p>Geçmişten günümüze ulaşan, uzun gözlem ve tecrübelere dayanan, topluma ders ve öğüt veren kalıplaşmış özlü sözlerdir.</p>
+                            <div class="example-box">
+                                <strong>Deyim ile Atasözü Arasındaki Fark:</strong><br>
+                                • Deyimler anlık bir durumu tasvir eder (ders vermez).<br>
+                                • Atasözleri genel geçer kurallar koyar, öğüt ve ders içerir.
+                            </div>
+                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & TDK</div>
+                        `,
+                        questions: [
+                            { q: "\"Etekleri zil çalmak\" deyiminin anlamı nedir?", options: ["A) Çok korkmak", "B) Çok sevinmek", "C) Üzülmek", "D) Telaşlanmak"], correct: 1, exp: "B seçeneğinde belirtildiği gibi 'etekleri zil çalmak' aşırı neşelenmek ve çok sevinmek anlamındadır." },
+                            { q: "\"Ağzı kulaklarına varmak\" ne anlama gelir?", options: ["A) Gülmekten bayılmak", "B) Çok sevinmek", "C) Şaşırmak", "D) Korkmak"], correct: 1, exp: "B seçeneğinde olduğu gibi mutluluktan yüzü gülmek, çok sevinmek demektir." },
+                            { q: "\"Damdan düşer gibi\" deyiminin anlamı nedir?", options:
