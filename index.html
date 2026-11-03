@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Türkçe Diyarı - Ortaokul Türkçe Eğitim ve Test Platformu</title>
     
-    <!-- Tam Ortalı Vektörel Kep Logosu (Favicon) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%234f46e5' d='M256 32L32 144l224 112 224-112L256 32zM112 214.3v136.5c0 48.6 64.5 88 144 88s144-39.4 144-88V214.3l-144 72-144-72z'/></svg>">
+    <!-- Sekme Logosu (Favicon) - Menüdeki Yuvarlak Kep Logosu İle Birebir Aynı -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><circle cx='256' cy='256' r='256' fill='%234f46e5'/><path fill='%23ffffff' d='M242.4 115.1C246.9 113.6 251.8 113.6 256.3 115.1l176 56.5c7.4 2.4 12.3 9.4 12.3 17.3s-4.9 14.9-12.3 17.3l-75.7 24.3v63c0 28.5-19.5 52.8-46.7 60.1-4.8 1.3-9.6 2-14.6 2s-9.8-.7-14.6-2c-27.2-7.3-46.7-31.6-46.7-60.1v-63l-75.7-24.3c-7.4-2.4-12.3-9.4-12.3-17.3s4.9-14.9 12.3-17.3l176-56.5zm19.6 156.9c17.7 0 32-14.3 32-32s-14.3-32-32-32-32 14.3-32 32 14.3 32 32 32z'/></svg>">
 
     <!-- Google Fonts & Font Awesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -35,7 +35,7 @@
         .navbar { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 2rem; }
         .logo-area { display: flex; align-items: center; gap: 0.8rem; cursor: pointer; text-decoration: none; }
         
-        /* Tam Hizalanmış Logo Kutusu */
+        /* Yuvarlak Kusursuz Kep Logosu Kutusu */
         .logo-icon-box { 
             width: 45px; 
             height: 45px; 
@@ -84,6 +84,9 @@
         .topic-subitem:hover, .topic-subitem.active { background: var(--primary); color: white; }
 
         .content-viewer { background: var(--card-bg); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); border: 1px solid #f1f5f9; min-height: 550px; }
+        .content-viewer h2 { margin-bottom: 1rem; color: var(--primary); font-size: 1.6rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; }
+        .content-viewer h3 { margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-main); font-size: 1.2rem; }
+        .content-viewer p { margin-bottom: 1rem; color: var(--text-main); font-size: 1rem; line-height: 1.8; }
         .example-box { background: #f0fdf4; border-left: 4px solid var(--success); padding: 1rem; border-radius: 8px; margin: 1rem 0; }
         .source-tag { margin-top: 3rem; text-align: right; font-size: 0.8rem; color: #94a3b8; font-style: italic; }
 
@@ -156,7 +159,7 @@
 
         <!-- KONU ANLATIMLARI -->
         <div id="pageLessons" class="page-view">
-            <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Kapsamlı Konu Anlatım Kılavuzu</h2>
+            <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Kapsamlı Konu Anlatım Kılavuzu (50+ Satır Detaylı)</h2>
             <div class="units-layout">
                 <div class="unit-sidebar">
                     <h3><i class="fa-solid fa-list"></i> Temalar & Üniteler</h3>
@@ -164,14 +167,14 @@
                 </div>
                 <div class="content-viewer" id="contentViewer">
                     <h2>Sol taraftan bir konu seçin.</h2>
-                    <p>Seçtiğiniz konunun ayrıntılı açıklamaları ve zengin örnekleri burada görünecektir.</p>
+                    <p>Seçtiğiniz konunun detaylı ve eksiksiz rehberi burada görünecektir.</p>
                 </div>
             </div>
         </div>
 
         <!-- TESTLER -->
         <div id="pageTests" class="page-view">
-            <h2 class="section-title"><i class="fa-solid fa-circle-check"></i> İnteraktif Test Bankası (15'er Soru)</h2>
+            <h2 class="section-title"><i class="fa-solid fa-circle-check"></i> İnteraktif Test Bankası (Her Konuya 15 Soru)</h2>
             <div class="test-config-card" id="testConfigCard">
                 <div class="config-grid">
                     <div class="form-group"><label>Ünite / Tema Seç:</label><select id="selectUnit" onchange="updateTopicDropdown()"></select></div>
