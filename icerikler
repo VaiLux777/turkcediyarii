@@ -1,0 +1,172 @@
+const curriculumData = [
+    {
+        unit: "1. Tema: Dilimizin Zenginliği (Dolu)",
+        topics: [
+            {
+                name: "Gerçek, Mecaz ve Terim Anlam",
+                htmlContent: `
+                    <h2>Gerçek, Mecaz ve Terim Anlam</h2>
+                    <p>Sözcükler cümle içerisinde kullanıldıkları yere ve kazandıkları anlam ilişkilerine göre üç temel başlık altında incelenir:</p>
+                    <h3>1. Gerçek (Temel) Anlam</h3>
+                    <p>Bir sözcüğün aklımıza gelen ilk, temel ve herkesçe bilinen anlamıdır.</p>
+                    <div class="example-box"><strong>Örnek:</strong> "Bardağın yere düşüp <strong>kırılmasına</strong> çok üzüldü." (Fiziksel parçalanma)</div>
+                    <h3>2. Mecaz Anlam</h3>
+                    <p>Sözcüğün gerçek anlamından tamamen uzaklaşarak kazandığı yeni ve soyut anlamlardır.</p>
+                    <div class="example-box"><strong>Örnek:</strong> "Söylediğin o sert sözlerle kalbimi <strong>kırdın</strong>." (Üzmek, incitmek)</div>
+                    <h3>3. Terim Anlam</h3>
+                    <p>Bilim, sanat, spor veya belirli bir meslek dalı ile ilgili özel kavramlardır.</p>
+                    <div class="example-box"><strong>Örnek:</strong> "Matematik dersinde <strong>üçgenin</strong> iç açılaranı hesapladık." (Geometri)</div>
+                    <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & TDK</div>
+                `,
+                questions: [
+                    { q: "\"Ağır\" sözcüğü hangisinde mecaz anlamdadır?", options: ["A) Bu torba çok ağır.", "B) Söylediği ağır sözler kalbimi kırdı.", "C) Kamyona ağır yükler yüklendi.", "D) Masadaki ağır kutu düştü."], correct: 1, exp: "B seçeneğinde 'ağır' sözcüğü kırıcı ve üzücü anlamda kullanıldığı için mecazdır." },
+                    { q: "\"Tatlı\" sözcüğü hangisinde gerçek anlamıyla kullanılmıştır?", options: ["A) Tatlı diliyle herkesi etkiledi.", "B) Tatlı bir yorgunluk hissediyordu.", "C) Fırından taze ve tatlı bir kurabiye aldı.", "D) Tatlı anılarımızı yad ettik."], correct: 2, exp: "C seçeneğinde yiyecek olarak lezzet anlamındadır." },
+                    { q: "Aşağıdakilerin hangisinde terim anlamlı bir sözcük vardır?", options: ["A) Sahneye çıkan oyuncular alkışlandı.", "B) Bugün hava çok bulutlu.", "C) Kalemim masada unutulmuş.", "D) Çiçekleri sulamayı unuttum."], correct: 0, exp: "'Sahne' ve 'oyuncu' tiyatro terimidir." },
+                    { q: "\"Boş\" sözcüğü hangi cümlede mecaz anlamda kullanılmıştır?", options: ["A) Odadaki boş kutuları çöpe attım.", "B) Bu hafta sonu tamamen boşum.", "C) Bardaktaki suyu döküp bardağı boş bıraktı.", "D) Çantamda hiç defter kalmamış, çantam boş."], correct: 1, exp: "Meşguliyetsizlik (boş zaman) anlamında mecazidir." },
+                    { q: "\"Kırılmak\" sözcüğü hangisinde gerçek anlamda kullanılmıştır?", options: ["A) Bana güvendiği için kalbi kırıldı.", "B) Düşen cam bardak mutfakta kırıldı.", "C) Şirketin aldığı karara çalışanlar kırıldı.", "D) Söylenenlere öğretmenimiz çok kırıldı."], correct: 1, exp: "Bardağın parçalanması fiziksel (gerçek) kırılmadır." },
+                    { q: "\"Yanmak\" sözcüğü hangisinde gerçek anlamdadır?", options: ["A) Elektrik faturasını görünce içim yandı.", "B) Güneşte çok kaldığı için omuzları yandı.", "C) Sınavı kazanamayınca emekleri yandı.", "D) Arkadaşının sözlerine çok yandı."], correct: 1, exp: "Güneşten cildin kızarması fiziksel yanmadır." },
+                    { q: "\"Keskin\" sözcüğü hangisinde mecaz anlamda kullanılmıştır?", options: ["A) Keskin bıçakla ekmekleri dilimledi.", "B) Keskin sirke küpüne zarar verir.", "C) Olaylara karşı çok keskin bir zekası vardı.", "D) Keskin rüzgar yüzünü üşütüyordu."], correct: 2, exp: "Zekanın güçlü ve hızlı kavrayışlı olması mecazdır." },
+                    { q: "\"Pişmek\" sözcüğü hangisinde gerçek anlamdadır?", options: ["A) Güneşte ala karga gibi kaldık, piştik.", "B) Fırındaki börekler 20 dakikaya pişer.", "C) Hayatın zorluklarıyla iyice pişmişti.", "D) Sıkıntıdan evde oturmaktan piştik."], correct: 1, exp: "Böreklerin ısı ile yenilebilir hale gelmesi gerçek anlamdır." },
+                    { q: "\"Derin\" sözcüğü hangisinde mecaz anlamdadır?", options: ["A) Derin bir kuyu kazıp su buldular.", "B) Deniz o kadar derindi ki dibi görünmüyordu.", "C) Yazarın bu kitabında derin anlamlar gizliydi.", "D) Derin bir havuzda yüzmeyi öğrendik."], correct: 2, exp: "Anlamın kapsamlı ve zengin olması mecazdır." },
+                    { q: "\"Sıcak\" sözcüğü hangisinde terim anlamlıdır?", options: ["A) Sıcak çorbayı içince içi ısındı.", "B) Coğrafya dersinde sıcak kuşak iklimlerini işledik.", "C) Arkadaşımın sıcak yaklaşımı beni mutlu etti.", "D) Yaz aylarında hava oldukça sıcak oluyor."], correct: 1, exp: "'Sıcak kuşak' coğrafya terimidir." },
+                    { q: "\"Kök\" kelimesi hangisinde terim anlamdadır?", options: ["A) Ağacın kökleri toprağın derinliklerindeydi.", "B) Dişimin kökünde iltihap oluşmuş.", "C) Dil bilgisinde sözcüklerin kökünü bulduk.", "D) Saçımın kökleri güçleniyor."], correct: 2, exp: "Dil bilgisi dalının özel terimidir." },
+                    { q: "\"Perde\" sözcüğü hangisinde tiyatro terimidir?", options: ["A) Evin salonuna tül perde taktık.", "B) Güneş gelmesin diye perdesini çektik.", "C) Oyunun ikinci perdesi oldukça heyecanlı başladı.", "D) Gözünün perdesinde leke oluşmuş."], correct: 2, exp: "Tiyatronun bölümlerinden biridir." },
+                    { q: "\"Baş\" sözcüğü hangisinde gerçek anlamdadır?", options: ["A) İşin başından beri biliyordum.", "B) Futbolcu topa başıyla çok sert vurdu.", "C) Sınıfın başı olarak görevlendirildi.", "D) Sıranın başında o bekliyordu."], correct: 1, exp: "Vücut organı olan baş gerçek anlamdadır." },
+                    { q: "\"Kuru\" sözcüğü hangisinde mecaz anlamdadır?", options: ["A) Çamaşırlar balkonda kurudu.", "B) Toprak susuzluktan kurumuştu.", "C) Toplantıda kuru bir kalabalık vardı.", "D) Kuru odunları soba için hazırladık."], correct: 2, exp: "Verimsiz, etkisiz anlamında mecazdır." },
+                    { q: "\"Burun\" sözcüğü hangisinde yan anlamdadır?", options: ["A) Soğuktan burnu kızarmıştı.", "B) Gemi adanın burnuna doğru yanaştı.", "C) Köpeğin burnu iyi koku alır.", "D) Burnundan ameliyat olacakmış."], correct: 1, exp: "Coğrafi çıkıntı anlamı yan anlamdır." }
+                ]
+            },
+            {
+                name: "Eş ve Zıt Anlamlı Kelimeler",
+                htmlContent: `
+                    <h2>Eş ve Zıt Anlamlı Kelimeler</h2>
+                    <p>Yazılışları farklı fakat anlamları aynı olan sözcükler eş anlamlıdır.</p>
+                    <div class="example-box"><strong>Örnek:</strong> Mektep - Okul, Cevap - Yanıt</div>
+                    <div class="source-tag">Kaynak: TDK</div>
+                `,
+                questions: [
+                    { q: "Aşağıdaki kelime çiftlerinden hangisi zıt anlamlıdır?", options: ["A) Siyah - Kara", "B) Yaşlı - İhtiyar", "C) İleri - Geri", "D) Konuk - Misafir"], correct: 2, exp: "İleri ve geri zıt anlamlıdır." },
+                    { q: "\"Fakir\" kelimesinin eş anlamlısı hangisidir?", options: ["A) Zengin", "B) Yoksul", "C) Cimri", "D) Cömert"], correct: 1, exp: "Yoksul ile eş anlamlıdır." },
+                    { q: "Aşağıdakilerden hangisi eş anlamlıdır?", options: ["A) İyi - Kötü", "B) Uzun - Kısa", "C) Cevap - Yanıt", "D) Ağır - Hafif"], correct: 2, exp: "Cevap ve yanıt eş anlamlıdır." },
+                    { q: "\"Kırmızı\" kelimesinin eş anlamlısı hangi cümlede vardır?", options: ["A) Al bayrağimiz dalgalanıyor.", "B) Siyah elbiseyi beğendi.", "C) Ak sakallı dede geldi.", "D) Beyaz güvercin uçtu."], correct: 0, exp: "Al kelimesi kırmızı demektir." },
+                    { q: "\"Sonbahar\" kelimesinin eş anlamlısı nedir?", options: ["A) İlkbahar", "B) Yaz", "C) Güz", "D) Kış"], correct: 2, exp: "Sonbaharın eş anlamlısı güzdür." },
+                    { q: "\"Hediye\" kelimesinin eş anlamlısı nedir?", options: ["A) Armağan", "B) Borç", "C) Ödül", "D) Paket"], correct: 0, exp: "Hediye armağan demektir." },
+                    { q: "\"Yaşlı\" sözcüğünün zıttı nedir?", options: ["A) İhtiyar", "B) Genç", "C) Taze", "D) Kurumuş"], correct: 1, exp: "Yaşlının zıttı gençtir." },
+                    { q: "\"Cılız\" kelimesinin zıttı nedir?", options: ["A) Zayıf", "B) Güçlü", "C) Şişman", "D) Ufak"], correct: 2, exp: "Cılızın zıttı şişmandır." },
+                    { q: "\"Fayda\" kelimesinin zıttı nedir?", options: ["A) Yarar", "B) Zarar", "C) Kar", "D) Ziyan"], correct: 1, exp: "Faydanın zıttı zarardır." },
+                    { q: "\"Cesur\" kelimesinin eş anlamlısı nedir?", options: ["A) Korkak", "B) Yürekli", "C) Ürkek", "D) Çekingen"], correct: 1, exp: "Cesur yürekli demektir." },
+                    { q: "\"Öğrenci\" kelimesinin eş anlamlısı nedir?", options: ["A) Muallim", "B) Talebe", "C) Müdür", "D) Memur"], correct: 1, exp: "Öğrenci talebe demektir." },
+                    { q: "\"Özel\" kelimesinin zıttı nedir?", options: ["A) Tek", "B) Genel", "C) Değerli", "D) Farklı"], correct: 1, exp: "Özel kelimesinin zıttı geneldir." },
+                    { q: "\"Ev\" kelimesinin eş anlamlısı nedir?", options: ["A) Konut", "B) Okul", "C) Sokak", "D) Şehir"], correct: 0, exp: "Ev konut demektir." },
+                    { q: "\"Fakir\" kelimesinin zıttı nedir?", options: ["A) Yoksul", "B) Zengin", "C) Cimri", "D) Paralı"], correct: 1, exp: "Fakirin zıttı zengindir." },
+                    { q: "\"Soru\" kelimesinin eş anlamlısı nedir?", options: ["A) Cevap", "B) Yanıt", "C) Problem", "D) Sınav"], correct: 2, exp: "Soru/problem anlamını karşılar." }
+                ]
+            },
+            {
+                name: "Deyimler ve Atasözleri",
+                htmlContent: `
+                    <h2>Deyimler ve Atasözleri</h2>
+                    <p>Kalıplaşmış söz öbekleridir.</p>
+                    <div class="source-tag">Kaynak: TDK</div>
+                `,
+                questions: [
+                    { q: "\"Etekleri zil çalmak\" deyiminin anlamı nedir?", options: ["A) Çok korkmak", "B) Çok sevinmek", "C) Üzülmek", "D) Telaşlanmak"], correct: 1, exp: "Çok sevinmek demektir." },
+                    { q: "\"Ağzı kulaklarına varmak\" ne anlama gelir?", options: ["A) Gülmekten bayılmak", "B) Çok sevinmek", "C) Şaşırmak", "D) Korkmak"], correct: 1, exp: "Çok sevinmeyi ifade eder." },
+                    { q: "\"Damdan düşer gibi\" deyiminin anlamı nedir?", options: ["A) Yavaşça gelmek", "B) Birdenbire, yersiz konuşmak", "C) Yüksekten atlamak", "D) Düşüp yaralanmak"], correct: 1, exp: "Aniden ve yersiz ortaya çıkmaktır." },
+                    { q: "\"Göz boyamak\" deyimi ne anlama gelir?", options: ["A) Makyaj yapmak", "B) Birini kandırmak", "C) Resim yapmak", "D) Gözü iyileştirmek"], correct: 1, exp: "Aldatmak anlamındadır." },
+                    { q: "\"İğne atsan yere düşmez\" neyi anlatır?", options: ["A) Çok kalabalık bir yeri", "B) Çok temiz odayı", "C) Kaybolan iğneyi", "D) Karanlık ortamı"], correct: 0, exp: "Çok kalabalık yerler için söylenir." },
+                    { q: "\"Damlaya damlaya göl olur\" anlamı nedir?", options: ["A) Su içmek", "B) Küçük birikimler büyür", "C) Göller doludur", "D) Tasarruf etme"], correct: 1, exp: "Küçük birikimlerin önemini vurgular." },
+                    { q: "\"Sakla samanı, gelir zamanı\" neyi öğütler?", options: ["A) Saman saklamayı", "B) Eşyaları atmamayı", "C) Gereksiz şeylerin ileride lazımat olabileceğini", "D) Ahır kurmayı"], correct: 2, exp: "Hiçbir şeyi ziyan etmemeyi anlatır." },
+                    { q: "\"Ağaç yaşken eğilir\" anlamı nedir?", options: ["A) Ağaç sulamak", "B) Çocuklar küçük yaşta eğitilir", "C) Ağaç kesilmez", "D) Odun kırılır"], correct: 1, exp: "Eğitimin küçüklükte verilmesini vurgular." },
+                    { q: "\"Acele işe şeytan karışır\" neyi tavsiye eder?", options: ["A) Hızlı olmayı", "B) Sakin ve düşünerek yapmayı", "C) Şeytandan kaçmayı", "D) İşleri ertelemeyi"], correct: 1, exp: "Telaşın hata getireceğini söyler." },
+                    { q: "\"Taşıma su ile değirmen dönmez\" anlamı nedir?", options: ["A) Başkasının gücüyle sürekli iş yürümez", "B) Değirmen suyla çalışır", "C) Su taşımak zor", "D) Taşlar ağır"], correct: 0, exp: "Kendi emeğimizin olması gerektiğini belirtir." },
+                    { q: "\"Çam sakızı çoban armağanı\" ne demektir?", options: ["A) Çam hediyesi", "B) Küçük ama samimi hediye", "C) Çoban maaşı", "D) Sakız"], correct: 1, exp: "Küçük ama sevgiyle verilen hediye demektir." },
+                    { q: "\"Ateş olmayan yerden duman çıkmaz\" neyi ifade eder?", options: ["A) Yangın", "B) Her söylentinin gerçek payı bulunduğunu", "C) Duman zararlıdır", "D) Baca tıkanması"], correct: 1, exp: "Dedikoduların asılsız olmadığını belirtir." },
+                    { q: "\"Bal tutan parmağını yalar\" anlamı nedir?", options: ["A) Bal yemek yasak", "B) İmkân sağlayan işten faydalanılır", "C) Parmaklar yapışır", "D) Tatlı severler"], correct: 1, exp: "Faydalı işin avantaj sağladığını belirtir." },
+                    { q: "\"Gülü seven dikenine katlanır\" neyi simgeler?", options: ["A) Bahçe işi", "B) Güzel şeyin sıkıntısına göğüs germek", "C) Gül dikmek", "D) Çiçek korumak"], correct: 1, exp: "Sevilen şeyin zorluklarına katlanılır." },
+                    { q: "\"İt ürür kervan yürür\" anlamı nedir?", options: ["A) Köpekler", "B) Kötü sözlere kulak asmadan yola devam etmek", "C) Kervan", "D) Havlamak"], correct: 1, exp: "Engellere takılmadan yola devam etmektir." }
+                ]
+            }
+        ]
+    },
+    {
+        unit: "2. Tema: Bağımsızlık Yolu (Dolu)",
+        topics: [
+            {
+                name: "Cümlede Anlam İlişkileri",
+                htmlContent: `
+                    <h2>Cümlede Anlam İlişkileri</h2>
+                    <p>Neden-sonuç ve amaç-sonuç ilişkileri.</p>
+                    <div class="source-tag">Kaynak: MEB</div>
+                `,
+                questions: [
+                    { q: "Hangisinde neden-sonuç ilişkisi vardır?", options: ["A) Sınavı kazanmak için çalışıyor.", "B) Yağmur yağdığı için maç iptal oldu.", "C) Erken yatarsa uyanır.", "D) Kitap almak üzere çıktı."], correct: 1, exp: "Yağmurun yağması maçın iptal olma nedenidir." },
+                    { q: "Hangisinde amaç-sonuç ilişkisi vardır?", options: ["A) Hastalandığı için gelmedi.", "B) Soruları çözmek için kütüphaneye gitti.", "C) Otobüs kaçınca geç kaldı.", "D) Yorgun olduğu için uyudu."], correct: 1, exp: "Kütüphaneye gitme amacı soruları çözmektir." },
+                    { q: "\"Hava soğuk olduğu için kalın giyindi\" ilişkisi nedir?", options: ["A) Amaç-sonuç", "B) Neden-sonuç", "C) Koşul", "D) Karşılaştırma"], correct: 1, exp: "Neden kalın giyindiği açıklanmıştır." },
+                    { q: "Hangisinde koşul anlamı vardır?", options: ["A) Çok çalıştığı için geçti.", "B) Ödevini bitirirse oyun oynayabilir.", "C) Kardeşini görmek için geldi.", "D) Sinemaya gitmek istiyordu."], correct: 1, exp: "Oyun oynaması ödevini bitirmesine bağlıdır." },
+                    { q: "\"Akşam oldu mu içime hüzün çöker\" anlamı nedir?", options: ["A) Neden", "B) Zaman/Koşul", "C) Amaç", "D) Öznel"], correct: 1, exp: "Zaman ve şart anlamı vardır." },
+                    { q: "Hangisi amaç-sonuç cümlesidir?", options: ["A) Sütü taşırdığı için kızdı.", "B) Doktor olmak amacıyla fen lisesini istiyor.", "C) Kar yağınca yollar kapandı.", "D) Uykusuz kalınca başı ağrımış."], correct: 1, exp: "Hedef/amaç bildirmektedir." },
+                    { q: "\"Toplantıya yetişmek üzere evden çıktı\" ilişki türü nedir?", options: ["A) Amaç-sonuç", "B) Neden-sonuç", "C) Koşul", "D) Karşılaştırma"], correct: 0, exp: "Toplantıya yetişmek amacıyla çıkmıştır." },
+                    { q: "Hangisinde neden-sonuç ilişkisi *yoktur*?", options: ["A) Trafik sıkışınca geç kaldı.", "B) Erken kalkmak için alarmları kurdu.", "C) Yorgunluktan gözü kapandı.", "D) Sıcaktan buzlar eridi."], correct: 1, exp: "Alarm kurma amacı erken kalkmaktır (amaç-sonuç)." },
+                    { q: "\"Ağaçları suladı ki meyve versin\" anlam özelliği nedir?", options: ["A) Neden-sonuç", "B) Amaç-sonuç", "C) Koşul", "D) Benzetme"], correct: 1, exp: "Amaç belirtmektedir." },
+                    { q: "Hangisinde şart anlamı vardır?", options: ["A) Düzenli beslenirse iyileşir.", "B) İlaç içtiği için iyileşti.", "C) Sağlığına kavuşmak için içiyor.", "D) Hastalandığından gelemedi."], correct: 0, exp: "İyileşmesi beslenmesine bağlıdır." },
+                    { q: "\"Gözlük taktı ki yazıları okusun\" ne bildirir?", options: ["A) Neden", "B) Amaç", "C) Koşul", "D) Sonuç"], correct: 1, exp: "Amaç bildirmektedir." },
+                    { q: "\"Erken yatarsan dinç uyanırsın\" anlamı nedir?", options: ["A) Amaç", "B) Neden", "C) Koşul", "D) Tanım"], correct: 2, exp: "Koşul bildirmektedir." }
+                ]
+            },
+            {
+                name: "Kök ve Ekler",
+                htmlContent: `
+                    <h2>Kök ve Ekler</h2>
+                    <p>Kök ve ek bilgisi.</p>
+                    <div class="source-tag">Kaynak: TDK</div>
+                `,
+                questions: [
+                    { q: "\"Gözlükçü\" kelimesinin kökü nedir?", options: ["A) İsim kökü", "B) Fiil kökü", "C) Gövde", "D) Ek kök"], correct: 0, exp: "'Göz' ismi köktür." },
+                    { q: "Hangisi yapım eki almıştır?", options: ["A) Evler", "B) Kalemim", "C) Simitçi", "D) Okulda"], correct: 2, exp: "-çi yapım ekidir." },
+                    { q: "Hangisinde çekim eki kullanılmıştır?", options: ["A) Bilgi", "B) Sevgi", "C) Kitaplar", "D) Gözlük"], correct: 2, exp: "-lar çoğul çekim ekidir." },
+                    { q: "\"Yazmaktan yazıcı\" kelimesinde ek hangi görevdedir?", options: ["A) İsimden fiil", "B) Fiilden isim yapım", "C) Çekim", "D) Hal"], correct: 1, exp: "Fiilden isim yapmıştır." },
+                    { q: "Hangisi fiil köküdür?", options: ["A) Yol", "B) Güneş", "C) Gel", "D) Taş"], correct: 2, exp: "Gelmek fiil köküdür." },
+                    { q: "Hangisi isim köküdür?", options: ["A) Oku", "B) Koş", "C) Balık", "D) Yaz"], correct: 2, exp: "Balık isim köküdür." }
+                ]
+            }
+        ]
+    },
+    {
+        unit: "3. Tema: Farklı Dünyalar (Dolu)",
+        topics: [
+            {
+                name: "Öznel ve Nesnel Anlatım",
+                htmlContent: `
+                    <h2>Öznel ve Nesnel Anlatım</h2>
+                    <p>Öznel ve nesnel yargılar.</p>
+                    <div class="source-tag">Kaynak: MEB</div>
+                `,
+                questions: [
+                    { q: "Hangisi öznel anlatımlı bir cümledir?", options: ["A) Kitap üç bölümden oluşuyor.", "B) Filmde yerli oyuncular oynamış.", "C) Romanın dili oldukça akıcı ve etkileyiciydi.", "D) Kitap 2024'te basıldı."], correct: 2, exp: "Etkileyici bulmak kişisel görüştür." },
+                    { q: "Hangisi nesnel anlatımlıdır?", options: ["A) Tabloları harika görünüyor.", "B) Şairin son şiiri yüz mısradır.", "C) Mavi renk huzur verir.", "D) İzmir en güzel şehir."], correct: 1, exp: "Mısra sayısı kanıtlanabilir." },
+                    { q: "Hangisinde nesnel bir yargı vardır?", options: ["A) En lezzetli yemek mantıdır.", "B) Bahçede dört çam ağacı var.", "C) Matematik en eğlencelidir.", "D) Hava neşe veriyor."], correct: 1, exp: "Ağaç sayısı kanıtlanabilir." },
+                    { q: "Hangisi öznel yargıdır?", options: ["A) Sınavda yirmi soru vardı.", "B) Sınıf otuz kişidir.", "C) Türkçe ortaokulda okunur.", "D) Bu zor soruları kimse çözemez."], correct: 3, exp: "Kimsenin çözememesi abartı ve kişiseldir." },
+                    { q: "Hangisi nesnel cümledir?", options: ["A) En iyi müzik halk müziğidir.", "B) Yazar sade bir dil kullanmış.", "C) Romanın kapağı turuncu renktedir.", "D) Oyuncu göz kamaştırdı."], correct: 2, exp: "Kapak rengi kanıtlanabilir." },
+                    { q: "\"Yazar bu romanı iki yılda tamamladı\" nedir?", options: ["A) Öznel", "B) Nesnel", "C) Varsayım", "D) Öneri"], correct: 1, exp: "Süre belgelenebilir." }
+                ]
+            },
+            {
+                name: "Söz Sanatları",
+                htmlContent: `
+                    <h2>Söz Sanatları</h2>
+                    <p>Benzetme, kişileştirme vb.</p>
+                    <div class="source-tag">Kaynak: TDK</div>
+                `,
+                questions: [
+                    { q: "\"Kömür karası gözleriyle baktı\" hangi sanat vardır?", options: ["A) Kişileştirme", "B) Benzetme", "C) Abartma", "D) Konuşturma"], correct: 1, exp: "Gözler kömür karasına benzetilmiştir." },
+                    { q: "\"Bulutlar bize küsmüş ağlıyordu\" hangi sanat vardır?", options: ["A) Benzetme", "B) Kişileştirme", "C) Abartma", "D) Zıtlık"], correct: 1, exp: "Bulutlara insani özellik verilmiştir." },
+                    { q: "\"Gözümde yaş sel oldu\" hangi sanattır?", options: ["A) Benzetme", "B) Abartma", "C) Kişileştirme", "D) Konuşturma"], correct: 1, exp: "Yaşın sel olması abartmadır." },
+                    { q: "\"Papatya kulağıma fısıldadı\" sanat nedir?", options: ["A) Benzetme", "B) Konuşturma ve Kişileştirme", "C) Abartma", "D) Tezat"], correct: 1, exp: "Konuşturma ve kişileştirmedir." },
+                    { q: "\"Aslanlar gibi çalıştı\" sanat nedir?", options: ["A) Benzetme", "B) Kişileştirme", "C) Abartma", "D) Konuşturma"], correct: 0, exp: "Çalışması aslana benzetilmiştir." },
+                    { q: "\"Dağlar titriyordu\" hangi sanat vardır?", options: ["A) Benzetme", "B) Kişileştirme", "C) Abartma", "D) Tezat"], correct: 1, exp: "Dağların titreşmesi kişileştirmedir." }
+                ]
+            }
+        ]
+    }
+];
