@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Türkçe Diyarı - Ortaokul Türkçe Eğitim ve Test Platformu</title>
-    
-    <!-- Favicon (Kep Logosu Sekme İkonu) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%234f46e5' d='M242.4 1.1C246.9-.4 251.8-.4 256.3 1.1l224 72c7.4 2.4 12.3 9.4 12.3 17.3s-4.9 14.9-12.3 17.3l-96 30.9V224c0 35.3-28.7 64-64 64h-32c-35.3 0-64-28.7-64-64V138.6L20.1 108C12.7 105.6 7.8 98.6 7.8 90.7s4.9-14.9 12.3-17.3l222.3-72zM512 320c0-17.7-14.3-32-32-32s-32 14.3-32 32v64c0 53-43 96-96 96H160c-53 0-96-43-96-96v-64c0-17.7-14.3-32-32-32s-32 14.3-32 32v64c0 70.7 57.3 128 128 128h192c70.7 0 128-57.3 128-128v-64z'/></svg>">
-
     <!-- Google Fonts & Font Awesome Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -28,74 +24,519 @@
             --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-        body { background-color: var(--bg-light); color: var(--text-main); line-height: 1.6; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
 
-        header { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.03); border-bottom: 1px solid #e2e8f0; }
-        .navbar { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0.8rem 2rem; }
-        .logo-area { display: flex; align-items: center; gap: 0.8rem; cursor: pointer; text-decoration: none; }
-        .logo-icon-box { width: 45px; height: 45px; background: linear-gradient(135deg, #4f46e5, #06b6d4); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3); }
-        .logo-text { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
-        .logo-text span { color: var(--secondary); }
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
 
-        .nav-links { display: flex; gap: 0.8rem; list-style: none; flex-wrap: wrap; }
-        .nav-btn { padding: 0.6rem 1.2rem; border-radius: 30px; text-decoration: none; color: var(--text-muted); font-weight: 600; transition: all 0.3s ease; cursor: pointer; border: none; background: transparent; font-size: 0.95rem; }
-        .nav-btn.active, .nav-btn:hover { background-color: var(--primary); color: white; }
+        /* Header / Navbar */
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border-bottom: 1px solid #e2e8f0;
+        }
 
-        .hero { background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%); color: white; padding: 4rem 2rem; text-align: center; border-radius: 0 0 40px 40px; margin-bottom: 3rem; }
-        .hero h1 { font-size: 2.8rem; margin-bottom: 1rem; font-weight: 700; }
-        .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 600px; margin: 0 auto 2rem; }
-        .grade-badges { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
-        .grade-badge { background: rgba(255, 255, 255, 0.2); padding: 0.5rem 1.5rem; border-radius: 20px; cursor: pointer; backdrop-filter: blur(5px); transition: 0.3s; font-weight: 600; }
-        .grade-badge.active, .grade-badge:hover { background: white; color: var(--primary); }
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+        }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem 4rem; }
-        .section-title { font-size: 1.8rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem; color: var(--text-main); }
-        .page-view { display: none; }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+        }
 
-        .grid-topics { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
-        .topic-card { background: var(--card-bg); border-radius: var(--radius); padding: 1.8rem; box-shadow: var(--shadow); border: 1px solid #f1f5f9; transition: transform 0.3s ease; }
-        .topic-card:hover { transform: translateY(-5px); }
-        .topic-icon { width: 50px; height: 50px; border-radius: 12px; background: #e0e7ff; color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.2rem; }
+        .logo-icon-box {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #4f46e5, #06b6d4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+        }
 
-        .units-layout { display: grid; grid-template-columns: 320px 1fr; gap: 2rem; align-items: start; }
-        .unit-sidebar { background: var(--card-bg); border-radius: var(--radius); padding: 1.5rem; box-shadow: var(--shadow); border: 1px solid #f1f5f9; }
-        .unit-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-        .unit-btn { width: 100%; text-align: left; padding: 0.8rem 1rem; border-radius: 10px; border: 1px solid #e2e8f0; background: #f8fafc; cursor: pointer; font-weight: 600; color: var(--text-main); display: flex; align-items: center; justify-content: space-between; }
-        .unit-btn:hover, .unit-btn.active { background: #e0e7ff; border-color: var(--primary); color: var(--primary); }
-        .topic-sublist { list-style: none; padding-left: 1rem; margin-top: 0.4rem; display: none; flex-direction: column; gap: 0.3rem; }
-        .unit-item.open .topic-sublist { display: flex; }
-        .topic-subitem { padding: 0.5rem 0.8rem; font-size: 0.9rem; border-radius: 8px; cursor: pointer; color: var(--text-muted); }
-        .topic-subitem:hover, .topic-subitem.active { background: var(--primary); color: white; }
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
 
-        .content-viewer { background: var(--card-bg); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); border: 1px solid #f1f5f9; min-height: 550px; }
-        .example-box { background: #f0fdf4; border-left: 4px solid var(--success); padding: 1rem; border-radius: 8px; margin: 1rem 0; }
-        .source-tag { margin-top: 3rem; text-align: right; font-size: 0.8rem; color: #94a3b8; font-style: italic; }
+        .logo-text span {
+            color: var(--secondary);
+        }
 
-        .test-config-card { background: var(--card-bg); border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow); border: 1px solid #f1f5f9; margin-bottom: 2rem; }
-        .config-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
-        .form-group select { width: 100%; padding: 0.8rem 1rem; border-radius: 10px; border: 2px solid #e2e8f0; font-size: 1rem; background: #f8fafc; }
+        .nav-links {
+            display: flex;
+            gap: 0.8rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
 
-        .quiz-section { background: var(--card-bg); border-radius: var(--radius); padding: 2.5rem; box-shadow: var(--shadow); border: 1px solid #f1f5f9; margin-bottom: 4rem; display: none; }
-        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid #f1f5f9; }
-        .options-grid { display: grid; gap: 1rem; }
-        .option-btn { background: #f8fafc; border: 2px solid #e2e8f0; padding: 1rem 1.5rem; border-radius: 12px; text-align: left; font-size: 1rem; cursor: pointer; }
-        .option-btn.correct { background: #dcfce7; border-color: var(--success); color: #166534; }
-        .option-btn.wrong { background: #fee2e2; border-color: var(--danger); color: #991b1b; }
-        .btn { background: var(--primary); color: white; padding: 0.8rem 1.8rem; border: none; border-radius: 30px; font-weight: 600; cursor: pointer; }
-        .explanation { margin-top: 1.5rem; padding: 1rem; background: #eff6ff; border-left: 4px solid var(--secondary); border-radius: 8px; display: none; }
+        .nav-btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 0.95rem;
+        }
 
-        .tip-card { background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border-left: 6px solid var(--accent); padding: 1.5rem; border-radius: var(--radius); display: flex; gap: 1.5rem; align-items: center; }
-        .tip-meta { font-size: 0.8rem; color: #d97706; font-weight: 600; margin-bottom: 0.3rem; display: block; }
-        footer { text-align: center; padding: 2rem; color: var(--text-muted); border-top: 1px solid #e2e8f0; background: white; margin-top: 4rem; }
+        .nav-btn.active, .nav-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .grade-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .grade-badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
+            font-weight: 600;
+        }
+
+        .grade-badge.active, .grade-badge:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* Container & Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-main);
+        }
+
+        .page-view {
+            display: none;
+        }
+        .page-view.active-view {
+            display: block;
+        }
+
+        /* Konu Kartları */
+        .grid-topics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .topic-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.8rem;
+            box-shadow: var(--shadow);
+            border: 1px solid #f1f5f9;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        .topic-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: #e0e7ff;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .topic-card h3 {
+            margin-bottom: 0.6rem;
+        }
+
+        .topic-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Konu Anlatımı Sekmesi */
+        .units-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .unit-sidebar {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid #f1f5f9;
+        }
+
+        .unit-sidebar h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .unit-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .unit-btn {
+            width: 100%;
+            text-align: left;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text-main);
+            transition: 0.2s;
+        }
+
+        .unit-btn:hover, .unit-btn.active {
+            background: #e0e7ff;
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .topic-sublist {
+            list-style: none;
+            padding-left: 1rem;
+            margin-top: 0.4rem;
+            display: none;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .unit-item.open .topic-sublist {
+            display: flex;
+        }
+
+        .topic-subitem {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: 0.2s;
+        }
+
+        .topic-subitem:hover, .topic-subitem.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .content-viewer {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid #f1f5f9;
+            min-height: 550px;
+            position: relative;
+        }
+
+        .content-viewer h2 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-size: 1.6rem;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 0.5rem;
+        }
+
+        .content-viewer h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+            font-size: 1.2rem;
+        }
+
+        .content-viewer p, .content-viewer ul {
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        .content-viewer ul {
+            padding-left: 1.5rem;
+        }
+
+        .content-viewer li {
+            margin-bottom: 0.5rem;
+        }
+
+        .example-box {
+            background: #f0fdf4;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .source-tag {
+            margin-top: 3rem;
+            text-align: right;
+            font-size: 0.8rem;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        /* Test Bankası / Seçim Alanı */
+        .test-config-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid #f1f5f9;
+            margin-bottom: 2rem;
+        }
+
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            font-size: 1rem;
+            background: #f8fafc;
+            outline: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .form-group select:focus {
+            border-color: var(--primary);
+        }
+
+        /* Test Çözüm Ekranı */
+        .quiz-section {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid #f1f5f9;
+            margin-bottom: 4rem;
+            display: none;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .question-box {
+            margin-bottom: 2rem;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .options-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            text-align: left;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: #f0fdf4;
+        }
+
+        .option-btn.correct {
+            background: #dcfce7;
+            border-color: var(--success);
+            color: #166534;
+        }
+
+        .option-btn.wrong {
+            background: #fee2e2;
+            border-color: var(--danger);
+            color: #991b1b;
+        }
+
+        .quiz-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .explanation {
+            margin-top: 1.5rem;
+            padding: 1rem 1.5rem;
+            background: #eff6ff;
+            border-left: 4px solid var(--secondary);
+            border-radius: 8px;
+            display: none;
+        }
+
+        /* Tip Card */
+        .tip-card {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-left: 6px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .tip-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            border-top: 1px solid #e2e8f0;
+            background: white;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .units-layout { grid-template-columns: 1fr; }
+            .quiz-actions { flex-direction: column; gap: 1rem; }
+            .btn { width: 100%; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- Header -->
     <header>
         <div class="navbar">
             <div class="logo-area" onclick="switchPage('home')">
-                <div class="logo-icon-box"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div class="logo-icon-box">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
                 <div class="logo-text">Türkçe<span> Diyarı</span></div>
             </div>
             <ul class="nav-links">
@@ -106,6 +547,7 @@
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
         <h1>Türkçe Diyarı'na Hoş Geldin!</h1>
         <p>6. Sınıf Türkçe konularını zengin örnekler, detaylı anlatımlar ve interaktif test havuzuyla kusursuzca öğren.</p>
@@ -117,126 +559,387 @@
         </div>
     </section>
 
+    <!-- Main Container -->
     <div class="container">
-        <!-- ANA SAYFA -->
-        <div id="pageHome" class="page-view" style="display: block;">
-            <h2 class="section-title"><i class="fa-solid fa-book-open"></i> 6. Sınıf Öne Çıkan Başlıklar</h2>
+
+        <!-- 1. ANA SAYFA GÖRÜNÜMÜ -->
+        <div id="pageHome" class="page-view active-view">
+            <h2 class="section-title">
+                <i class="fa-solid fa-book-open"></i> 6. Sınıf Öne Çıkan Başlıklar
+            </h2>
             <div class="grid-topics">
-                <div class="topic-card"><div class="topic-icon"><i class="fa-solid fa-font"></i></div><h3>Sözcükte Anlam</h3><p>Gerçek, mecaz, terim anlam, eş ve zıt anlamlı kelimeler, deyimler.</p></div>
-                <div class="topic-card"><div class="topic-icon"><i class="fa-solid fa-align-left"></i></div><h3>Cümlede Anlam</h3><p>Öznel-nesnel, neden-sonuç, amaç-sonuç ve koşul cümleleri detayları.</p></div>
-                <div class="topic-card"><div class="topic-icon"><i class="fa-solid fa-star"></i></div><h3>Öznel-Nesnel & Söz Sanatları</h3><p>Farklı dünyalar temasına ait anlatım biçimleri ve söz sanatları.</p></div>
-                <div class="topic-card"><div class="topic-icon"><i class="fa-solid fa-clock"></i></div><h3>Diğer Konular</h3><p>4., 5. ve 6. ünite içerikleri çok yakında eklenecektir!</p></div>
+                <div class="topic-card">
+                    <div class="topic-icon"><i class="fa-solid fa-font"></i></div>
+                    <h3>Sözcükte Anlam</h3>
+                    <p>Gerçek, mecaz, terim anlam, eş ve zıt anlamlı kelimeler, deyimler.</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon"><i class="fa-solid fa-align-left"></i></div>
+                    <h3>Cümlede Anlam</h3>
+                    <p>Öznel-nesnel, neden-sonuç, amaç-sonuç ve koşul cümleleri detayları.</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon"><i class="fa-solid fa-star"></i></div>
+                    <h3>Öznel-Nesnel & Söz Sanatları</h3>
+                    <p>Farklı dünyalar temasına ait anlatım biçimleri ve söz sanatları.</p>
+                </div>
+                <div class="topic-card">
+                    <div class="topic-icon"><i class="fa-solid fa-clock"></i></div>
+                    <h3>Diğer Konular</h3>
+                    <p>4., 5. ve 6. ünite içerikleri çok yakında eklenecektir!</p>
+                </div>
             </div>
 
-            <!-- Günün İpucu (RNG - 400 Adetlik Havuz & Saat 01.00 Sistemli) -->
+            <!-- Günün İpucu -->
             <div class="tip-card">
-                <div class="tip-icon" style="font-size: 2.5rem; color: var(--accent);"><i class="fa-solid fa-lightbulb"></i></div>
+                <div class="tip-icon">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
                 <div>
-                    <span class="tip-meta" id="ipucuZamanDamgasi">Günün Türkçe İpucu (Yükleniyor...)</span>
                     <h4 style="margin-bottom: 0.3rem;">Günün Türkçe İpucu</h4>
-                    <p id="gunlukIpucuMetni">İpucu yükleniyor...</p>
+                    <p><strong>"İle"</strong> kelimesi yerine <strong>"ve"</strong> koyabiliyorsan <u>bağlaçtır</u>, koyamıyorsan <u>edattır</u>! Örnek: "Ali ile (ve) Veli geldi" &rarr; Bağlaç.</p>
                 </div>
             </div>
         </div>
 
-        <!-- KONU ANLATIMLARI -->
+        <!-- 2. KONU ANLATIMLARI GÖRÜNÜMÜ -->
         <div id="pageLessons" class="page-view">
-            <h2 class="section-title"><i class="fa-solid fa-graduation-cap"></i> Kapsamlı Konu Anlatım Kılavuzu</h2>
+            <h2 class="section-title">
+                <i class="fa-solid fa-graduation-cap"></i> 6. Sınıf Türkçe Kapsamlı Konu Anlatım Kılavuzu
+            </h2>
             <div class="units-layout">
                 <div class="unit-sidebar">
                     <h3><i class="fa-solid fa-list"></i> Temalar & Üniteler</h3>
                     <ul class="unit-list" id="unitSidebarList"></ul>
                 </div>
                 <div class="content-viewer" id="contentViewer">
-                    <h2>Sol taraftan bir konu seçin.</h2>
-                    <p>Seçtiğiniz konunun ayrıntılı açıklamaları ve örnekleri burada görünecektir.</p>
+                    <h2>Sol taraftan dolu olan 3 üniteden bir konu seçin.</h2>
+                    <p>Seçtiğiniz konunun ayrıntılı açıklamaları, püf noktaları ve zengin örnekleri burada görünecektir. Diğer üniteler yakında eklenecektir.</p>
+                    <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & Türk Dil Kurumu (TDK)</div>
                 </div>
             </div>
         </div>
 
-        <!-- TESTLER -->
+        <!-- 3. TESTLER SEKMESİ -->
         <div id="pageTests" class="page-view">
-            <h2 class="section-title"><i class="fa-solid fa-circle-check"></i> İnteraktif Test Bankası</h2>
+            <h2 class="section-title">
+                <i class="fa-solid fa-circle-check"></i> İnteraktif Test Bankası (3 Dolu Ünite)
+            </h2>
+            
+            <!-- Test Seçim Paneli -->
             <div class="test-config-card" id="testConfigCard">
+                <p style="margin-bottom: 1.5rem; color: var(--text-muted);">Çözmek istediğin üniteyi ve konuyu seçerek test havuzundan soruları çözmeye başla. (Diğer üniteler ve sınıflar çok yakında eklenecektir!)</p>
                 <div class="config-grid">
-                    <div class="form-group"><label>Ünite / Tema Seç:</label><select id="selectUnit" onchange="updateTopicDropdown()"></select></div>
-                    <div class="form-group"><label>Konu Seç:</label><select id="selectTopic"></select></div>
+                    <div class="form-group">
+                        <label for="selectUnit">1. Ünite / Tema Seç:</label>
+                        <select id="selectUnit" onchange="updateTopicDropdown()"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectTopic">2. Konu Seç:</label>
+                        <select id="selectTopic"></select>
+                    </div>
                 </div>
                 <button class="btn" onclick="startCustomQuiz()"><i class="fa-solid fa-play"></i> Testi Başlat</button>
             </div>
 
+            <!-- Aktif Test Çözüm Alanı -->
             <div class="quiz-section" id="quizSection">
                 <div class="quiz-header">
-                    <div><h3 id="activeTopicName">Konu Adı</h3></div>
+                    <div>
+                        <span style="color: var(--primary); font-weight: 600;" id="quizTitleBadge">Seçmeli Test</span>
+                        <h3 id="activeTopicName">Konu Adı</h3>
+                    </div>
                     <div id="score" style="font-weight: 700; color: var(--secondary);">Puan: 0</div>
                 </div>
+
                 <div class="question-box">
-                    <div class="question-text" id="questionText">Soru metni...</div>
+                    <div class="question-text" id="questionText">Soru metni yükleniyor...</div>
                     <div class="options-grid" id="optionsContainer"></div>
-                    <div class="explanation" id="explanationBox"><strong>Açıklama:</strong> Açıklama.</div>
+                    <div class="explanation" id="explanationBox">
+                        <strong>Açıklama:</strong> Açıklama metni.
+                    </div>
                 </div>
-                <div class="quiz-actions" style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
+
+                <div class="quiz-actions">
                     <span id="quizStatus" style="color: var(--text-muted);">Soru 1 / 15</span>
                     <div>
-                        <button class="btn" style="background: var(--text-muted); margin-right: 0.5rem;" onclick="returnToConfig()"><i class="fa-solid fa-arrow-left"></i> Geri Dön</button>
+                        <button class="btn" style="background: var(--text-muted); margin-right: 0.5rem;" onclick="returnToConfig()"><i class="fa-solid fa-arrow-left"></i> Test Seçimine Dön</button>
                         <button class="btn" id="nextBtn" onclick="nextQuestion()" style="display: none;">Sonraki Soru <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
-    <footer><p>&copy; 2026 Türkçe Diyarı - Ortaokul Türkçe Eğitim Platformu. Tüm hakları saklıdır.</p></footer>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Türkçe Diyarı - Ortaokul Türkçe Eğitim Platformu. Tüm hakları saklıdır.</p>
+    </footer>
 
-    <!-- Harici Veri Dosyalarını Çağırıyoruz -->
-    <script src="icerikler.js"></script>
-    <script src="ipuclari.js"></script>
-
+    <!-- JavaScript Mantığı -->
     <script>
-        // Sayfa Yüklenince Günün İpucunu RNG Havuzundan Saat 01.00 Kuralına Göre Bas
-        window.addEventListener('DOMContentLoaded', () => {
-            const veri = getGununIpucu();
-            document.getElementById('gunlukIpucuMetni').innerText = veri.metin;
-            document.getElementById('ipucuZamanDamgasi').innerText = `📅 ${veri.zamanDamgasi}`;
-            renderUnits();
-        });
-
         function switchPage(pageId) {
-            document.getElementById('pageHome').style.display = 'none';
-            document.getElementById('pageLessons').style.display = 'none';
-            document.getElementById('pageTests').style.display = 'none';
-
-            document.getElementById('navHome').classList.remove('active');
-            document.getElementById('navLessons').classList.remove('active');
-            document.getElementById('navTests').classList.remove('active');
+            document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active-view'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
 
             if(pageId === 'home') {
-                document.getElementById('pageHome').style.display = 'block';
+                document.getElementById('pageHome').classList.add('active-view');
                 document.getElementById('navHome').classList.add('active');
             } else if(pageId === 'lessons') {
-                document.getElementById('pageLessons').style.display = 'block';
+                document.getElementById('pageLessons').classList.add('active-view');
                 document.getElementById('navLessons').classList.add('active');
             } else if(pageId === 'tests') {
-                document.getElementById('pageTests').style.display = 'block';
+                document.getElementById('pageTests').classList.add('active-view');
                 document.getElementById('navTests').classList.add('active');
                 initTestDropdowns();
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        const curriculumData = [
+            {
+                unit: "1. Tema: Dilimizin Zenginliği (Dolu)",
+                topics: [
+                    {
+                        name: "Gerçek, Mecaz ve Terim Anlam",
+                        htmlContent: `
+                            <h2>Gerçek, Mecaz ve Terim Anlam</h2>
+                            <p>Sözcüklerin cümle içerisinde üstlendiği anlamlar anlatımı zenginleştirir.</p>
+                            <h3>1. Gerçek (Temel) Anlam</h3>
+                            <p>Bir sözcüğün akla gelen ilk temel anlamıdır.</p>
+                            <div class="example-box"><strong>Örnek:</strong> "Bardağın kırılmasına çok üzüldü."</div>
+                            <h3>2. Mecaz Anlam</h3>
+                            <p>Gerçek anlamdan tamamen uzaklaşarak kazanılan soyut anlamdır.</p>
+                            <div class="example-box"><strong>Örnek:</strong> "Bana karşı çok soğuk davranıyordu."</div>
+                            <h3>3. Terim Anlam</h3>
+                            <p>Bilim, sanat veya meslek dalına özgü kavramlar.</p>
+                            <div class="example-box"><strong>Örnek:</strong> "Üçgenin iç açıları toplamı 180 derecedir."</div>
+                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & TDK</div>
+                        `,
+                        questions: [
+                            { q: "\"Ağır\" sözcüğü hangisinde mecaz anlamdadır?", options: ["A) Bu torba çok ağır.", "B) Söylediği ağır sözler kalbimi kırdı.", "C) Kamyona ağır yükler yüklendi.", "D) Masadaki ağır kutu düştü."], correct: 1, exp: "Kırıcı, üzücü anlamında mecazdır." },
+                            { q: "\"Tatlı\" sözcüğü hangisinde gerçek anlamıyla kullanılmıştır?", options: ["A) Tatlı diliyle herkesi etkiledi.", "B) Tatlı bir yorgunluk hissediyordu.", "C) Fırından taze ve tatlı bir kurabiye aldı.", "D) Tatlı anılarımızı yad ettik."], correct: 2, exp: "Yiyecek olarak lezzet anlamındadır." },
+                            { q: "Aşağıdakilerin hangisinde terim anlamlı bir sözcük vardır?", options: ["A) Sahneye çıkan oyuncular alkışlandı.", "B) Bugün hava çok bulutlu.", "C) Kalemim masada unutulmuş.", "D) Çiçekleri sulamayı unuttum."], correct: 0, exp: "'Sahne ve oyuncu' tiyatro terimidir." },
+                            { q: "\"Boş\" sözcüğü hangi cümlede mecaz anlamda kullanılmıştır?", options: ["A) Odadaki boş kutuları çöpe attım.", "B) Bu hafta sonu tamamen boşum.", "C) Bardaktaki suyu döküp bardağı boş bıraktı.", "D) Çantamda hiç defter kalmamış, çantam boş."], correct: 1, exp: "Meşgul olmadığını, işinin olmadığını belirtir (mecaz)." },
+                            { q: "\"Kırılmak\" sözcüğü hangisinde gerçek anlamda kullanılmıştır?", options: ["A) Bana güvendiği için kalbi kırıldı.", "B) Düşen cam bardak mutfakta kırıldı.", "C) Şirketin aldığı karara çalışanlar kırıldı.", "D) Söylenenlere öğretmenimiz çok kırıldı."], correct: 1, exp: "Fiziksel olarak bütünlüğün bozulması gerçek anlamdır." },
+                            { q: "\"Yanmak\" sözcüğü hangisinde gerçek anlamdadır?", options: ["A) Elektrik faturasını görünce anam ağladı, içim yandı.", "B) Güneşte çok kaldığı için omuzları yandı.", "C) Sınavı kazanamayınca bütün emekleri yandı.", "D) Arkadaşının sözlerine çok yandı."], correct: 1, exp: "Güneşten cildin zarar görmesi fiziksel (gerçek) yanmadır." },
+                            { q: "\"Keskin\" sözcüğü hangisinde mecaz anlamda kullanılmıştır?", options: ["A) Keskin bıçakla ekmekleri dilimledi.", "B) Keskin sirke küpüne zarar verir.", "C) Olaylara karşı çok keskin bir zekası vardı.", "D) Keskin rüzgar yüzünü üşütüyordu."], correct: 2, exp: "Zekanın güçlü/çabuk kavrayışlı olması mecazdır." },
+                            { q: "\"Pişmek\" sözcüğü hangisinde gerçek anlamdadır?", options: ["A) Güneşte ala karga gibi kaldık, iyice piştik.", "B) Fırındaki börekler 20 dakikaya pişer.", "C) Hayatın zorluklarıyla iyice pişmişti.", "D) Sıkıntıdan evde oturmaktan piştik."], correct: 1, exp: "Yemeğin ısı etkisiyle yenilebilir hale gelmesi gerçek anlamdır." },
+                            { q: "\"Derin\" sözcüğü hangisinde mecaz anlamdadır?", options: ["A) Derin bir kuyu kazıp su buldular.", "B) Deniz o kadar derindi ki dibi görünmüyordu.", "C) Yazarın bu kitabında derin anlamlar gizliydi.", "D) Derin bir havuzda yüzmeyi öğrendik."], correct: 2, exp: "Anlamın kapsamlı ve zengin olması mecazdır." },
+                            { q: "\"Sıcak\" sözcüğü hangisinde terim anlamlıdır?", options: ["A) Sıcak çorbayı içince içi ısındı.", "B) Coğrafya dersinde sıcak kuşak iklimlerini işledik.", "C) Arkadaşımın sıcak yaklaşımı beni mutlu etti.", "D) Yaz aylarında hava oldukça sıcak oluyor."], correct: 1, exp: "'Sıcak kuşak' coğrafya terimidir." },
+                            { q: "\"Kök\" kelimesi hangisinde terim anlamdadır?", options: ["A) Ağacın kökleri toprağın derinliklerindeydi.", "B) Dişimin kökünde iltihap oluşmuş.", "C) Dil bilgisinde sözcüklerin kökünü bulduk.", "D) Saçımın kökleri güç güçleniyor."], correct: 2, exp: "Dil bilgisi alanına ait terimdir." },
+                            { q: "\"Perde\" sözcüğü hangisinde tiyatro terimidir?", options: ["A) Evin salonuna tül perde taktık.", "B) Güneş gelmesin diye pencerenin perdesini çektik.", "C) Oyunun ikinci perdesi oldukça heyecanlı başladı.", "D) Gözünün perdesinde leke oluşmuş."], correct: 2, exp: "Tiyatronun bölümlerinden biridir (terim)." },
+                            { q: "\"Baş\" sözcüğü hangisinde gerçek anlamdadır?", options: ["A) İşin başından beri böyle olacağını biliyordum.", "B) Futbolcu topa başıyla çok sert vurdu.", "C) Sınıfın başı olarak görevlendirildi.", "D) Sıranın başında o bekliyordu."], correct: 1, exp: "Vücut organı olan baş gerçek anlamdadır." },
+                            { q: "\"Kuru\" sözcüğü hangisinde mecaz anlamdadır?", options: ["A) Çamaşırlar balkonda tamamen kurudu.", "B) Toprak susuzluktan iyice kurumuştu.", "C) Toplantıda kuru bir kalabalık vardı, kimse dinlemiyordu.", "D) Kuru odunları soba için hazırladık."], correct: 2, exp: "Verimsiz, etkisiz anlamında mecazdır." },
+                            { q: "\"Burun\" sözcüğü hangisinde yan anlamdadır?", options: ["A) Soğuktan burnu iyice kızarmıştı.", "B) Gemi adanın burnuna doğru yanaştı.", "C) Köpeğin burnu çok iyi koku alır.", "D) Burnundan ameliyat olacakmış."], correct: 1, exp: "Coğrafi şekil olarak çıkıntı anlamı yan anlamdır." }
+                        ]
+                    },
+                    {
+                        name: "Eş ve Zıt Anlamlı Kelimeler",
+                        htmlContent: `
+                            <h2>Eş ve Zıt Anlamlı Kelimeler</h2>
+                            <p>Yazılışları farklı anlamları aynı ya da zıt olan kelimelerdir.</p>
+                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & TDK</div>
+                        `,
+                        questions: [
+                            { q: "Aşağıdaki kelime çiftlerinden hangisi zıt anlamlıdır?", options: ["A) Siyah - Kara", "B) Yaşlı - İhtiyar", "C) İleri - Geri", "D) Konuk - Misafir"], correct: 2, exp: "İleri ve geri sözcükleri zıt anlamlıdır." },
+                            { q: "\"Fakir\" kelimesinin eş anlamlısı hangisidir?", options: ["A) Zengin", "B) Yoksul", "C) Cimri", "D) Cömert"], correct: 1, exp: "Fakir kelimesi yoksul ile eş anlamlıdır." },
+                            { q: "Aşağıdakilerden hangisi eş anlamlı kelimelerden oluşmuştur?", options: ["A) İyi - Kötü", "B) Uzun - Kısa", "C) Cevap - Yanıt", "D) Ağır - Hafif"], correct: 2, exp: "Cevap ve yanıt eş anlamlıdır." },
+                            { q: "\"Kırmızı\" kelimesinin eş anlamlısı hangi cümlede kullanılmıştır?", options: ["A) Al bayrağımız dalgalanıyor.", "B) Siyah elbiseyi çok beğendi.", "C) Ak sakallı dede geldi.", "D) Beyaz güvercin uçtu."], correct: 0, exp: "Al kelimesi kırmızı ile eş anlamlıdır." },
+                            { q: "\"Sonbahar\" kelimesinin eş anlamlısı hangisidir?", options: ["A) İlkbahar", "B) Yaz", "C) Güz", "D) Kış"], correct: 2, exp: "Sonbaharın eş anlamlısı güzdür." },
+                            { q: "\"Hediye\" kelimesinin eş anlamlısı hangisidir?", options: ["A) Armağan", "B) Borç", "C) Ödül", "D) Paket"], correct: 0, exp: "Hediye armağan demektir." },
+                            { q: "\"Yaşlı\" sözcüğünün zıt anlamlısı hangisidir?", options: ["A) İhtiyar", "B) Genç", "C) Taze", "D) Kurumuş"], correct: 1, exp: "Yaşlının zıttı gençtir." },
+                            { q: "\"Cılız\" kelimesinin zıt anlamlısı hangisidir?", options: ["A) Zayıf", "B) Güçlü", "C) Şişman", "D) Ufak"], correct: 2, exp: "Cılız (zayıf) kelimesinin zıttı şişmandır." },
+                            { q: "\"Fayda\" kelimesinin zıt anlamlısı hangisidir?", options: ["A) Yarar", "B) Zarar", "C) Kar", "D) Ziyan"], correct: 1, exp: "Faydanın zıttı zarardır." },
+                            { q: "\"Cesur\" kelimesinin eş anlamlısı hangisidir?", options: ["A) Korkak", "B) Yürekli", "C) Ürkek", "D) Çekingen"], correct: 1, exp: "Cesur yürekli demektir." },
+                            { q: "\"Öğrenci\" kelimesinin eş anlamlısı hangisidir?", options: ["A) Muallim", "B) Talebe", "C) Müdür", "D) Memur"], correct: 1, exp: "Öğrenci talebe demektir." },
+                            { q: "\"Özel\" kelimesinin zıt anlamlısı hangisidir?", options: ["A) Tek", "B) Genel", "C) Değerli", "D) Farklı"], correct: 1, exp: "Özel kelimesinin zıttı geneldir." },
+                            { q: "\"Ev\" kelimesinin eş anlamlısı hangisidir?", options: ["A) Konut", "B) Okul", "C) Sokak", "D) Şehir"], correct: 0, exp: "Ev konut demektir." },
+                            { q: "\"Fakir\" kelimesinin zıt anlamlısı hangisidir?", options: ["A) Yoksul", "B) Zengin", "C) Cimri", "D) Paralı"], correct: 1, exp: "Fakirin zıttı zengindir." },
+                            { q: "\"Soru\" kelimesinin eş anlamlısı hangisidir?", options: ["A) Cevap", "B) Yanıt", "C) Problem", "D) Sınav"], correct: 2, exp: "Soru kelimesi soru/problem anlamını karşılar." }
+                        ]
+                    },
+                    {
+                        name: "Deyimler ve Atasözleri",
+                        htmlContent: `
+                            <h2>Deyimler ve Atasözleri</h2>
+                            <p>Kalıplaşmış söz öbekleridir.</p>
+                            <div class="source-tag">Kaynak: MEB Türkiye Yüzyılı Maarif Modeli & TDK</div>
+                        `,
+                        questions: [
+                            { q: "\"Etekleri zil çalmak\" deyiminin anlamı nedir?", options: ["A) Çok korkmak", "B) Çok sevinmek", "C) Üzülmek", "D) Telaşlanmak"], correct: 1, exp: "Çok sevinmek anlamına gelir." },
+                            { q: "\"Ağzı kulaklarına varmak\" ne anlama gelir?", options: ["A) Gülmekten bayılmak", "B) Çok sevinmek", "C) Şaşırmak", "D) Korkmak"], correct: 1, exp: "Ağzı kulaklarına varmak çok sevinmeyi ifade eder." },
+                            { q: "\"Damdan düşer gibi\" deyiminin anlamı nedir?", options: ["A) Yavaşça gelmek", "B) Birdenbire, yersiz ve uygunsuz bir şekilde ortaya çıkmak", "C) Yüksekten atlamak", "D) Düşüp yaralanmak"], correct: 1, exp: "Aniden ve yersiz konuşmak demektir." },
+                            { q: "\"Göz boyamak\" deyimi hangi anlamda kullanılır?", options: ["A) Makyaj yapmak", "B) Birini kandırmak, aldatmak", "C) Resim yapmak", "D) Gözü iyileştirmek"], correct: 1, exp: "Aldatmak, boya ile kandırmak anlamındadır." },
+                            { q: "\"İğne atsan yere düşmez\" deyimi neyi anlatır?", options: ["A) Çok kalabalık bir yeri", "B) Çok temiz bir odayı", "C) Kaybolan iğneyi", "D) Karanlık bir ortamı"], correct: 0, exp: "Çok kalabalık ortamlarda kullanılır." },
+                            { q: "\"Damlaya damlaya göl olur\" atasözünün anlamı nedir?", options: ["A) Su içmek sağlığa yararlıdır", "B) Küçük birikimler zamanla büyük sonuçlar doğurur", "C) Göller doludur", "D) Tasarruf etmemek gerekir"], correct: 1, exp: "Küçük birikimlerin önemini vurgular." },
+                            { q: "\"Sakla samanı, gelir zamanı\" atasözü neyi öğütler?", options: ["A) Saman saklamayı", "B) Eşyaları çöpe atmamayı", "C) Gereksiz görülen şeylerin ileride lazımat olabileceğini", "D) Ahır kurmayı"], correct: 2, exp: "Hiçbir şeyi ziyan etmemeyi öğütler." },
+                            { q: "\"Ağaç yaşken eğilir\" atasözünün anlamı nedir?", options: ["A) Ağaçlar sulanmalıdır", "B) Çocuklar küçük yaşta kolay eğitilir", "C) Yaş ağaçlar kesilmez", "D) Odunlar kırılır"], correct: 1, exp: "Eğitimin küçüklükte verilmesini vurgular." },
+                            { q: "\"Acele işe şeytan karışır\" atasözü neyi tavsiye eder?", options: ["A) Hızlı olmayı", "B) Her işi sakin ve düşünerek yapmayı", "C) Şeytandan uzak durmayı", "D) İşleri ertelemeyi"], correct: 1, exp: "Aceleciliğin hata getireceğini söyler." },
+                            { q: "\"Taşıma su ile değirmen dönmez\" atasözü neyi anlatır?", options: ["A) Başkasının gücüyle sürekli iş yürütülemez", "B) Değirmenler suyla çalışır", "C) Su taşımak zordur", "D) Taşlar ağırdır"], correct: 0, exp: "Kendi emeğimizin olması gerektiğini belirtir." },
+                            { q: "\"Çam sakızı çoban armağanı\" ne demektir?", options: ["A) Çam ağacı hediyesi", "B) Değersiz ama sevgiyle verilen küçük hediye", "C) Çobanlara verilen maaş", "D) Sakız çiğnemek"], correct: 1, exp: "Küçük ama samimi hediye demektir." },
+                            { q: "\"Ateş olmayan yerden duman çıkmaz\" neyi ifade eder?", options: ["A) Yangın çıktığını", "B) Her söylentinin gerçek bir payı bulunduğunu", "C) Dumanın zararlı olduğunu", "D) Bacaların tıkandığını"], correct: 1, exp: "Dedikoduların asılsız olmadığını belirtir." },
+                            { q: "\"Bal tutan parmağını yalar\" ne anlama gelir?", options: ["A) Bal yemek yasaktır", "B) İmkân sağlayan bir işte çalışan kişi bundan faydalanır", "C) Parmaklar yapış yapış olur", "D) Tatlı sevenler"], correct: 1, exp: "Faydalı bir işin avantaj sağladığını belirtir." },
+                            { q: "\"Gülü seven dikenine katlanır\" neyi simgeler?", options: ["A) Bahçe işlerini", "B) Güzel bir şeyin sıkıntılarına da göğüs germek gerektiğini", "C) Gül dikmek zorludur", "D) Çiçekleri korumayı"], correct: 1, exp: "Sevilen şeyin zorluklarına katlanılır." },
+                            { q: "\"İt ürür kervan yürür\" atasözünün anlamı nedir?", options: ["A) Köpekler kervanı sever", "B) Kötü sözlere kulak asmadan işimize devam etmeliyiz", "C) Kervanlar gece yürür", "D) Köpekler havlar"], correct: 1, exp: "Engellere takılmadan yola devam etmektir." }
+                        ]
+                    }
+                ]
+            },
+            {
+                unit: "2. Tema: Bağımsızlık Yolu (Dolu)",
+                topics: [
+                    {
+                        name: "Cümlede Anlam İlişkileri",
+                        htmlContent: `
+                            <h2>Cümlede Anlam İlişkileri</h2>
+                            <p>Neden-sonuç, amaç-sonuç ilişkileri.</p>
+                            <div class="source-tag">Kaynak: MEB & Türkçe Ders Kitapları</div>
+                        `,
+                        questions: [
+                            { q: "Hangisinde neden-sonuç ilişkisi vardır?", options: ["A) Sınavı kazanmak için çalışıyor.", "B) Yağmur yağdığı için maç iptal oldu.", "C) Erken yatarsa uyanır.", "D) Kitap almak üzere çıktı."], correct: 1, exp: "Yağmurun yağması maçın iptal olma nedenidir." },
+                            { q: "Hangisinde amaç-sonuç ilişkisi vardır?", options: ["A) Hastalandığı için okula gelmedi.", "B) Soruları çözmek için kütüphaneye gitti.", "C) Otobüs kaçınca geç kaldı.", "D) Yorgun olduğu için uyudu."], correct: 1, exp: "Kütüphaneye gitme amacı soruları çözmektir." },
+                            { q: "\"Hava soğuk olduğu için kalın giyindi\" cümlesinde anlam ilişkisi nedir?", options: ["A) Amaç-sonuç", "B) Neden-sonuç", "C) Koşul-sonuç", "D) Karşılaştırma"], correct: 1, exp: "Neden kalın giyindiği açıklanmıştır." },
+                            { q: "Aşağıdakilerden hangisinde koşul (şart) anlamı vardır?", options: ["A) Çok çalıştığı için sınavı geçti.", "B) Ödevini bitirirse oyun oynayabilir.", "C) Kardeşini görmek üzere eve geldi.", "D) Sinemaya gitmek istiyordu."], correct: 1, exp: "Oyun oynaması ödevini bitirmesine bağlanmıştır." },
+                            { q: "\"Akşam oldu mu içime bir hüzün çöker\" cümlesinin anlamı nedir?", options: ["A) Neden", "B) Zaman/Koşul", "C) Amaç", "D) Öznel"], correct: 1, exp: "Zaman ve şart anlamı vardır." },
+                            { q: "Hangisi amaç-sonuç cümlesidir?", options: ["A) Sütü taşırdığı için annesi kızdı.", "B) Doktor olmak amacıyla fen lisesini istiyor.", "C) Kar yağınca yollar kapandı.", "D) Uykusuz kalınca başı ağrımış."], correct: 1, exp: "Hedef/amaç bildirmektedir." },
+                            { q: "\"Toplantıya yetişmek üzere hızlıca evden çıktı\" cümlesindeki ilişki türü nedir?", options: ["A) Amaç-sonuç", "B) Neden-sonuç", "C) Koşul", "D) Karşılaştırma"], correct: 1, exp: "Toplantıya yetişmek amacıyla çıkmıştır (Amaç-sonuç)." },
+                            { q: "Hangisinde neden-sonuç ilişkisi *yoktur*?", options: ["A) Trafik sıkışınca işe geç kaldı.", "B) Erken kalkmak için alarmları kurdu.", "C) Yorgunluktan gözleri kapanıyordu.", "D) Sıcaktan buzlar eridi."], correct: 1, exp: "Alarm kurma amacı erken kalkmaktır (amaç-sonuç)." },
+                            { q: "\"Ağaçları suladı ki yeşerip meyve versin\" cümlesinin anlam özelliği nedir?", options: ["A) Neden-sonuç", "B) Amaç-sonuç", "C) Koşul", "D) Benzetme"], correct: 1, exp: "Amaç belirtmektedir." },
+                            { q: "Hangisinde şart (koşul) anlamı vardır?", options: ["A) Düzenli beslenirse kısa sürede iyileşir.", "B) İlaçlarını içtiği için iyileşti.", "C) Sağlığına kavuşmak için ilaç içiyor.", "D) Hastalandığından okula gelemedi."], correct: 0, exp: "İyileşmesi düzenli beslenmesine bağlıdır." },
+                            { q: "\"Gözlük taktı ki yazıları rahat okusun\" cümlesi ne bildirir?", options: ["A) Neden", "B) Amaç", "C) Koşul", "D) Sonuç"], correct: 1, exp: "Amaç bildirmektedir." },
+                            { q: "Hangisinde neden-sonuç ilişkisi vardır?", options: ["A) Kitap okumaya kütüphaneye gitti.", "B) Para kazanmak için çalışıyor.", "C) Sınavda heyecanlandığı için bildiklerini unuttu.", "D) Başarılı olmak üzere hazırlandı."], correct: 2, exp: "Heyecanlanması bildiklerini unutma nedenidir." },
+                            { q: "\"Erken yatarsan sabah dinç uyanırsın\" cümlesinin anlamı nedir?", options: ["A) Amaç", "B) Neden", "C) Koşul", "D) Tanım"], correct: 2, exp: "Koşul bildirmektedir." },
+                            { q: "Hangisi amaç-sonuç cümlesidir?", options: ["A) Deprem olduğu için binalar yıkıldı.", "B) Yarışmayı kazanmak maksadıyla kouştu.", "C) Yağmur yağdı ve sokaklar göl oldu.", "D) Sınav zor olduğu için notu düştü."], correct: 1, exp: "Maksat/amaç katmıştır." },
+                            { q: "Hangisinde neden-sonuç ilişkisi vardır?", options: ["A) Ekmek almak üzere markete yollandı.", "B) Gülmek için fıkra dinledi.", "C) Aç kaldığından mide krampları geçirdi.", "D) Hediyeyi vermek için bekliyordu."], correct: 2, exp: "Mide kramplarının nedeni aç kalmaktır." }
+                        ]
+                    },
+                    {
+                        name: "Kök ve Ekler",
+                        htmlContent: `
+                            <h2>Kök ve Ekler</h2>
+                            <p>Kök, bir sözcüğün anlamlı en küçük parçasıdır. Yapım ve çekim ekleri bu temada incelenir.</p>
+                            <div class="source-tag">Kaynak: Dil Bilgisi Kuralları</div>
+                        `,
+                        questions: [
+                            { q: "\"Gözlükçü\" kelimesinin kökü türü yönünden nedir?", options: ["A) İsim kökü", "B) Fiil kökü", "C) Gövde", "D) Ek kök"], correct: 0, exp: "'Göz' ismi isim köküdür." },
+                            { q: "Aşağıdakilerden hangisi yapım eki almıştır?", options: ["A) Evler", "B) Kalemim", "C) Simitçi", "D) Okulda"], correct: 2, exp: "-çi yapım ekidir." },
+                            { q: "Hangisinde çekim eki kullanılmıştır?", options: ["A) Bilgi", "B) Sevgi", "C) Kitaplar", "D) Gözlük"], correct: 2, exp: "-lar çoğul çekim ekidir." },
+                            { q: "\"Yazmaktan yazıcı\" kelimesinde ek hangi görevdedir?", options: ["A) İsimden fiil yapım", "B) Fiilden isim yapım", "C) Çekim eki", "D) Hal eki"], correct: 1, exp: "Fiilden isim yapmıştır." },
+                            { q: "Hangisi fiil köküdür?", options: ["A) Yol", "B) Güneş", "C) Gel", "D) Taş"], correct: 2, exp: "-mek gelebilir (gelmek)." },
+                            { q: "Hangisi isim köküdür?", options: ["A) Oku", "B) Koş", "C) Balık", "D) Yaz (fiil olan)"], correct: 2, exp: "Balık isim köküdür." },
+                            { q: "\"Ağaçtan\" kelimesindeki '-tan' eki nedir?", options: ["A) Yapım eki", "B) Ayrılma (çıkma) hâl eki", "C) Belirtme hâl eki", "D) Çoğul eki"], correct: 1, exp: "Ayrılma hâl ekidir." },
+                            { q: "\"Gözlük\" kelimesinde hangi ek vardır?", options: ["A) Çekim eki", "B) İsimden isim yapım eki", "C) Fiilden isim", "D) Ünsüz yumuşaması"], correct: 1, exp: "İsimden isim yapım ekidir." },
+                            { q: "Aşağıdaki kelimelerden hangisi kök halinde *değildir*?", options: ["A) Su", "B) Yolcu", "C) Taş", "D) Süt"], correct: 1, exp: "Yol-cu türemiştir." },
+                            { q: "\"Okulda\" kelimesindeki eklerin sırası nasıldır?", options: ["A) Yapım + Çekim", "B) Kök + Bulunma hâl eki", "C) Çekim + Yapım", "D) Kök + Çoğul"], correct: 1, exp: "Okul (kök) + da (hâl eki)." },
+                            { q: "Hangisinde birden fazla yapım eki vardır?", options: ["A) Evler", "B) Suluk", "C) Gözlüksüz", "D) Kitapçı"], correct: 2, exp: "Göz-lük-süz iki yapım eki almıştır." },
+                            { q: "\"Çiçekçi\" sözcüğünün kökü nedir?", options: ["A) Çiçek", "B) Çiç", "C) Çiçekçi", "D) Çi"], correct: 0, exp: "Kökü çiçek'tir." },
+                            { q: "Hangisi iyelik eki almıştır?", options: ["A) Evler", "B) Kalemim", "C) Masaya", "D) Okuldan"], correct: 1, exp: "-im benim kalemim (iyelik)." },
+                            { q: "\"Yürüyüş\" kelimesinin kökü nedir?", options: ["A) Yür-", "B) Yürü-", "C) Yürüyü", "D) Yür"], correct: 1, exp: "Kökü yürü-'mektir (fiil)." },
+                            { q: "Aşağıdakilerden hangisi unvan/çoğul eki almış bir isimdir?", options: ["A) Öğrenciler", "B) Kalem", "C) Silgi", "D) Defter"], correct: 0, exp: "-ler çoğul ekidir." }
+                        ]
+                    }
+                ]
+            },
+            {
+                unit: "3. Tema: Farklı Dünyalar (Dolu)",
+                topics: [
+                    {
+                        name: "Öznel ve Nesnel Anlatım",
+                        htmlContent: `
+                            <h2>Öznel ve Nesnel Anlatım</h2>
+                            <p>Cümlelerin kanıtlanabilirlik özellikleri anlatımı şekillendirir.</p>
+                            <h3>1. Öznel Anlatım</h3>
+                            <p>Kişiden kişiye değişen, kanıtlanamayan yargılardır.</p>
+                            <div class="example-box"><strong>Örnek:</strong> "Bu roman, yazarın en güzel kitabıdır."</div>
+                            <h3>2. Nesnel Anlatım</h3>
+                            <p>Herkesçe aynı kabul edilen, kanıtlanabilir yargılardır.</p>
+                            <div class="example-box"><strong>Örnek:</strong> "Türkiye'nin başkenti Ankara'dır."</div>
+                            <div class="source-tag">Kaynak: MEB & Türkçe Kaynakları</div>
+                        `,
+                        questions: [
+                            { q: "Hangisi öznel anlatımlı bir cümledir?", options: ["A) Yazarın bu kitabı üç bölümden oluşuyor.", "B) Filmde başrolde yerli oyuncular oynamış.", "C) Romanın dili oldukça akıcı ve etkileyiciydi.", "D) Kitap 2024 yılında basılmıştır."], correct: 2, exp: "Etkileyici olması kişisel görüştür (öznel)." },
+                            { q: "Hangisi nesnel anlatımlı bir cümledir?", options: ["A) Bu ressamın tabloları harika görünüyor.", "B) Şairin son şiiri yüz mısradan ibarettir.", "C) Mavi renk insanı her zaman huzur verir.", "D) İzmir Türkiye'nin en güzel şehridir."], correct: 1, exp: "Sayılabilir ve kanıtlanabilir bir bilgidir." },
+                            { q: "Aşağıdakilerden hangisinde nesnel bir yargı vardır?", options: ["A) Dünyanın en lezzetli yemeği mantıdır.", "B) Okulumuzun bahçesinde dört tane çam ağacı var.", "C) Matematik dersi en eğlenceli derstir.", "D) Hava bugün insana neşe veriyor."], correct: 1, exp: "Ağaç sayısı kanıtlanabilir (nesnel)." },
+                            { q: "Hangisi öznel yargıdır?", options: ["A) Sınavda toplam yirmi soru soruldu.", "B) Sınıfımız otuz kişiliktir.", "C) Türkçe dersi ortaokulda okunur.", "D) Bu zor soruları kimse çözemez."], correct: 3, exp: "Kimsenin çözememesi abartı ve kişiseldir." },
+                            { q: "Hangisi nesnel bir cümledir?", options: ["A) En iyi müzik türü halk müziğidir.", "B) Yazar, eserinde sade bir dil kullanmıştır.", "C) Romanın kapak resmi turuncu renktedir.", "D) Oyuncu performansıyla göz kamaştırdı."], correct: 2, exp: "Kapak rengi kanıtlanabilir." },
+                            { q: "\"Yazar bu romanı iki yılda tamamlamıştır\" cümlesi nedir?", options: ["A) Öznel", "B) Nesnel", "C) Varsayım", "D) Öneri"], correct: 1, exp: "Süre belgelenebilir (nesnel)." },
+                            { q: "Hangisi öznel anlatımlıdır?", options: ["A) Türkiye yedi coğrafi bölgeye ayrılır.", "B) Ağrı Dağı Türkiye'nin en yüksek dağıdır.", "C) Bu tür filmler izleyicisini sıkar.", "D) İstanbul iki kıtayı birbirine bağlar."], correct: 2, exp: "Sıkıcı bulmak kişisel bir durumdur." },
+                            { q: "Hangisi nesneldir?", options: ["A) Mavi elbise ona çok yakışmış.", "B) Sabah kahvaltısında süt içti.", "C) Bu hikaye bana çok saçma geldi.", "D) Yemeklerin tadı berbattı."], correct: 1, exp: "İçtiği nesnel olarak gözlemlenebilir." },
+                            { q: "Hangisi öznel bir yargı bildirir?", options: ["A) Sınav yarın saat onda başlayacak.", "B) Salonun pencereleri güneye bakıyor.", "C) Oyuncunun sahnedeki heyecanı gözlerinden okunuyordu.", "D) Yazar ilk kitabını 1990'da yazdı."], correct: 2, exp: "Yorum içermektedir." },
+                            { q: "Hangisi nesnel cümledir?", options: ["A) Şiirdeki kafiyeler kulağa hoş geliyor.", "B) Metin beş paragraftan oluşmaktadır.", "C) Resimdeki renkler içimi ısıttı.", "D) Bu yazarın eserleri çok okunuyor."], correct: 1, exp: "Paragraf sayısı sayılabilir." },
+                            { q: "Aşağıdakilerden hangisi kişisel düşünce içerir?", options: ["A) Tiyatro binası restore ediliyor.", "B) Salonun kapasitesi üç yüz kişiliktir.", "C) Oyunun dekoru oldukça sönüktü.", "D) Perde saat yirmide açıldı."], correct: 2, exp: "Sönük bulmak özneldir." },
+                            { q: "Hangisi nesnel yargıdır?", options: ["A) Bu film izlenmeye değer.", "B) Yönetmen ödül almayı hak etti.", "C) Filmin yönetmeni Nuri Bilge Ceylan'dır.", "D) Oyunculuklar harikaydı."], correct: 2, exp: "Yönetmen kimliği gerçektir." },
+                            { q: "Öznel anlatımlı cümle hangisidir?", options: ["A) Şair, şiirinde bahar mevsimini anlatmış.", "B) Eserdeki betimlemeler okuyucuyu sıkıyor.", "C) Kitap yüz yirmi sayfadır.", "D) Yazar İstanbul'da doğmuştur."], correct: 1, exp: "Sıkıcı bulmak özneldir." },
+                            { q: "Nesnel anlatımlı cümle hangisidir?", options: ["A) Türkçe dil bilgisi kuralları önemlidir.", "B) Soru bankasındaki sorular çok kolay.", "C) Öğretmen tahtaya iki örnek yazdı.", "D) Bu dersi herkes çok seviyor."], correct: 2, exp: "Örnek sayısı kanıtlanabilir." },
+                            { q: "Hangisi öznel bir cümledir?", options: ["A) Okulun bahçesinde basketbol potası var.", "B) Sınıfın tahtası yeşil renktedir.", "C) Türkçe öğretmeni çok neşeli bir insan.", "D) Zil çaldıktan sonra dışarı çıktılar."], correct: 2, exp: "Neşeli olmak kişisel bir niteliktir." }
+                        ]
+                    },
+                    {
+                        name: "Söz Sanatları",
+                        htmlContent: `
+                            <h2>Söz Sanatları</h2>
+                            <p>Benzetme, kişileştirme, konuşturma ve abartma sanatları.</p>
+                            <div class="source-tag">Kaynak: Edebi Sanatlar Kılavuzu</div>
+                        `,
+                        questions: [
+                            { q: "\"Kömür karası gözleriyle bana baktı\" cümlesinde hangi söz sanatı vardır?", options: ["A) Kişileştirme", "B) Benzetme", "C) Abartma", "D) Konuşturma"], correct: 1, exp: "Gözler kömür karasına benzetilmiştir." },
+                            { q: "\"Bulutlar, bugün bize küsmüş gibi ağlıyordu\" cümlesinde hangi sanat vardır?", options: ["A) Benzetme", "B) Kişileştirme (Teşhis)", "C) Abartma", "D) Zıtlık"], correct: 1, exp: "Bulutların küsmesi ve ağlaması insani özelliktir." },
+                            { q: "\"Ağlamaktan gözümde yaş sel oldu\" cümlesinde hangi söz sanatına başvurulmuştur?", options: ["A) Benzetme", "B) Abartma (Mübalağa)", "C) Kişileştirme", "D) Konuşturma"], correct: 1, exp: "Yaşın sel olması abartmadır." },
+                            { q: "\"Papatya kulağıma fısıldadı\" cümlesinde hangi sanat vardır?", options: ["A) Benzetme", "B) Konuşturma ve Kişileştirme", "C) Abartma", "D) Tezat"], correct: 1, exp: "Papatyanın konuşması kişileştirmedir." },
+                            { q: "\"Aslanlar gibi çalışıp sınavı kazandı\" cümlesindeki sanat nedir?", options: ["A) Benzetme", "B) Kişileştirme", "C) Abartma", "D) Konuşturma"], correct: 0, exp: "Çalışması aslana benzetilmiştir." },
+                            { q: "\"Gök gürültüsünden korkan dağlar titriyordu\" cümlesinde hangi sanat vardır?", options: ["A) Benzetme", "B) Kişileştirme", "C) Abartma", "D) Tezat"], correct: 1, exp: "Dağların titreşmesi kişileştirmedir." },
+                            { q: "\"Bir ah çeksem karşı dağı devirir\" sözünde hangi sanat vardır?", options: ["A) Benzetme", "B) Abartma", "C) Kişileştirme", "D) Konuşturma"], correct: 1, exp: "Dağı devirmek abartmadır." },
+                            { q: "\"Deniz dalgalarıyla oynaşıp gülüyordu\" cümlesinde hangi sanat vardır?", options: ["A) Kişileştirme", "B) Benzetme", "C) Abartma", "D) Tezat"], correct: 0, exp: "Denizin gülmesi kişileştirmedir." },
+                            { q: "\"İnci gibi dişleriyle gülümserdi\" cümlesindeki sanat nedir?", options: ["A) Benzetme", "B) Abartma", "C) Kişileştirme", "D) Tezat"], correct: 0, exp: "Dişler inciye benzetilmiştir." },
+                            { q: "\"Rüzgar pencereyi sertçe dövüyordu\" cümlesinde ne vardır?", options: ["A) Benzetme", "B) Kişileştirme", "C) Abartma", "D) Konuşturma"], correct: 1, exp: "Rüzgarın dövmesi insani özelliktir." },
+                            { q: "\"Dünyalar kadar ödevim var\" cümlesinde hangi sanat vardır?", options: ["A) Benzetme", "B) Abartma", "C) Kişileştirme", "D) Konuşturma"], correct: 1, exp: "Dünyalar kadar denilerek abartılmıştır." },
+                            { q: "\"Kardan adam güneşi görünce ağlamaya başladı\" cümlesinde hangi sanat vardır?", options: ["A) Kişileştirme", "B) Benzetme", "C) Abartma", "D) Tezat"], correct: 0, exp: "Kardan adamın ağlaması kişileştirmedir." },
+                            { q: "\"Zeytin gözlü bebeğim uyuyor\" cümlesindeki sanat nedir?", options: ["A) Benzetme", "B) Abartma", "C) Kişileştirme", "D) Konuşturma"], correct: 0, exp: "Gözler zeytine benzetilmiştir." },
+                            { q: "\"Acıdan dağlar bile erir\" sözünde ne vardır?", options: ["A) Benzetme", "B) Abartma", "C) Kişileştirme", "D) Konuşturma"], correct: 1, exp: "Dağların erimesi abartmadır." },
+                            { q: "\"Aydede bize gülümseyerek bakıyordu\" cümlesinde ne vardır?", options: ["A) Kişileştirme", "B) Benzetme", "C) Abartma", "D) Tezat"], correct: 0, exp: "Ayın gülümsemesi kişileştirmedir." }
+                        ]
+                    }
+                ]
+            },
+            {
+                unit: "4. Tema: İletişim ve Sosyal İlişkiler (Yakında)",
+                topics: [
+                    { name: "İsimler ve İsim Tamlamaları", htmlContent: `<h2>İsimler ve İsim Tamlamaları</h2><p>Bu ünitenin kapsamlı konu anlatımları ve 15 soruluk testleri çok yakında eklenecektir!</p><div class="source-tag">Yakında Geliyor</div>` },
+                    { name: "Yazım Kuralları ve Noktalama", htmlContent: `<h2>Yazım Kuralları ve Noktalama</h2><p>Bu ünitenin konu anlatımı ve testleri çok yakında eklenecektir!</p><div class="source-tag">Yakında Geliyor</div>` }
+                ]
+            },
+            {
+                unit: "5. Tema: Bilim ve Teknoloji (Yakında)",
+                topics: [
+                    { name: "Sıfatlar (Ön Adlar)", htmlContent: `<h2>Sıfatlar</h2><p>Bu konunun içerikleri yakında yayında olacaktır.</p><div class="source-tag">Yakında Geliyor</div>` }
+                ]
+            },
+            {
+                unit: "6. Tema: Lider Ruhlar (Yakında)",
+                topics: [
+                    { name: "Edat, Bağlaç ve Ünlem", htmlContent: `<h2>Edat, Bağlaç ve Ünlem</h2><p>Bu konunun içerikleri yakında yayında olacaktır.</p><div class="source-tag">Yakında Geliyor</div>` }
+                ]
+            }
+        ];
+
         function renderUnits() {
             const sidebarList = document.getElementById('unitSidebarList');
             sidebarList.innerHTML = "";
+
             curriculumData.forEach((unitObj) => {
                 const li = document.createElement('li');
                 li.className = "unit-item";
+
                 const btn = document.createElement('button');
                 btn.className = "unit-btn";
-                btn.innerHTML = `<span><i class="fa-solid fa-folder-open"></i> ${unitObj.unit}</span> <i class="fa-solid fa-chevron-down"></i>`;
-                btn.onclick = (e) => { e.stopPropagation(); li.classList.toggle('open'); };
+                btn.innerHTML = `<i class="fa-solid fa-folder-open"></i> ${unitObj.unit}`;
+                btn.onclick = () => { li.classList.toggle('open'); };
 
                 const sublist = document.createElement('ul');
                 sublist.className = "topic-sublist";
+
                 unitObj.topics.forEach((topicObj) => {
                     const subItem = document.createElement('li');
                     subItem.className = "topic-subitem";
@@ -249,11 +952,13 @@
                     };
                     sublist.appendChild(subItem);
                 });
+
                 li.appendChild(btn);
                 li.appendChild(sublist);
                 sidebarList.appendChild(li);
             });
         }
+        renderUnits();
 
         function initTestDropdowns() {
             const unitSelect = document.getElementById('selectUnit');
@@ -271,7 +976,9 @@
             const unitIndex = document.getElementById('selectUnit').value;
             const topicSelect = document.getElementById('selectTopic');
             topicSelect.innerHTML = "";
-            curriculumData[unitIndex].topics.forEach((topicObj, index) => {
+
+            const topics = curriculumData[unitIndex].topics;
+            topics.forEach((topicObj, index) => {
                 const opt = document.createElement('option');
                 opt.value = index;
                 opt.innerText = topicObj.name;
@@ -279,7 +986,10 @@
             });
         }
 
-        let activeQuestions = [], currentQuestion = 0, score = 0, answered = false;
+        let activeQuestions = [];
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
 
         function startCustomQuiz() {
             const uIndex = document.getElementById('selectUnit').value;
@@ -287,13 +997,18 @@
             const selectedTopic = curriculumData[uIndex].topics[tIndex];
 
             activeQuestions = selectedTopic.questions || [];
-            if(activeQuestions.length === 0) { alert("Bu ünitenin soruları yakında eklenecektir!"); return; }
+            if(activeQuestions.length === 0) {
+                alert("Bu ünitenin soruları pek yakında eklenecektir!");
+                return;
+            }
 
-            currentQuestion = 0; score = 0;
+            currentQuestion = 0;
+            score = 0;
             document.getElementById('score').innerText = `Puan: 0`;
             document.getElementById('activeTopicName').innerText = selectedTopic.name;
             document.getElementById('testConfigCard').style.display = 'none';
             document.getElementById('quizSection').style.display = 'block';
+
             loadQuizQuestion();
         }
 
@@ -312,6 +1027,7 @@
 
             const optionsContainer = document.getElementById("optionsContainer");
             optionsContainer.innerHTML = "";
+
             q.options.forEach((opt, index) => {
                 const btn = document.createElement("button");
                 btn.className = "option-btn";
@@ -324,6 +1040,7 @@
         function checkQuizAnswer(selectedIndex) {
             if (answered) return;
             answered = true;
+
             const q = activeQuestions[currentQuestion];
             const buttons = document.querySelectorAll(".option-btn");
 
@@ -339,7 +1056,13 @@
             const expBox = document.getElementById("explanationBox");
             expBox.innerHTML = `<strong>Açıklama:</strong> ${q.exp}`;
             expBox.style.display = "block";
-            document.getElementById("nextBtn").style.display = "inline-block";
+
+            if (currentQuestion < activeQuestions.length - 1) {
+                document.getElementById("nextBtn").style.display = "inline-block";
+            } else {
+                document.getElementById("nextBtn").innerText = "Testi Tamamla";
+                document.getElementById("nextBtn").style.display = "inline-block";
+            }
         }
 
         function nextQuestion() {
